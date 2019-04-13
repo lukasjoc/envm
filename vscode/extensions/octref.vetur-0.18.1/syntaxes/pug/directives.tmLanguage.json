@@ -1,9 +1,0 @@
-{
-  "scopeName": "vue.pug.directives",
-  "injectionSelector": "L:meta.tag.other",
-  "patterns": [
-    {
-      "include": "source.vue#vue-directives"
-    }
-  ]
-}
