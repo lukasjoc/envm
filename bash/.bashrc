@@ -60,5 +60,5 @@ export PS1="[\[\e[1;32m\]\u\[\e[m\]@\[\e[1;31m\]\h\[\e[m\] \[\e[1;30m\]\W\[\e[m\
 
 # Travel to working path
 if [ -d ~/w ]; then
-    cd "~/w"
+    cd ~/w
 fi
