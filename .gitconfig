@@ -1,6 +1,6 @@
 [user]
-  email = jochamlu@gmail.com
-  name = jochamlu
+  email = {EMAIL}
+  name = {NAME}
 [core]
   autocrlf = true
 [help]
