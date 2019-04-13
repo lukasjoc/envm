@@ -1,2 +1,4 @@
 # ENVFiles
-Just some essential Environment Files for Linux and MacOS inspired by [Leon Ebel](https://github.com/ebelleon)
+Just some essential environment files for Linux & Mac 
+
+*Inspired by* [Leon Ebel](https://github.com/ebelleon)
