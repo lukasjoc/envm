@@ -56,7 +56,7 @@ function parse_git_dirty {
 }
 
 # Colored Shell Prompt with git status
-export PS1="[\[\e[1;32m\]\u\[\e[m\]@\[\e[1;31m\]\h\[\e[m\] \[\e[1;30m\]\W\[\e[m\]]\\$ \[\e[1;36m\]\`parse_git_branch\`\[\e[m\]"
+# export PS1="[\[\e[1;32m\]\u\[\e[m\]@\[\e[1;31m\]\h\[\e[m\] \[\e[1;30m\]\W\[\e[m\]]\\$ \[\e[1;36m\]\`parse_git_branch\`\[\e[m\]"
 
 # Travel to working path
 if [ -d ~/w ]; then
