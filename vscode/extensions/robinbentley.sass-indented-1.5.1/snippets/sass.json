@@ -1,0 +1,48 @@
+{
+  "variable": {
+    "prefix": "var",
+    "body": "$${0:var}: ${1:value} ${2:!default}",
+    "description": "Declare a new variable."
+  },
+  "mixin": {
+    "prefix": "mixin",
+    "body": [
+      "=${1:name}(${2:args})",
+      "\t$0"
+    ],
+    "description": "Create a new mixin"
+  },
+  "@if-statement": {
+    "prefix": "if",
+    "body": [
+      "@if ${1:statement}",
+      "\t$0"
+    ],
+    "description": "@if statement (e.g @if 1 + 1 == 2)"
+  },
+  "@for-loop": {
+    "prefix": "for",
+    "body": [
+      "@for $${1:var} from ${2:1} through ${3:10}",
+      "\t$0"
+    ],
+    "description": "@for loop"
+  },
+  "@each-loop": {
+    "prefix": "each",
+    "body": [
+      "@each $${1:var} in ${2:list/map}",
+      "\t$0"
+    ],
+    "description": "@each loop"
+  },
+  "@while-loop": {
+    "prefix": "while",
+    "body": [
+      "@while $${1:i} ${2:statement}",
+      "\t$0",
+      "\t$${1:i}: $${1:i} ${3://increment/deincrement}"
+    ],
+    "description": "@while loop"
+  }
+}
