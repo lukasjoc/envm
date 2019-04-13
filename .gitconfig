@@ -1,0 +1,16 @@
+[user]
+  email = jochamlu@gmail.com
+  name = jochamlu
+[core]
+  autocrlf = true
+[help]
+  autocorrect = 9
+[alias]
+  br = branch
+  co = commit -m
+  di = diff
+  log = log --all --graph --pretty='format:%C(auto)%h%d %s %C(dim yellow) [%an] (%ad)%C(reset)' --date=format:'%d.%m.%y %H:%M:%S'
+  ch = checkout
+  st = status --short --branch
+  sts = stash save
+  aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t= \\2/' | sort

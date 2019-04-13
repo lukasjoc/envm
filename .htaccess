@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # remove extension and add trailing slash
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^([^/]+)/$ $1.htm
+  RewriteRule ^([^/]+)/([^/]+)/$ $1/$2.htm
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
+  RewriteRule (.*)$ /$1/ [R=301,L]
+  # remove extension and remove trainling slash
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule (.+)/$ /$1 [R=301,L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^([^.]+)$ $1.htm [NC,L]
+</IfModule>
