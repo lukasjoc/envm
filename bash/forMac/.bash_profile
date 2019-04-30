@@ -1,7 +1,7 @@
 # Inlcude bash_aliases for better organisation
-# if [ -f ~/.bash_aliases ]; then
-# . ~/.bash_aliases
-# fi
+if [ -f ~/.bash_aliases ]; then
+. ~/.bash_aliases
+fi
 
 # Start up SSH session with tmux open
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
@@ -67,9 +67,11 @@ alias ip="ip addr"
 alias ..="cd ../"
 alias ...="cd ../../../"
 alias rm="rm -rf"
-alias ll="ls -lhaG --color=always"
-alias l="ls -lhaG --color=always"
-alias ls="ls -lhG --color=always"
+alias ll="ls -lhaG"
+alias l="ls -lhaG"
+alias ls="ls -lhG"
+alias b="brew"
+alias bc="brew cask"
 alias go="go run"
 alias nr="npm run"
 alias npmi="npm install"
