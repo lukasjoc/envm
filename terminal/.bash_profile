@@ -1,6 +1,6 @@
 # Inlcude bash_aliases for better organisation
 if [ -f ~/.bash_aliases ]; then
-. ~/.bash_aliases
+  . ~/.bash_aliases
 fi
 
 # Start up SSH session with tmux open
@@ -61,7 +61,7 @@ if [ -d ~/w ]; then
 fi
 
 # [Aliases]
-alias do="docker" 
+alias do="docker"
 alias dc="docker-compose"
 alias ip="ip addr"
 alias ..="cd ../"
