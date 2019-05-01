@@ -1,9 +1,3 @@
-# ENVFiles
-Just some essential environment files for Linux & Mac 
-
-**Inspired by** [Leon Ebel's dotfiles repository ](https://github.com/ebelleon/dotfiles)
-
-# ENVFiles README
 ### What is this project about?
 ```
 - Collection of really useful environment/setup files 
@@ -22,3 +16,4 @@ Just some essential environment files for Linux & Mac
   - Suggeston: Delete your .bashrc and only use .bash_profile on macintosh
 ```
 **2019 jsakul** | _MIT licenced_
+**Inspired by** [Leon Ebel's dotfiles repository ](https://github.com/ebelleon/dotfiles)
