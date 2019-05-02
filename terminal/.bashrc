@@ -1,7 +1,7 @@
 # Inlcude bash_aliases for better organisation
-if [ -f ~/.bash_aliases ]; then
-. ~/.bash_aliases
-fi
+# if [ -f ~/.bash_aliases ]; then
+# . ~/.bash_aliases
+# fi
 
 # Start up SSH session with tmux open
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
@@ -55,10 +55,22 @@ function parse_git_dirty {
     fi
 }
 
-# Colored Shell Prompt with git status
-# export PS1="[\[\e[1;32m\]\u\[\e[m\]@\[\e[1;31m\]\h\[\e[m\] \[\e[1;30m\]\W\[\e[m\]]\\$ \[\e[1;36m\]\`parse_git_branch\`\[\e[m\]"
-
 # Travel to working path
 if [ -d ~/w ]; then
     cd ~/w
 fi
+
+# [Aliases]
+alias do="docker" 
+alias dc="docker-compose"
+alias ip="ip addr"
+alias ..="cd ../"
+alias ...="cd ../../../"
+alias rm="rm -rf"
+alias ll="ls -lhaG --color=always"
+alias l="ls -lhaG --color=always"
+alias ls="ls -lhG --color=always"
+alias go="go run"
+alias nr="npm run"
+alias npmi="npm install"
+alias py3="python3"
