@@ -8,3 +8,4 @@ set hlsearch " enable search highlighting
 set ruler " always show cursor position
 set tabstop=4 shiftwidth=4 smarttab " tab -> 4 spaces
 set expandtab " convert tabs to spaces
+
