@@ -61,8 +61,13 @@ if [ -d ~/w ]; then
 fi
 
 # [Aliases]
+# Docker
 alias do="docker"
 alias dc="docker-compose"
+alias crm="do container prune"
+alias irm="do $(docker images -q)"
+alias dsh="exec -it"
+
 alias ip="ip addr"
 alias ..="cd ../"
 alias ...="cd ../../../"

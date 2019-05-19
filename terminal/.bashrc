@@ -61,17 +61,22 @@ if [ -d ~/w ]; then
 fi
 
 # [Aliases]
-alias do="docker" 
+alias do="docker"
 alias dc="docker-compose"
+alias crm="do container prune"
+alias irm="do $(docker images -q)"
+alias dsh="exec -it"
+
 alias ip="ip addr"
 alias ..="cd ../"
 alias ...="cd ../../../"
 alias rm="rm -rf"
-alias ll="ls -lhaG --color=always"
-alias l="ls -lhaG --color=always"
-alias ls="ls -lhG --color=always"
+alias ll="ls -lhaG"
+alias l="ls -lhaG"
+alias ls="ls -lhG"
+alias b="brew"
+alias bc="brew cask"
 alias go="go run"
 alias nr="npm run"
 alias npmi="npm install"
 alias py3="python3"
-alias thread="ps -A | grep -m1 firefox | awk '{print $1}'"
