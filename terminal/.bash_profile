@@ -56,7 +56,7 @@ alias dcom="docker-compose"
 alias dcon="do container"
 
 #SYSTEM Stuff
-alias showip="ip addr"
+alias ip="ifconfig en0 inet"
 alias rm="rm -rf"
 
 alias ll="ls -lhaG"
