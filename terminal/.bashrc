@@ -1,8 +1,3 @@
-# Inlcude bash_aliases for better organisation
-# if [ -f ~/.bash_aliases ]; then
-# . ~/.bash_aliases
-# fi
-
 # Start up SSH session with tmux open
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
@@ -55,28 +50,36 @@ function parse_git_dirty {
     fi
 }
 
-# Travel to working path
-if [ -d ~/w ]; then
-    cd ~/w
-fi
-
-# [Aliases]
+# DOCKER,DOCKER-COMPOSE
 alias do="docker"
-alias dc="docker-compose"
-alias crm="do container prune"
-alias irm="do $(docker images -q)"
-alias dsh="exec -it"
+alias dcom="docker-compose"
+alias dcon="do container"
 
-alias ip="ip addr"
+#SYSTEM Stuff
+alias showip="ip addr"
+alias rm="rm -rf"
+
+alias ll="ls -lhaG --color=auto"
+alias l="ls -lhaG --color=auto"
+alias ls="ls -lhG --color=auto"
+
 alias ..="cd ../"
 alias ...="cd ../../../"
-alias rm="rm -rf"
-alias ll="ls -lhaG"
-alias l="ls -lhaG"
-alias ls="ls -lhG"
-alias b="brew"
+
+# HOMEBREW
+alias br="brew"
 alias bc="brew cask"
-alias go="go run"
-alias nr="npm run"
-alias npmi="npm install"
-alias py3="python3"
+
+#NEOVIM 
+alias vim="nvim"
+alias vi="nvim"
+
+# PSQL ADMIN
+alias psql_up="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias psql_newusr="createuser --interactive --pwprompt" 
+alias psql_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+
+#GOPATH
+export GOPATH="$HOME/go"
+export GO111MODULE=on #use go modules inside the $GOPATH
+export PATH=$PATH:$GOPATH/bin

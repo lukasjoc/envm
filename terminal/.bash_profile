@@ -52,11 +52,11 @@ function parse_git_dirty {
 
 # DOCKER,DOCKER-COMPOSE
 alias do="docker"
-alias dc="docker-compose"
+alias dcom="docker-compose"
 alias dcon="do container"
 
 #SYSTEM Stuff
-alias ip="ip addr"
+alias showip="ip addr"
 alias rm="rm -rf"
 
 alias ll="ls -lhaG"
