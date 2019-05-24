@@ -82,4 +82,4 @@ alias psql_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresq
 #GOPATH
 export GOPATH="$HOME/go"
 export GO111MODULE=on #use go modules inside the $GOPATH
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin:PATH
