@@ -81,5 +81,8 @@ alias psql_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresq
 
 #GOPATH
 export GOPATH="$HOME/go"
-export GO111MODULE=on #use go modules inside the $GOPATH
+export GO111MODULE=off #use go mod inside the $GOPATH by turning this to [on]
 export PATH=$PATH:$GOPATH/bin:PATH
+
+# Branch Name on the Console
+export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\] @ \w\[\033[0;32m\] - [$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\033[0;32m\]]\[\033[0m\033[0;32m\] \$\[\033[0m\033[0;32m\]\[\033[0m\] '
