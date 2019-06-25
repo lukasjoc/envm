@@ -9,11 +9,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'dracula/vim', {'rtp': '.vim/bundle/vim/colors/dracula.vim'}
 call vundle#end()
 filetype plugin indent on
 
 syntax on
-colorscheme desert
 set number
 set smartindent 
 set tabstop=2 
