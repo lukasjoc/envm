@@ -51,18 +51,8 @@ function parse_git_dirty {
 }
 
 # DOCKER,DOCKER-COMPOSE
-alias do="docker"
-alias dcom="docker-compose"
-alias dcon="do container"
-
-#SYSTEM Stuff
-alias showip="ip addr"
-alias rm="rm -rf"
-
-alias ll="ls -lhaG --color=auto"
-alias l="ls -lhaG --color=auto"
-alias ls="ls -lhG --color=auto"
-
+alias d="docker"
+alias dc="docker-compose"
 alias ..="cd ../"
 alias ...="cd ../../../"
 
@@ -70,16 +60,7 @@ alias ...="cd ../../../"
 alias br="brew"
 alias bc="brew cask"
 
-#NEOVIM 
-alias vim="nvim"
-alias vi="nvim"
-
-# PSQL ADMIN
-alias psql_up="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
-alias psql_newusr="createuser --interactive --pwprompt" 
-alias psql_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
-
-#GOPATH
+# GOPATH
 export GOPATH="$HOME/go"
 export GO111MODULE=off #use go mod inside the $GOPATH by turning this to [on]
 export PATH=$PATH:$GOPATH/bin:PATH

@@ -51,17 +51,11 @@ function parse_git_dirty {
 }
 
 # DOCKER,DOCKER-COMPOSE
-alias do="docker"
-alias dcom="docker-compose"
-alias dcon="do container"
+alias d="docker"
+alias dc="docker-compose"
 
 #SYSTEM Stuff
 alias ip="ifconfig en0 inet"
-alias rm="rm -rf"
-
-alias ll="ls -lhaG"
-alias l="ls -lhaG"
-alias ls="ls -lhG"
 
 alias ..="cd ../"
 alias ...="cd ../../../"
@@ -70,9 +64,6 @@ alias ...="cd ../../../"
 alias br="brew"
 alias bc="brew cask"
 
-#NEOVIM 
-alias vim="nvim"
-alias vi="nvim"
 
 # PSQL ADMIN
 alias psql_up="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
