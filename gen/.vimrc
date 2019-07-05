@@ -13,11 +13,12 @@ filetype plugin indent on
 
 syntax on
 colorscheme koehler
+
+set listchars=trail:.
+set list
 set foldmethod=indent
 set number
-set smartindent 
-set tabstop=2 
-set shiftwidth=2
+set tabstop=2 shiftwidth=2 smartindent
 set expandtab
 set hlsearch
 set encoding=utf-8
