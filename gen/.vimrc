@@ -14,7 +14,7 @@ filetype plugin indent on
 syntax on
 colorscheme koehler
 
-set listchars=trail:.
+set listchars=trail:.,tab:.,
 set list
 set foldmethod=indent
 set number
