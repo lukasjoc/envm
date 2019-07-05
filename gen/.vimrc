@@ -4,8 +4,8 @@ filetype off
 syntax on
 colorscheme koehler
 
-set listchars=trail:.,tab:.,
 set list
+set listchars=tab:\ \ ,trail:.
 set foldmethod=indent
 set number
 set tabstop=2 shiftwidth=2 smartindent
