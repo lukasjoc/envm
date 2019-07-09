@@ -50,7 +50,7 @@ function parse_git_dirty {
     fi
 }
 
-# System, Docker, Homebrew etc.
+# Docker, system stuff.
 alias d="docker"
 alias dc="docker-compose"
 alias ll="ls -lisaG"
@@ -62,7 +62,7 @@ alias ...="cd ../../../"
 alias br="brew"
 alias bc="brew cask"
 
-# PSQL ADMIN
+# PQAdmin
 alias psql_up="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias psql_newusr="createuser --interactive --pwprompt" 
 alias psql_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
