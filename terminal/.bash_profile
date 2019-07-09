@@ -50,20 +50,17 @@ function parse_git_dirty {
     fi
 }
 
-# DOCKER,DOCKER-COMPOSE
+# System, Docker, Homebrew etc.
 alias d="docker"
 alias dc="docker-compose"
-
-#SYSTEM Stuff
+alias ll="ls -lisaG"
 alias ip="ifconfig en0 inet"
-
 alias ..="cd ../"
 alias ...="cd ../../../"
 
 # HOMEBREW
 alias br="brew"
 alias bc="brew cask"
-
 
 # PSQL ADMIN
 alias psql_up="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
