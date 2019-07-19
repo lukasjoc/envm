@@ -13,5 +13,4 @@
      -> system.sh
 ```
 
-**2019 jsakul** | _MIT licenced_
-**Inspired by** [Leon Ebel's dotfiles repository ](https://github.com/ebelleon/dotfiles)
+by (lukasjoc)[https://lukasjoc.com] 2019 
