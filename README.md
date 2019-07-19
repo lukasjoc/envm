@@ -13,4 +13,4 @@
      -> system.sh
 ```
 
-by [lukasjoc](https://lukasjoc.com) 2019 
+by [lukasjoc](https://lukasjoc.com) 2019 inspired by [lukasjoc](https://ebelleon.de)
