@@ -3,14 +3,9 @@
 
 ### Content:
 ```
-  - bash* files
-  - git* files
-  - .inputrc 
-  - .tmmux.conf
-  - .vimrc
-  - scripts
-    | Sets up your system with this files
-     -> system.sh
+  - really cool ozh + zsh setup
+  - really cool .vimrc
+  - other helpful stuff
 ```
 
 by [lukasjoc](https://lukasjoc.com), [ebelleon](https://ebelleon.de) 2019
