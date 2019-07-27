@@ -50,20 +50,25 @@ function parse_git_dirty {
     fi
 }
 
-# DOCKER,DOCKER-COMPOSE
+alias ..="cd ../"
 alias d="docker"
 alias dc="docker-compose"
-alias ..="cd ../"
-alias ...="cd ../../../"
-
-# HOMEBREW
 alias br="brew"
 alias bc="brew cask"
+alias ll="ls -lisaG"
+alias ls='ls -G'
 
-# GOPATH
+# Go
 export GOPATH="$HOME/go"
-export GO111MODULE=off #use go mod inside the $GOPATH by turning this to [on]
+export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin:PATH
+
+# Nvm 
+export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Wdir
+cd ~/fun
 
 # Branch Name on the Console
 export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\] @ \w\[\033[0;32m\] - [$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\033[0;32m\]]\[\033[0m\033[0;32m\] \$\[\033[0m\033[0;32m\]\[\033[0m\] '
