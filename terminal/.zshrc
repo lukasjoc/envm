@@ -13,7 +13,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='nano'
+  export EDITOR='vim'
 fi
 
 alias ..="cd ../"
