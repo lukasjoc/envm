@@ -13,4 +13,5 @@
   ch = checkout
   st = status --short --branch
   sts = stash save
+  rmb = git push origin --delete  
   aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t= \\2/' | sort
