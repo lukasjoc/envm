@@ -10,9 +10,6 @@
   log = log --all --graph --pretty='format:%C(auto)%h%d %s %C(dim yellow) [%an] (%ad)%C(reset)' --date=format:'%d.%m.%y %H:%M:%S'
   ch = checkout
   st = status --short --branch
-<<<<<<< HEAD
   sts = stash save
   rmb = git push origin --delete  
-=======
->>>>>>> de1a8f17449acad31c98b6d4b34a0c05cf4fb47f
   aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t= \\2/' | sort
