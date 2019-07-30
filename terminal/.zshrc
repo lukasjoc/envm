@@ -1,6 +1,6 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="/Users/lj/.oh-my-zsh"
-export UPDATE_ZSH_DAYS=28
+export UPDATE_ZSH_DAYS=176
 
 ZSH_THEME="gentoo"
 DISABLE_UPDATE_PROMPT="true"
