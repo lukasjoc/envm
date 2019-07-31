@@ -1,5 +1,5 @@
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export ZSH="/Users/lj/.oh-my-zsh"
+export PATH="/usr/local/bin:${PATH}"
+export ZSH="$HOME/.oh-my-zsh"
 export UPDATE_ZSH_DAYS=176
 
 ZSH_THEME="gentoo"

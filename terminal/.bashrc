@@ -1,3 +1,5 @@
+
+export PATH="/usr/local/bin:${PATH}"
 # Start up SSH session with tmux open
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
@@ -68,4 +70,3 @@ export PATH=$PATH:$GOPATH/bin:PATH
 
 # Wdir
 cd ~/fun
-
