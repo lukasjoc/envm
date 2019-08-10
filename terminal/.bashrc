@@ -60,8 +60,8 @@ alias d="docker"
 alias dc="docker-compose"
 alias br="brew"
 alias bc="brew cask"
-alias ll="ls -lisaG"
-alias ls='ls -G'
+alias ll="ls -la --color=auto"
+alias ls="ls -G --color=auto"
 
 # Go
 export GOPATH="$HOME/go"
@@ -69,4 +69,4 @@ export GO111MODULE=on
 export PATH=$PATH:$GOPATH/bin:PATH
 
 # Wdir
-cd ~/fun
+cd ~/w/

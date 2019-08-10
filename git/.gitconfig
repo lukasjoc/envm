@@ -1,15 +1,11 @@
 [user]
-  email = EMAIL
-  name = NAME
+  email = jochamlu@gmail.com
+  name = Lukas Jocham
 [core]
-  autocrlf = false 
+  autocrlf = false
 [help]
   autocorrect = 9
 [alias]
-  br = branch
-  log = log --all --graph --pretty='format:%C(auto)%h%d %s %C(dim yellow) [%an] (%ad)%C(reset)' --date=format:'%d.%m.%y %H:%M:%S'
-  ch = checkout
-  st = status --short --branch
-  sts = stash save
-  rmb = git push origin --delete  
-  aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t= \\2/' | sort
+  br=branch -a
+  ch=checkout
+  st=status
