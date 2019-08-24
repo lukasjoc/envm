@@ -1,6 +1,6 @@
 [user]
-  email = jochamlu@gmail.com
-  name = Lukas Jocham
+  email = INSERT_EMAIL
+  name = INSERT_NAME
 [core]
   autocrlf = false
 [help]
