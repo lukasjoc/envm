@@ -4,7 +4,7 @@ DISABLE_MAGIC_FUNCTIONS=true
 CASE_SENSITIVE=false
 
 export PATH="/usr/local/bin:${PATH}"
-export ZSH="/Users/lj/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 export UPDATE_ZSH_DAYS=7
 source $ZSH/oh-my-zsh.sh
 
@@ -15,23 +15,22 @@ else
   export EDITOR='nano'
 fi
 
-alias d="docker"
-alias dc="docker-compose"
-alias br="brew"
-alias bc="brew cask"
-alias ll="ls -lha" #This "h" option gives me sizes in MB
-alias rmd="rm -rf"
-
 # Go
 export GOPATH="$HOME/go"
 export GO111MODULE=on #Module support on
 export PATH=$PATH:$GOPATH/bin:PATH
-
-# Go Version Manager
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
-# Python Version Manager
+# Python
 eval "$(pyenv init -)"
 
-# Set working environment
-cd ~/w/
+#Some Aliases
+alias ..="cd ../"
+alias dc="docker-compose"
+alias bc="brew cask"
+alias ls="ls -GF"
+alias ll="ls -GalF"
+alias rmd="rm -rf"
+
+# Set Synced working environment
+cd ~/Sync/w/
