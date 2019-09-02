@@ -1,0 +1,1 @@
+# TODO: write little script that installs SAP GUI for JAVA and its dependencys on MacOS and Linux Systems
