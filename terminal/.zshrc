@@ -16,6 +16,30 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='nano'
 fi
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+     alias ls='ls -G'
+fi
+
+# Not Recomded
+# if [ -f ~/.bash_aliases ]; then
+#      . ~/.bash_aliases
+# fi
+
+if ! shopt -oq posix; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
+fi
+
+
+HISTSIZE=1000
+HISTFILESIZE=2000
+shopt -s checkwinsize
+
 
 # Go
 export GOPATH="$HOME/go"
@@ -30,8 +54,8 @@ eval "$(pyenv init -)"
 alias ..="cd ../"
 alias dc="docker-compose"
 alias bc="brew cask"
-alias ls="rm -rf .DS_Store && ls -GF" #Fuck You .DSSTORE
-alias ll="rm -rf .DS_Store && ls -GalF" #Fuck You .DSSTORE
+alias ls="rm -rf .DS_Store && ls -F" #Fuck You .DSSTORE
+alias ll="rm -rf .DS_Store && ls -alF" #Fuck You .DSSTORE
 alias rmd="rm -rf"
 
 # Set synced working environment
