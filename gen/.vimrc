@@ -6,7 +6,6 @@ colorscheme koehler
 
 set list
 set listchars=tab:\ \ ,trail:.
-set foldmethod=indent
 set number
 set tabstop=2 shiftwidth=2 smartindent
 set expandtab
