@@ -38,6 +38,8 @@ alias bc="brew cask"
 alias ls="rm -rf .DS_Store && ls -GF" #Fuck You .DSSTORE
 alias ll="rm -rf .DS_Store && ls -alF" #Fuck You .DSSTORE
 alias rmd="rm -rf"
+alias go_tools="sh ~/go-tools.sh"
 
-# Set synced working environment
-cd $HOME/Sync/w/
+# Set working environment
+cd $HOME/w/
+echo " “Inspiration exists, but it has to find you working.” — Pablo Picasso"
