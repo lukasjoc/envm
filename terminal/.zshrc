@@ -1,3 +1,5 @@
+# This is my setup for macosx systems
+
 ZSH_THEME="gentoo"
 DISABLE_UPDATE_PROMPT="true"
 DISABLE_MAGIC_FUNCTIONS=true
@@ -17,7 +19,7 @@ fi
 
 # Go
 export GOPATH="$HOME/go"
-export GO111MODULE=on #Module support on
+export GO111MODULE=on #Module support on| turn it off for module usage in $GOPATH
 export PATH=$PATH:$GOPATH/bin:PATH
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
@@ -28,9 +30,9 @@ eval "$(pyenv init -)"
 alias ..="cd ../"
 alias dc="docker-compose"
 alias bc="brew cask"
-alias ls="ls -GF"
-alias ll="ls -GalF"
+alias ls="rm -rf .DS_Store && ls -GF" #Fuck You .DSSTORE
+alias ll="rm -rf .DS_Store && ls -GalF" #Fuck You .DSSTORE
 alias rmd="rm -rf"
 
-# Set Synced working environment
-cd ~/Sync/w/
+# Set synced working environment
+cd $HOME/Sync/w/
