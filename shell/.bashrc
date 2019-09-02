@@ -15,8 +15,8 @@ fi
 # Some Aliases
 alias ..="cd ../"
 alias dc="docker-compose"
-alias ll="ls -F --color=auto"
-alias ls="ls -alF"
+alias ls="ls -F --color=auto"
+alias ll="ls -alF"
 
 # Go
 export GOPATH="$HOME/go"
