@@ -3,7 +3,6 @@
 HISTSIZE=1000
 HISTFILESIZE=2000
 export PATH="/usr/local/bin:${PATH}"
-shopt -s checkwinsize
 
 # Good ozsh stuff
 export ZSH="$HOME/.oh-my-zsh"
