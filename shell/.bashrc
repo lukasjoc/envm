@@ -17,6 +17,8 @@ alias ..="cd ../"
 alias dc="docker-compose"
 alias ls="ls -F --color=auto"
 alias ll="ls -alF"
+alias rmd="rm -rf"
+alias go_tools="sh ~/go-tools.sh"
 
 # Go
 export GOPATH="$HOME/go"
@@ -29,3 +31,4 @@ eval "$(pyenv init -)"
 
 # Set working environment
 cd $HOME/w/
+echo " “Inspiration exists, but it has to find you working.” — Pablo Picasso"
