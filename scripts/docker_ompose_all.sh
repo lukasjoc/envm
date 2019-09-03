@@ -1,1 +1,0 @@
-# TODO: make little script that goes through dir and runs docker compose up 
