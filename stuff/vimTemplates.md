@@ -21,14 +21,11 @@ if __name__ == "__main__":
 ```
 
 <!-- Shell -->
-
 ```
-
-
-    #!/bin/sh
-    function main() {
-    echo "Start shelling!"
-    }
-    main
+#!/bin/sh
+function main() {
+  echo "Start shelling!"
+}
+main
   
 ```
