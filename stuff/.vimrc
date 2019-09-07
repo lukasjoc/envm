@@ -3,6 +3,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'wakatime/vim-wakatime'
+Plugin 'dracula/vim'
 call vundle#end()
 """"
 
@@ -11,8 +12,7 @@ set nocompatible
 filetype off
 
 syntax on
-colorscheme koehler
-
+color dracula
 set list
 set listchars=tab:\ \ ,trail:.
 set number
