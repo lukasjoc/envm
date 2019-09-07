@@ -4,8 +4,9 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'wakatime/vim-wakatime'
 call vundle#end()
-filetype plugin indent on
+""""
 
+filetype plugin indent on
 set nocompatible
 filetype off
 
