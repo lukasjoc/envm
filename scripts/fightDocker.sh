@@ -11,5 +11,5 @@ docker rmi $(docker images -q)
 echo "\nFighting networks and docker junk.."
 docker system prune
 
-echo "\aI did it sir $USER. I won with honor"
+echo "\nI did it sir $USER. I won with honor"
 
