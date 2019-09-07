@@ -17,8 +17,10 @@ alias ..="cd ../"
 alias dc="docker-compose"
 alias ls="ls -F --color=auto"
 alias ll="ls -alF"
-alias rmd="rm -rf"
 alias go_tools="sh ~/go-tools.sh"
+alias mkdir="mkdir -p"
+alias rmdir="rm -rf"
+alias cooldocker='docker container ls && echo 🐳========== && docker images && echo 🐳========== && docker network ls'
 
 # Go
 export GOPATH="$HOME/go"

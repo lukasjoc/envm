@@ -36,8 +36,9 @@ alias dc="docker-compose"
 alias bc="brew cask"
 alias ls="rm -rf .DS_Store && ls -GF" #Fuck You .DSSTORE
 alias ll="rm -rf .DS_Store && ls -alF" #Fuck You .DSSTORE
-alias rmd="rm -rf"
-alias go_tools="sh ~/go-tools.sh"
+alias mkdir="mkdir -p"
+alias rmdir="rm -rf"
+alias cooldocker='docker container ls && echo 🐳========== && docker images && echo 🐳========== && docker network ls'
 
 # Set working environment
 cd $HOME/w/
