@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 
 echo "I'm gonna go to battle for you. I'l triumph or die in honor."
 
@@ -11,6 +11,8 @@ docker rmi $(docker images -q)
 
 echo "\nFighting networks and docker junk.."
 docker system prune
+
+docker container ls && echo 🐳====EMTY && docker images && echo 🐳====EMTY && docker network ls
 
 echo "\nI did it sir $USER. I won with honor"
 
