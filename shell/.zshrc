@@ -38,7 +38,12 @@ alias ls="rm -rf .DS_Store && ls -GF" #Fuck You .DSSTORE
 alias ll="rm -rf .DS_Store && ls -alF" #Fuck You .DSSTORE
 alias mkdir="mkdir -p"
 alias rmdir="rm -rf"
-alias cooldocker='docker container ls && echo 🐳========== && docker images && echo 🐳========== && docker network ls'
+
+alias cooldocker="printf '\n'; cimages && docker images && printf '\n'; ccontainer && docker container ls && printf '\n'; cnets && docker network ls"
+alias cimages='printf 🐋=IMAGES\ CURRENTLY\ USED=🐋:" "; docker images | grep "" -c'
+alias ccontainer='printf 🐋=CONTAINER\ CURRENTLY\ RUNNING=🐋:" "; docker container ls | grep "" -c'
+alias cnets='printf 🐋=NETWORKD\ CURRENTY\ USED=🐋:" "; docker network ls | grep "" -c'
+
 
 # Set working environment
 cd $HOME/w/

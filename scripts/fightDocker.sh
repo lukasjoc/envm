@@ -13,7 +13,7 @@ cat << "EOF"
 EOF
 
 << EOF
-lukasjoc, $(date +'%Y')
+lukasjoc, $DATE
 https://lukasjoc.com
 ===================================================
 
@@ -31,7 +31,8 @@ docker rmi $(docker images -q)
 echo "\nFighting networks and docker junk.."
 docker system prune
 
-docker container ls && echo 🐳====EMTY && docker images && echo 🐳====EMTY && docker network ls
-
+printf 🐋=IMAGES\ CURRENTLY\ USED\ =🐋:" "; docker images | grep "" -c && printf "\n";
+printf 🐋=CONTAINERS\ CURRENTLY\ RUNNING\ =🐋:" "; docker container ls | grep "" -c && printf "\n";
+printf 🐋=NETWORKS\ CURRENTY\ USED\ =🐋:" "; docker network ls | grep "" -c && printf "\n";
 echo "\nI did it sir $USER. I won with honor"
 
