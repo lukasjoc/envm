@@ -17,7 +17,7 @@ Vim:
   - run :PluginInstall
   - For WakaTime to work run :WakaTimeApiKey followed by your API-Key 
 Shell:
-  - you should have zsh or bash
+  - you should have zsh with ozsh or plain bash
   - you should have ether $HOME/Sync/w or $HOME/w/ for your workdir 
   
 ```
