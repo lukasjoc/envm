@@ -11,5 +11,10 @@ Content:
   - other really cool stuffs 😹
 ```
 
-!INFO: For the wakatime and dracula Vundle Plugin to work open vim after setting vimrc and run :PluginInstall 
+Info & Setup
+```
+ - For the WakaTime and Dracula Vundle-Plugin to work properly open Vim after setting .vimrc and run :PluginInstall
+ - For WakaTime to work as indented run :WakaTimeApiKey followed by your API-Key gained on your wt settings page 
+ ```
+
 by [lukasjoc](https://lukasjoc.com), 2019
