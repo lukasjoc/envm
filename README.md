@@ -13,8 +13,13 @@ Content:
 
 Info & Setup
 ```
- - For the WakaTime and Dracula Vundle-Plugin to work properly open Vim after setting .vimrc and run :PluginInstall
- - For WakaTime to work as indented run :WakaTimeApiKey followed by your API-Key gained on your wt settings page 
- ```
+Vim:
+  - run :PluginInstall
+  - For WakaTime to work run :WakaTimeApiKey followed by your API-Key 
+Shell:
+  - you should have zsh or bash
+  - you should have ether $HOME/Sync/w or $HOME/w/ for your workdir 
+  
+```
 
 by [lukasjoc](https://lukasjoc.com), 2019
