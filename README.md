@@ -5,10 +5,10 @@
 Content:
 
 ```
-  - really shell setup for zsh and bash
-  - really cool .vimrc
-  - scripts for day to day hassles
-  - other really cool stuffs 😹
+  - Shell setup for zsh and bash
+  - Vim configuration with very light Vundle setup
+  - Very usefull scripts for day to day hassles 
+  - other really cool stuffs like .inputrc and .gitconfig with aliases 🦄👹
 ```
 
 Info & Setup
