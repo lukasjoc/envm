@@ -35,6 +35,16 @@ export PATH=$PATH:$GOPATH/bin:PATH
 # Python
 eval "$(pyenv init -)"
 
-# Set working environment
-cd $HOME/w/
-echo " “Inspiration exists, but it has to find you working.” — Pablo Picasso"
+
+# Setting working dir
+if [ -d "$HOME/Sync/" ]; then
+  cd $HOME/Sync/w/
+elif [ -d "$HOME/w/"]; then
+  cd $HOME/w/
+else
+  print Please setup your working directory ether as $HOME/Sync/w or $HOME/w/!;
+fi
+
+if [ -d "$HOME/Sync/w" ] || [ -d "$HOME/w" ]; then
+  print “Inspiration exists, but it has to find you working.” — Pablo Picasso;
+fi

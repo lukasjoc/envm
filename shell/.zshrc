@@ -45,6 +45,16 @@ alias ccontainer='printf 🐋=CONTAINER\ CURRENTLY\ RUNNING=🐋:" "; docker con
 alias cnets='printf 🐋=NETWORKD\ CURRENTY\ USED=🐋:" "; docker network ls | grep "" -c'
 
 
-# Set working environment
-cd $HOME/w/
-echo " “Inspiration exists, but it has to find you working.” — Pablo Picasso"
+
+# Setting working dir
+if [ -d "$HOME/Sync/" ]; then
+  cd $HOME/Sync/w/
+elif [ -d "$HOME/w/"]; then
+  cd $HOME/w/
+else
+  print Please setup your working directory ether as $HOME/Sync/w or $HOME/w/!;
+fi
+
+if [ -d "$HOME/Sync/w" ] || [ -d "$HOME/w" ]; then
+  print “Inspiration exists, but it has to find you working.” — Pablo Picasso;
+fi

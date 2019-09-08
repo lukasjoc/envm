@@ -11,4 +11,5 @@ Content:
   - other really cool stuffs 😹
 ```
 
+!INFO: For the wakatime and dracula Vundle Plugin to work open vim after setting vimrc and run :PluginInstall 
 by [lukasjoc](https://lukasjoc.com), 2019
