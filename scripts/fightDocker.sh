@@ -19,7 +19,7 @@ https://lukasjoc.com
 
 EOF
 
-echo "\nI'm gonna go to battle for you. I'l triumph or die in honor."
+echo "\nI'm gonna go to battle for you. I'll triumph or die in honor."
 
 echo "\nFighting containers.."
 docker container stop $(docker container ls -a -q)
