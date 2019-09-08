@@ -6,16 +6,18 @@ Content:
 
 ```
   - Shell setup for zsh and bash
-  - Vim configuration with very light Vundle setup
+  - VIM configuration with very light Vundle setup
   - Very usefull scripts for day to day hassles 
-  - other really cool stuffs like .inputrc and .gitconfig with aliases 🦄👹
+  - Other really cool stuff LIKE .inputrc AND .gitconfig with aliases 🦄👹
 ```
 
 Info & Setup
 ```
-Vim:
+---
+VIM:
   - run :PluginInstall
   - For WakaTime to work run :WakaTimeApiKey followed by your API-Key 
+---
 Shell:
   - you should have zsh with ozsh or plain bash
   - you should have ether $HOME/Sync/w or $HOME/w/ for your workdir 
