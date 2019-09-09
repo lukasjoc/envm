@@ -49,7 +49,7 @@ alias cnets='printf 🐋=NETWORKD\ CURRENTY\ USED=🐋:" "; docker network ls | 
 # Setting working dir
 if [ -d "$HOME/Sync/" ]; then
   cd $HOME/Sync/w/
-elif [ -d "$HOME/w/"]; then
+elif [ -d "$HOME/w/" ]; then
   cd $HOME/w/
 else
   print Please setup your working directory ether as $HOME/Sync/w or $HOME/w/!;
