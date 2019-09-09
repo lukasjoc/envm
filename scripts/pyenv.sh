@@ -15,11 +15,14 @@ while true; do
 done
 
 
-install_python() {
+install_python {
   echo "Installing Python"
-# brew install pyenv 
-# pyenv install {$PYENV_PYTHON} 
-# export eval "$(pyenv init -)" >> ~/.zshrc
+
+# brew install pyenv
+# pyenv install {$PYENV_PYTHON}
+# PARSE $PYENV_SHELL and put it into .bashrc or .zshrc
+
+# export eval "$(pyenv init -)" >> ~/$SHELL_CONFIG
 # pyenv global {$PYENV_PYTHON}
 # pyenv rehash
 # python --version
