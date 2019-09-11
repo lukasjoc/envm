@@ -27,7 +27,7 @@ GetOptions(
     "delete!"   => \my $delete,
     "vm=s"      => \my $VM_NAME,
 ) or die("Error in command line arguments\n");
-​
+
 print "\N{U+1F60A} managing $VM_NAME...\n" if ($verbose);
 
 # take snapshots

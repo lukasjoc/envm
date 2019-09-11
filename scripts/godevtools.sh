@@ -1,5 +1,8 @@
 # TODO: Write little script that installs all relevant golang tools and language server from google 
 
+
+figlet "go-devtools"
+
 echo "Installing go tools" &&
 sleep 1 &&
 echo "Loading..." &&
