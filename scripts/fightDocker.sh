@@ -12,7 +12,7 @@ cat << "EOF"
 EOF
 
 << EOF
-lukasjoc, $DATE
+lukasjoc, 2019
 https://lukasjoc.com
 ===================================================
 
