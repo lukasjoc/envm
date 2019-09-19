@@ -29,6 +29,7 @@ export PATH=$PATH:$GOPATH/bin:PATH
 
 # Python
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 #Some Aliases
 alias ..="cd ../"

@@ -34,7 +34,7 @@ export PATH=$PATH:$GOPATH/bin:PATH
 
 # Python
 eval "$(pyenv init -)"
-
+eval "$(pyenv virtualenv-init -)"
 
 # Setting working dir
 if [ -d "$HOME/Sync/" ]; then
