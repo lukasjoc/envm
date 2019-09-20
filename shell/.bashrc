@@ -39,8 +39,12 @@ eval "$(pyenv virtualenv-init -)"
 # Setting working dir
 if [ -d "$HOME/Sync/" ]; then
   cd $HOME/Sync/w/
+  alias w="cd ~/Sync/w/"
+  alias fun="cd ~/Sync/w/fun/"
 elif [ -d "$HOME/w/" ]; then
-  cd $HOME/w/
+  cd $HOME/w/  
+  alias w="cd ~/w/"  
+  alias fun="cd ~/w/fun/"
 else
   print Please setup your working directory ether as $HOME/Sync/w or $HOME/w/!;
 fi
@@ -48,3 +52,4 @@ fi
 if [ -d "$HOME/Sync/w" ] || [ -d "$HOME/w" ]; then
   print “Inspiration exists, but it has to find you working.” — Pablo Picasso;
 fi
+

@@ -29,7 +29,10 @@ export PATH=$PATH:$GOPATH/bin:PATH
 
 # Python
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if 
+  which pyenv-virtualenv-init > /dev/null; then 
+  eval "$(pyenv virtualenv-init -)";
+fi
 
 #Some Aliases
 alias ..="cd ../"
@@ -45,13 +48,15 @@ alias cimages='printf 🐋=IMAGES\ CURRENTLY\ USED=🐋:" "; docker images | gre
 alias ccontainer='printf 🐋=CONTAINER\ CURRENTLY\ RUNNING=🐋:" "; docker container ls -a | grep "" -c'
 alias cnets='printf 🐋=NETWORKD\ CURRENTY\ USED=🐋:" "; docker network ls | grep "" -c'
 
-
-
 # Setting working dir
 if [ -d "$HOME/Sync/" ]; then
   cd $HOME/Sync/w/
+  alias w="cd ~/Sync/w/"
+  alias fun="cd ~/Sync/w/fun/"
 elif [ -d "$HOME/w/" ]; then
-  cd $HOME/w/
+  cd $HOME/w/  
+  alias w="cd ~/w/"  
+  alias fun="cd ~/w/fun/"
 else
   print Please setup your working directory ether as $HOME/Sync/w or $HOME/w/!;
 fi
@@ -59,3 +64,4 @@ fi
 if [ -d "$HOME/Sync/w" ] || [ -d "$HOME/w" ]; then
   print “Inspiration exists, but it has to find you working.” — Pablo Picasso;
 fi
+
