@@ -1,9 +1,25 @@
-# TODO: Write little script that installs all relevant golang tools and language server from google 
+#!/bin/sh
 
+cat << "EOF"
+                 _            _              _
+  __ _  ___   __| | _____   _| |_ ___   ___ | |___
+ / _` |/ _ \ / _` |/ _ \ \ / / __/ _ \ / _ \| / __|
+| (_| | (_) | (_| |  __/\ V /| || (_) | (_) | \__ \
+ \__, |\___/ \__,_|\___| \_/  \__\___/ \___/|_|___/
+ |___/
 
-figlet "go-devtools"
+EOF
 
-echo "Installing go tools" &&
+<< EOF
+lukasjoc, 2019
+https://lukasjoc.com
+===================================================
+
+EOF
+
+e
+
+ echo "Installing go tools" &&
 sleep 1 &&
 echo "Loading..." &&
 go get github.com/mdempsky/gocode &&
