@@ -3,7 +3,8 @@
 
 Run a script:
 ```
-./{{script}}.sh
+sh: ./{{script}}.sh
+pl: perl {{script}}.pl
 ```
 
 by [lukasjoc](https://lukasjoc.com), 2019
