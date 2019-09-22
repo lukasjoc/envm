@@ -17,6 +17,14 @@ alias ..="cd ../"
 alias dc="docker-compose"
 alias ls="ls -F --color=auto"
 alias ll="ls -alF"
+alias go_tools="sh ~/go-tools.sh"
+alias mkdir="mkdir -p"
+alias rmdir="rm -rf"
+
+alias cooldocker="printf '\n'; cimages && docker images && printf '\n'; ccontainer && docker container ls && printf '\n'; cnets && docker network ls"
+alias cimages='printf 🐋=IMAGES\ CURRENTLY\ USED=🐋:" "; docker images | grep "" -c'
+alias ccontainer='printf 🐋=CONTAINER\ CURRENTLY\ RUNNING=🐋:" "; docker container ls | grep "" -c'
+alias cnets='printf 🐋=NETWORKD\ CURRENTY\ USED=🐋:" "; docker network ls | grep "" -c'
 
 # Go
 export GOPATH="$HOME/go"
@@ -26,6 +34,22 @@ export PATH=$PATH:$GOPATH/bin:PATH
 
 # Python
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
-# Set working environment
-cd $HOME/w/
+# Setting working dir
+if [ -d "$HOME/Sync/" ]; then
+  cd $HOME/Sync/w/
+  alias w="cd ~/Sync/w/"
+  alias fun="cd ~/Sync/w/fun/"
+elif [ -d "$HOME/w/" ]; then
+  cd $HOME/w/  
+  alias w="cd ~/w/"  
+  alias fun="cd ~/w/fun/"
+else
+  print Please setup your working directory ether as $HOME/Sync/w or $HOME/w/!;
+fi
+
+if [ -d "$HOME/Sync/w" ] || [ -d "$HOME/w" ]; then
+  print “Inspiration exists, but it has to find you working.” — Pablo Picasso;
+fi
+

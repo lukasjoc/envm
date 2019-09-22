@@ -1,11 +1,22 @@
 [user]
-  email = INSERT_EMAIL
-  name = INSERT_NAME
+  email = name@example.com
+  name = My Name
+
 [core]
   autocrlf = false
+
 [help]
   autocorrect = 9
+
 [alias]
   br=branch -a
   ch=checkout
   st=status
+  log=log --oneline
+  logd=log --date=iso
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
