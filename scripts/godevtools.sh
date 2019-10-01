@@ -14,12 +14,9 @@ EOF
 lukasjoc, 2019
 https://lukasjoc.com
 ===================================================
-
 EOF
 
-e
-
- echo "Installing go tools" &&
+echo "Installing go tools" &&
 sleep 1 &&
 echo "Loading..." &&
 go get github.com/mdempsky/gocode &&
