@@ -6,24 +6,32 @@ cat << "EOM"
 | '_ \| '__/ _ \ \ /\ / / _` | | | | __/ _ \| | | | '_ \ / _` |/ _` | __/ _ \
 | |_) | | |  __/\ V  V / (_| | |_| | || (_) | |_| | |_) | (_| | (_| | ||  __/
 |_.__/|_|  \___| \_/\_/ \__,_|\__,_|\__\___/ \__,_| .__/ \__,_|\__,_|\__\___|
-
 EOM
 
 cat << "EOM"
 lukasjoc, 2019
 https://lukasjoc.com
+Updates Homebrew and brew caskroom
+Asks you to automate the process with crontabs and sets
+it up for you, if you want(and you should) :)
+Gives you some scheduling options
+- @yearly, @reboot. etc
 ===================================================
 EOM
 
-
-while true; do
-    read -p "Do you want to create a crontab to automate this process? [yes/no] " answer
-    case $answer in
-        [Yy]* ) createJob; break;;
-        [Nn]* ) update; exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+#update is updating the local homebrew-core repositoy
+#and upgrading brew's if possible, updating and upgrading cask's 
+#if possible, cleaning the hb installation if possible
+function update() {
+  echo "Updating and Upgrading Homebrew/Core"
+	cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
+	git reset --hard origin/master
+	brew upgrade
+	echo "Upgrading casks if any..."
+	brew cask upgrade
+	echo "Cleaning up..."
+	brew cleanup
+}
 
 # askCrontab asks user for input
 function createJob {
@@ -53,11 +61,10 @@ function createJob {
         * ) echo "Please answer yes or no.";;
     	esac
 		done
-
-  	
+	
   	#TODO: Set atomicBrewer into path to be able to call 
   	#it globally from job file 
-	#mv $PWD/atomicBrewer.sh /usr/local/bin/atomicBrewer
+		#mv $PWD/atomicBrewer.sh /usr/local/bin/atomicBrewer
 
   	#TODO: Call setJob function to set the job###################
    	setJob($OPT)
@@ -75,16 +82,12 @@ function setJob(OPT) {
 	#sudo echo "$opt atomicBrewer" >> file
 } 
 
-#update is updating the local homebrew-core repositoy
-#and upgrading brew's if possible, updating and upgrading cask's 
-#if possible, cleaning the hb installation if possible
-function update() {
-  echo "Updating and Upgrading Homebrew/Core"
-	cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
-	git reset --hard origin/master
-	brew upgrade
-	echo "Upgrading casks if any..."
-	brew cask upgrade
-	echo "Cleaning up..."
-	brew cleanup
-}
+
+while true; do
+    read -p "Do you want to create a crontab to automate this process? [yes/no] " answer
+    case $answer in
+        [Yy]* ) createJob; break;;
+        [Nn]* ) update; exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
