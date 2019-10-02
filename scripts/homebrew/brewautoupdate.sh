@@ -33,8 +33,19 @@ function update() {
 	brew cleanup
 }
 
+#setJon is creating a new jobs file and inserting the correct user based 
+#updating schedule, executing atomic updater
+#params: (OPT: schedule option)
+# setJob(OPT) {
+# 	echo "!DEBUG: Setting jobdata for $USER with $OPT"
+# 	#sudo crontab -e #file?-> #/tmp/...
+# 	#sudo echo "$opt atomicBrewer" >> file
+# } 
+
 # askCrontab asks user for input
 function createJob {
+  
+	PS3="Select update interval[1,2,3,4,5 or Quit]: "
 	options=(
 		"@reboot" 
 		"@yearly" 
@@ -44,44 +55,32 @@ function createJob {
 		"Quit"
 	)
 
-	PS3="Select update interval[1,2,3,4,5 or Quit]: "
-	
-	#TODO: this select is not working right now, please 
-	# look into how selections work with shell scripts
-	# valuw isn't taken 
-	select OPT in "${options[@]}"
-		do
-    	case $OPT in
-      	"@reboot");;
-        "@yearly");;
-        "@monthly");;
-   			"@weekly");;
-        "@daily");;
-        "Quit") break;;
-        * ) echo "Please answer yes or no.";;
-    	esac
-		done
-	
-  	#TODO: Set atomicBrewer into path to be able to call 
-  	#it globally from job file 
-		#mv $PWD/atomicBrewer.sh /usr/local/bin/atomicBrewer
+	select opt in "${options[@]}"
+	do
+			case $opt in
+					"Option 1")
+							echo "$opt updates";
+							break;;
+					"Option 2")
+							echo "you chose choice 2";
+							break;;
+					"Option 3")
+							echo "you chose choice $REPLY which is $opt";
+							break;;
+					"Quit") break;;
+					*) echo "invalid option $REPLY";;
+			esac
+	done	
+	#TODO: Set atomicBrewer into path to be able to call 
+  #it globally from job file 
+	#mv $PWD/atomicBrewer.sh /usr/local/bin/atomicBrewer
 
-  	#TODO: Call setJob function to set the job###################
-   	setJob($OPT)
+  #TODO: Call setJob function to set the job###################
+  # setJob($OPT)
 
 	echo "Running initial update..."
 	update
 }
-
-#setJon is creating a new jobs file and inserting the correct user based 
-#updating schedule, executing atomic updater
-#params: (OPT: schedule option)
-function setJob(OPT) {
-	echo "!DEBUG: Setting jobdata for $USER with $OPT"
-	#sudo crontab -e #file?-> #/tmp/...
-	#sudo echo "$opt atomicBrewer" >> file
-} 
-
 
 while true; do
     read -p "Do you want to create a crontab to automate this process? [yes/no] " answer
