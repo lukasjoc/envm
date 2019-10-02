@@ -12,6 +12,9 @@ EOF
 cat << EOF
 lukasjoc, 2019
 https://lukasjoc.com
+I mean there is a utility in the 
+docker CLI which does the same
+but this is way cooler, isn't it
 ===================================================
 EOF
 
