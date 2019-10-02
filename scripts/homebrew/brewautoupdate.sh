@@ -22,7 +22,7 @@ EOM
 #update is updating the local homebrew-core repositoy
 #and upgrading brew's if possible, updating and upgrading cask's 
 #if possible, cleaning the hb installation if possible
-function update() {
+function update {
   echo "Updating and Upgrading Homebrew/Core"
 	cd /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core
 	git reset --hard origin/master
@@ -36,55 +36,62 @@ function update() {
 #setJon is creating a new jobs file and inserting the correct user based 
 #updating schedule, executing atomic updater
 #params: (OPT: schedule option)
-# setJob(OPT) {
-# 	echo "!DEBUG: Setting jobdata for $USER with $OPT"
-# 	#sudo crontab -e #file?-> #/tmp/...
-# 	#sudo echo "$opt atomicBrewer" >> file
-# } 
+function setJob {
+	echo "!DEBUG: Setting jobdata for $USER with $OPT"
+	# TODO: create job file and create crontab rule for the user
+} 
 
 # askCrontab asks user for input
-function createJob {
-
-	PS3="Select update interval[1,2,3,4,5 or Quit]: "
+function makeAutomation {
+	PS3="Select update interval[1,2,3,4,5 or 6 for Quit]: "
 	options=(
-		"@reboot" 
-		"@yearly" 
-		"@monthly" 
-		"@weekly" 
+		"@reboot"
+		"@yearly"
+		"@monthly"
+		"@weekly"
 		"@daily"
 		"Quit"
 	)
 
-	select opt in "${options[@]}"
+	select OPT in "${options[@]}"
 	do
-		case $opt in
+		case $OPT in
 			"@reboot") break;;
 			"@yearly") break;;
 			"@monthly") break;;
 			"@weekly") break;;
 			"@daily") break;;
-			"Quit") break;;
+			"Quit") exit;;
 			*) echo "invalid option $REPLY";;
 		esac
 	done
 
-	echo "$opt"
-	#TODO: Set atomicBrewer into path to be able to call 
-  #it globally from job file 
-	#mv $PWD/atomicBrewer.sh /usr/local/bin/atomicBrewer
+	echo "Moving brewupdate script into /usr/local/bin/" 
+	if [ -f "/usr/local/bin/brewupdate" ]; then
+		rm /usr/local/bin/brewupdate
+	fi
 
-  #TODO: Call setJob function to set the job###################
-  # setJob($OPT)
+	if [ -f "$PWD/brewupdate" ]; then
+		cp $PWD/brewupdate /usr/local/bin/brewupdate
+	else
+		echo "Resyncing repository..."
+		echo "git reset --hard origin/master"
+		cp $PWD/brewupdate /usr/local/bin/brewupdate
+	fi
 
-	# echo "Running initial update..."
-	# update
+	echo "Initializing jobdata..."
+	setJob "$OPT";
+
+	echo "Running initial update..."
+	update
 }
 
+# TODO: maibe update this decision with a default value like this on enter [Y/n] or [n/Y]
 while true; do
-	read -p "Do you want to create a crontab to automate this process? [yes/no] " answer
+	read -p "Do you want to create a job to automate this process? [yes/no] " answer
 	case $answer in
-  	[Yy]* ) createJob; break;;
+  	[Yy]* ) makeAutomation; break;;
     [Nn]* ) update; exit;;
-    * ) echo "Please answer yes or no.";;
+    * ) echo "Please answer yes/y or no/n.";;
   esac
 done

@@ -11,7 +11,7 @@ EOM
 cat << "EOM"
 lukasjoc, 2019
 https://lukasjoc.com
-Installs Homebrew and brew caskroom
+Installs homebrew and brew caskroom
 Gives you some profiles of software to install
 - Default Pack
 - Developer Pack
