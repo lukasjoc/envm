@@ -1,4 +1,5 @@
 #!/bin/sh
+PATH=/usr/local/bin:/usr/local/sbin:~/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 cat << "EOM"
  _                                  _                        _       _
@@ -33,16 +34,38 @@ function update {
 	brew cleanup
 }
 
-#setJon is creating a new jobs file and inserting the correct user based 
-#updating schedule, executing atomic updater
-#params: (OPT: schedule option)
+#setJob is creating a new jobs file and inserting the correct user based 
+#updating schedule, executing brewupdate atomic brew update script
+#params: ($OPT: schedule option)
 function setJob {
-	echo "!DEBUG: Setting jobdata for $USER with $OPT"
-	# TODO: create job file and create crontab rule for the user
+	echo "Setting jobdata for $USER.."
+
+	#allow current user to schedule jobs
+	cronallowance=/usr/lib/cron/cron.allow
+	
+	if [[ ! -f "$cronallowance" ]]; then
+		echo "creating cron.allow"
+		touch $cronallowance
+	fi
+	echo "$USER" >> $cronallowance
+
+	#create cron files for current user & 
+	#create the job rules
+	# cronfile=/var/spool/cron/$USER
+	cronfile=/usr/lib/cron/spool/$USER
+	if [[ ! -f "$cronfile" ]]; then
+		touch $cronfile
+	fi
+	echo 'MAILTO=""' >> $cronfile
+	echo "$opt brewupdate" >> $cronfile
+
+	echo "Validating jobbed setup..."
+	echo "Current cronjobs for $USER"
+	sudo crontab -u $USER -l
 } 
 
 # askCrontab asks user for input
-function makeAutomation {
+function makeJob {
 	PS3="Select update interval[1,2,3,4,5 or 6 for Quit]: "
 	options=(
 		"@reboot"
@@ -52,7 +75,6 @@ function makeAutomation {
 		"@daily"
 		"Quit"
 	)
-
 	select OPT in "${options[@]}"
 	do
 		case $OPT in
@@ -67,30 +89,29 @@ function makeAutomation {
 	done
 
 	echo "Moving brewupdate script into /usr/local/bin/" 
-	if [ -f "/usr/local/bin/brewupdate" ]; then
-		rm /usr/local/bin/brewupdate
+	updater=/usr/local/bin/brewupdate
+	if [ -f "$updater" ]; then
+		rm $updater
 	fi
 
-	if [ -f "$PWD/brewupdate" ]; then
-		cp $PWD/brewupdate /usr/local/bin/brewupdate
-	else
+	if [[ ! -f "$PWD/brewupdate" ]]; then
 		echo "Resyncing repository..."
-		echo "git reset --hard origin/master"
-		cp $PWD/brewupdate /usr/local/bin/brewupdate
-	fi
+		# git reset --hard origin/master
+	fi 
+	cp $PWD/brewupdate $updater
 
 	echo "Initializing jobdata..."
 	setJob "$OPT";
 
-	echo "Running initial update..."
-	update
+	# echo "Running initial update..."
+	# update
 }
 
 # TODO: maibe update this decision with a default value like this on enter [Y/n] or [n/Y]
 while true; do
-	read -p "Do you want to create a job to automate this process? [yes/no] " answer
+	read -p "Do you want to create a cronjob to automate this process? [yes/no] " answer
 	case $answer in
-  	[Yy]* ) makeAutomation; break;;
+  	[Yy]* ) makeJob; break;;
     [Nn]* ) update; exit;;
     * ) echo "Please answer yes/y or no/n.";;
   esac
