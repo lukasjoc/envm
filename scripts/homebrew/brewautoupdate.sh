@@ -38,30 +38,33 @@ function update {
 #updating schedule, executing brewupdate atomic brew update script
 #params: ($OPT: schedule option)
 function setJob {
-	echo "Setting jobdata for $USER.."
+	# echo "Setting jobdata for $USER.."
 
-	#allow current user to schedule jobs
-	cronallowance=/usr/lib/cron/cron.allow
+	# #allow current user to schedule jobs
+	# cronallowance=/usr/lib/cron/cron.allow
 	
-	if [[ ! -f "$cronallowance" ]]; then
-		echo "creating cron.allow"
-		touch $cronallowance
-	fi
-	echo "$USER" >> $cronallowance
+	# if [[ ! -f "$cronallowance" ]]; then
+	# 	echo "creating cron.allow"
+	# 	touch $cronallowance
+	# fi
+	# echo "$USER" >> $cronallowance
 
-	#create cron files for current user & 
-	#create the job rules
-	# cronfile=/var/spool/cron/$USER
-	cronfile=/usr/lib/cron/spool/$USER
-	if [[ ! -f "$cronfile" ]]; then
-		touch $cronfile
-	fi
-	echo 'MAILTO=""' >> $cronfile
-	echo "$opt brewupdate" >> $cronfile
+	# #create cron files for current user & 
+	# #create the job rules
+	# # cronfile=/var/spool/cron/$USER
+	# cronfile=/usr/lib/cron/spool/$USER
+	# if [[ ! -f "$cronfile" ]]; then
+	# 	touch $cronfile
+	# fi
+	# echo 'MAILTO=""' >> $cronfile
+	# echo "$opt brewupdate" >> $cronfile
 
-	echo "Validating jobbed setup..."
-	echo "Current cronjobs for $USER"
-	sudo crontab -u $USER -l
+	# echo "Validating jobbed setup..."
+	# echo "Current cronjobs for $USER"
+	# sudo crontab -u $USER -l
+	
+	# TODO: mimic the zsh update schedule and use jobspec for builtin job management
+
 } 
 
 # askCrontab asks user for input
