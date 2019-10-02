@@ -44,7 +44,7 @@ function update() {
 
 # askCrontab asks user for input
 function createJob {
-  
+
 	PS3="Select update interval[1,2,3,4,5 or Quit]: "
 	options=(
 		"@reboot" 
@@ -57,20 +57,18 @@ function createJob {
 
 	select opt in "${options[@]}"
 	do
-			case $opt in
-					"Option 1")
-							echo "$opt updates";
-							break;;
-					"Option 2")
-							echo "you chose choice 2";
-							break;;
-					"Option 3")
-							echo "you chose choice $REPLY which is $opt";
-							break;;
-					"Quit") break;;
-					*) echo "invalid option $REPLY";;
-			esac
-	done	
+		case $opt in
+			"@reboot") break;;
+			"@yearly") break;;
+			"@monthly") break;;
+			"@weekly") break;;
+			"@daily") break;;
+			"Quit") break;;
+			*) echo "invalid option $REPLY";;
+		esac
+	done
+
+	echo "$opt"
 	#TODO: Set atomicBrewer into path to be able to call 
   #it globally from job file 
 	#mv $PWD/atomicBrewer.sh /usr/local/bin/atomicBrewer
@@ -78,15 +76,15 @@ function createJob {
   #TODO: Call setJob function to set the job###################
   # setJob($OPT)
 
-	echo "Running initial update..."
-	update
+	# echo "Running initial update..."
+	# update
 }
 
 while true; do
-    read -p "Do you want to create a crontab to automate this process? [yes/no] " answer
-    case $answer in
-        [Yy]* ) createJob; break;;
-        [Nn]* ) update; exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
+	read -p "Do you want to create a crontab to automate this process? [yes/no] " answer
+	case $answer in
+  	[Yy]* ) createJob; break;;
+    [Nn]* ) update; exit;;
+    * ) echo "Please answer yes or no.";;
+  esac
 done
