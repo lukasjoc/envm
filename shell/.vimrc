@@ -4,6 +4,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'dracula/vim'
+Plugin 'cespare/vim-toml'
+Plugin 'fatih/vim-go'
 call vundle#end()
 """"
 
@@ -21,5 +23,3 @@ set expandtab
 set hlsearch
 set encoding=utf-8
 set ruler
-
-

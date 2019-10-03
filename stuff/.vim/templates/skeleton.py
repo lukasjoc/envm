@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+
 def main():
     print("Start pying!")
 

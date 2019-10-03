@@ -30,4 +30,5 @@ go get github.com/stamblerre/gocode &&
 go get github.com/rogpeppe/godef &&
 go get golang.org/x/tools/cmd/goimports &&
 go get golang.org/x/lint/golint &&
-echo "Done installing go tools into $GOAPTH/bin"
+echo "Done installing go tools into GOAPTH"
+

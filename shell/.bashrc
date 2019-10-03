@@ -12,44 +12,48 @@ if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
 fi
 
-# Some Aliases
-alias ..="cd ../"
-alias dc="docker-compose"
-alias ls="ls -F --color=auto"
-alias ll="ls -alF"
-alias go_tools="sh ~/go-tools.sh"
-alias mkdir="mkdir -p"
-alias rmdir="rm -rf"
-
-alias cooldocker="printf '\n'; cimages && docker images && printf '\n'; ccontainer && docker container ls && printf '\n'; cnets && docker network ls"
-alias cimages='printf 🐋=IMAGES\ CURRENTLY\ USED=🐋:" "; docker images | grep "" -c'
-alias ccontainer='printf 🐋=CONTAINER\ CURRENTLY\ RUNNING=🐋:" "; docker container ls | grep "" -c'
-alias cnets='printf 🐋=NETWORKD\ CURRENTY\ USED=🐋:" "; docker network ls | grep "" -c'
-
 # Go
 export GOPATH="$HOME/go"
 export GO111MODULE=on #Module support on| turn it off for module usage in $GOPATH
 export PATH=$PATH:$GOPATH/bin:PATH
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+alias go_tools="sh ~/go-tools.sh"
 
 # Python
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# Some Aliases
+alias ..="cd ../"
+alias dc="docker-compose"
+alias ls="ls -F --color=auto"
+alias ll="ls -alF"
+alias mkdir="mkdir -p"
+alias rmdir="rm -rf"
+alias cooldocker="printf '\n'; cimages && docker images && printf '\n'; ccontainer && docker container ls && printf '\n'; cnets && docker network ls"
+alias cimages='printf 🐋=IMAGES\ CURRENTLY\ USED=🐋:" "; docker images | grep "" -c'
+alias ccontainer='printf 🐋=CONTAINER\ CURRENTLY\ RUNNING=🐋:" "; docker container ls | grep "" -c'
+alias cnets='printf 🐋=NETWORKD\ CURRENTY\ USED=🐋:" "; docker network ls | grep "" -c'
+
 # Setting working dir
 if [ -d "$HOME/Sync/" ]; then
   cd $HOME/Sync/w/
-  alias w="cd ~/Sync/w/"
+  alias work="cd ~/Sync/w/"
   alias fun="cd ~/Sync/w/fun/"
 elif [ -d "$HOME/w/" ]; then
   cd $HOME/w/  
-  alias w="cd ~/w/"  
+  alias work="cd ~/w/"  
   alias fun="cd ~/w/fun/"
 else
   print Please setup your working directory ether as $HOME/Sync/w or $HOME/w/!;
 fi
 
+# Greeting on terminal start
 if [ -d "$HOME/Sync/w" ] || [ -d "$HOME/w" ]; then
+  if hash figlet 2>/dev/null; then
+    figlet "Hello, $USER"
+  else
+    print Hello, $USER
+  fi
   print “Inspiration exists, but it has to find you working.” — Pablo Picasso;
 fi
-
