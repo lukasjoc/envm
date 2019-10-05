@@ -6,6 +6,7 @@ Plugin 'wakatime/vim-wakatime'
 Plugin 'dracula/vim'
 Plugin 'cespare/vim-toml'
 Plugin 'fatih/vim-go'
+Plugin 'posva/vim-vue'
 call vundle#end()
 """"
 
