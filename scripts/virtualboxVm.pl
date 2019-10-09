@@ -53,11 +53,11 @@ if ($delete) {
         $vms =~ s/^\s*Name:\s+(.*)\s+\(UUID.*$/$1/xms;
     }
     @vms = sort { join('', (split '.', $a)[2,1,0]) cmp join('', (split '.', $b)[2,1,0]) } @vms;
-​
+
     # get time
     my $limit = localtime;
     $limit -= SNAPSHOT_LIVESPAN;
-​
+
     my $delete = SNAPSHOT_MAX_DELETIONS;
     for my $date (@vms) {
         next if $date !~ m{^\d+\.\d+\.\d+ - \d+:\d+$};
@@ -75,8 +75,7 @@ if ($delete) {
 if ($start) {
     print "\N{U+1F680} starting vm $VM_NAME...\n" if ($verbose);
     exec(VBoxHeadless, '-s', $VM_NAME);
-}
-elsif ($stop) {
+} elsif ($stop) {
     print "\N{U+2764} stopping vm $VM_NAME...\n" if ($verbose);
     exec(VBoxManage, 'controlvm', $VM_NAME, 'acpipowerbutton');
 }

@@ -33,6 +33,11 @@ if which pyenv-virtualenv-init > /dev/null; then
   eval "$(pyenv virtualenv-init -)"; 
 fi
 
+# Perl
+source $HOME/perl5/perlbrew/etc/bashrc
+alias pb="perlbrew"
+alias pbl="perlbrew list"
+
 #Some Aliases
 alias ..="cd ../"
 alias dc="docker-compose"
@@ -45,7 +50,7 @@ alias cooldocker="printf '\n'; cimages && docker images && printf '\n'; ccontain
 alias cimages='printf 🐋=IMAGES\ CURRENTLY\ USED=🐋:" "; docker images | grep "" -c'
 alias ccontainer='printf 🐋=CONTAINER\ CURRENTLY\ RUNNING=🐋:" "; docker container ls | grep "" -c'
 alias cnets='printf 🐋=NETWORKD\ CURRENTY\ USED=🐋:" "; docker network ls | grep "" -c'
-
+alias count='ls -l | grep "" -c'
 # Setting working dir
 if [ -d "$HOME/Sync/" ]; then
   cd $HOME/Sync/w/
