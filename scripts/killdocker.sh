@@ -19,15 +19,15 @@ EOF
 
 kill() {
   declare -a tools=( 
-    "container"
-    "image"
-    "network"
-    "volumes"
+    "docker rmi $(docker images -q)"
+    "docker stop $(docker ps -q) && docker rm $(docker ps -a -q)"
+    "docker rm $(docker network ls -q)"
+    "docker rm $(docker volume ls -q)"
   )
   for tool in "${tools[@]}"
   do
-    echo "Killing..." $tool
-    # TODO: Kill every tool
+    echo "CAUTION! Killing... [^C to stop]"
+    exec $tool
   done
 }
 

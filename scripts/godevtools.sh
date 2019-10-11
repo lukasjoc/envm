@@ -20,17 +20,30 @@ Desc: Installs common go development tools into $GOPATH/bin
 ===================================================
 EOF
 
+ProgressBar() {
+  let _progress=(${1}*100/${2}*100)/100
+  let _done=(${_progress}*4)/10
+  let _left=40-$_done
+  _fill=$(printf "%${_done}s")
+  _empty=$(printf "%${_left}s")
+  printf "\rProgress : [${_fill// /\#}${_empty// /-}] ${_progress}%%"
+}
+
+_start=1
+_end=100
+
 function tools {
   declare -a tools=(
     "github.com/mdempsky/gocode"
     "github.com/uudashr/gopkgs/cmd/gopkgs"
     "github.com/ramya-rao-a/go-outline"
     "github.com/acroca/go-symbols"
-    "golang.org/x/tools/cmd/guru"
-    "golang.org/x/tools/cmd/gorename"
     "github.com/go-delve/delve/cmd/dlv"
     "github.com/stamblerre/gocode"
     "github.com/rogpeppe/godef"
+
+    "golang.org/x/tools/cmd/guru"
+    "golang.org/x/tools/cmd/gorename"
     "golang.org/x/tools/cmd/goimports"
     "golang.org/x/lint/golint"
   )
@@ -38,7 +51,6 @@ function tools {
   for tool in "${tools[@]}"
   do
     go get $tool
-    echo "TOOL: $tool SUCCESS"
   done
 }
 
@@ -48,6 +60,6 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
   exit 1
 else
-tools
-echo "Done installing go tools into GOPATH"
+  tools
+  echo "Done installing go tools into GOPATH"
 fi
