@@ -1,4 +1,5 @@
 #!/bin/sh
+export PATH=$PATH:$GOPATH/bin:PATH
 
 if hash figlet 2>/dev/null; then
   figlet "godevtools"
@@ -13,10 +14,9 @@ cat << EOF
 EOF
 fi
 
-<< EOF
-lukasjoc, 2019
-https://lukasjoc.com
-Installs common go development tools into $GOROOT/bin
+cat << EOF
+Author: lukasjoc, 2019 (https://lukasjoc.com)
+Desc: Installs common go development tools into $GOPATH/bin
 ===================================================
 EOF
 
@@ -40,10 +40,14 @@ function tools {
     go get $tool
     echo "TOOL: $tool SUCCESS"
   done
-
 }
 
-echo "Installing go tools"
-echo "Loading..."
+echo "Installing go tools into $GOPATH"
+read -p "Do you want to proceed? [y/N]" -n 1 -r
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+  exit 1
+else
 tools
 echo "Done installing go tools into GOPATH"
+fi
