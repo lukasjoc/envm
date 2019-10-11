@@ -20,16 +20,16 @@ Desc: Kills all docker containers, volumes, networks and images
 EOF
 
 kill() {
-  declare -a tools=(
+  declare -a commands=(
     "docker rmi $(docker images -q)"
     "docker stop $(docker ps -q) && docker rm $(docker ps -a -q)"
     "docker rm $(docker network ls -q)"
     "docker rm $(docker volume ls -q)"
   )
-  for tool in "${tools[@]}"
+  for command in "${commands[@]}"
   do
     echo "CAUTION! Killing... [^C to stop]"
-    exec $tool
+    $command
   done
 }
 
