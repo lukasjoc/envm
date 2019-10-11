@@ -23,13 +23,13 @@ kill() {
   declare -a commands=(
     "docker rmi $(docker images -q)"
     "docker stop $(docker ps -q) && docker rm $(docker ps -a -q)"
-    "docker rm $(docker network ls -q)"
-    "docker rm $(docker volume ls -q)"
+    "docker network rm $(docker network ls -q)"
+    "docker volume rm $(docker volume ls -q)"
   )
   for command in "${commands[@]}"
   do
     echo "CAUTION! Killing... [^C to stop]"
-    $command
+    exec $command
   done
 }
 
