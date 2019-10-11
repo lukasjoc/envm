@@ -9,16 +9,18 @@ cat << EOF
 | |/ / | | |/ _` |/ _ \ / __| |/ / _ \ '__|
 |   <| | | | (_| | (_) | (__|   <  __/ |
 |_|\_\_|_|_|\__,_|\___/ \___|_|\_\___|_|
+
 EOF
 fi
+
 cat << EOF
 Author: lukasjoc, 2019 (https://lukasjoc.com)
-Desc: Kills all docker containers, volumes, and images
+Desc: Kills all docker containers, volumes, networks and images
 ===================================================
 EOF
 
 kill() {
-  declare -a tools=( 
+  declare -a tools=(
     "docker rmi $(docker images -q)"
     "docker stop $(docker ps -q) && docker rm $(docker ps -a -q)"
     "docker rm $(docker network ls -q)"
