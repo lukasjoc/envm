@@ -29,7 +29,7 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
   exit 1
 else
-  if [ ! $# == 2 ]
+  if [[ ! $# == 2 ]]
   then
     echo "Usage: makeglobal {srcName} {destName}"
     exit 1
