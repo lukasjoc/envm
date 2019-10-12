@@ -1,5 +1,7 @@
 #!/bin/sh
 
+destDIR=/usr/local/bin
+
 if hash figlet 2>/dev/null; then
   figlet "makeglobal"
 else
@@ -15,21 +17,26 @@ fi
 
 cat << EOF
 Author: lukasjoc, 2019 (https://lukasjoc.com)
-Desc: Makes scripts executable and moves them into /usr/local/bin
+Desc: Makes scripts executable and moves them into $destDIR
+Usage: makeglobal {srcName} {destName}
 ===================================================
 EOF
 
-makeGlobal() {
-  # TODO: clone script and move into /usr/local/bin
-  echo "moving... $1 "
-}
-
-echo "Makeing scripts executable and moving cloned version into /usr/local/bin..."
+echo "Makeing scripts executable and moving cloned version into $destDIR..."
 read -p "Do you want to proceed? [y/N]" -n 1 -r
-if [[ ! $REPLY =~ ^[Yy]$ ]]
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]] 
 then
   exit 1
 else
-makeGlobal "$1"
-echo "Done moving $1 into /usr/local/bin"
+  if [ ! $# == 2 ]
+  then
+    echo "Usage: makeglobal {srcName} {destName}"
+    exit 1
+  else
+    chmod +x $1
+    cp $1 $2
+    mv $2 $destDIR
+  fi
+  echo "Done moving $2 into $destDIR"
 fi
