@@ -1,0 +1,379 @@
+{
+	"name": "rainbow-csv",
+	"displayName": "Rainbow CSV",
+	"description": "Highlight CSV and TSV files in different colors, Run SQL-like queries",
+	"version": "1.3.1",
+	"publisher": "mechatroner",
+	"icon": "rainbow_csv_logo.png",
+	"engines": {
+		"vscode": "^1.19.0"
+	},
+	"keywords": [
+		"csv",
+		"tsv",
+		"highlight"
+	],
+	"categories": [
+		"Other",
+		"Languages"
+	],
+	"activationEvents": [
+		"onLanguage:csv",
+		"onLanguage:tsv",
+		"onLanguage:csv (semicolon)",
+		"onLanguage:csv (pipe)",
+		"onLanguage:csv (tilde)",
+		"onLanguage:csv (whitespace)",
+		"onLanguage:csv (caret)",
+		"onLanguage:csv (colon)",
+		"onLanguage:csv (double quote)",
+		"onLanguage:csv (equals)",
+		"onLanguage:csv (dot)",
+		"onLanguage:csv (hyphen)",
+		"onLanguage:plaintext",
+		"onCommand:extension.RBQL",
+		"onCommand:extension.RainbowSeparator",
+		"onCommand:extension.SampleHead",
+		"onCommand:extension.SampleTail"
+	],
+	"main": "./extension",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Rainbow CSV",
+			"properties": {
+				"rainbow_csv.enable_separator_autodetection": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable automatic content based separator autodetection"
+				},
+				"rainbow_csv.autodetection_min_line_count": {
+					"type": "number",
+					"default": 10,
+					"description": "Minimum number of non-comment lines in file for content-based autodetection"
+				},
+				"rainbow_csv.autodetect_separators": {
+					"type": "array",
+					"default": [
+						"\t",
+						",",
+						";",
+						"|"
+					],
+					"description": "Enable automatic content-based separator autodetection for specified list of separators",
+					"items": {
+						"type": "string",
+						"description": "Separator"
+					}
+				},
+				"rainbow_csv.enable_tooltip": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable column-info tooltip on hover"
+				},
+				"rainbow_csv.enable_tooltip_column_names": {
+					"type": "boolean",
+					"default": true,
+					"description": "Show column names in tooltip"
+				},
+				"rainbow_csv.enable_tooltip_warnings": {
+					"type": "boolean",
+					"default": true,
+					"description": "Show warnings in tooltip"
+				},
+				"rainbow_csv.enable_auto_csv_lint": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable automatic linting/checking of opened csv files"
+				},
+				"rainbow_csv.csv_lint_detect_trailing_spaces": {
+					"type": "boolean",
+					"default": false,
+					"description": "CSV Lint: detect leading and trailing whitespaces in fields and show warning"
+				},
+				"rainbow_csv.comment_prefix": {
+					"type": "string",
+					"default": "",
+					"description": "Comment lines prefix, e.g. \"#\". Set to empty string to disable"
+				},
+				"rainbow_csv.enable_context_menu_head": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable \"Preview CSV head\" option in File Explorer context menu"
+				},
+				"rainbow_csv.enable_context_menu_tail": {
+					"type": "boolean",
+					"default": false,
+					"description": "Enable \"Preview CSV tail\" option in File Explorer context menu"
+				}
+			}
+		},
+		"menus": {
+			"editor/context": [
+				{
+					"when": "editorHasSelection",
+					"command": "extension.RainbowSeparator",
+					"group": "rainbow_csv"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "extension.SampleHead",
+					"when": "config.rainbow_csv.enable_context_menu_head",
+					"group": "rainbow_csv"
+				},
+				{
+					"command": "extension.SampleTail",
+					"when": "config.rainbow_csv.enable_context_menu_tail",
+					"group": "rainbow_csv"
+				}
+			]
+		},
+		"languages": [
+			{
+				"id": "csv",
+				"aliases": [
+					"CSV",
+					"csv"
+				],
+				"extensions": [
+					".csv"
+				]
+			},
+			{
+				"id": "tsv",
+				"aliases": [
+					"TSV",
+					"tsv"
+				],
+				"extensions": [
+					".tsv",
+					".tab"
+				]
+			},
+			{
+				"id": "csv (pipe)",
+				"aliases": [
+					"CSV (pipe)",
+					"csv (pipe)"
+				],
+				"extensions": []
+			},
+			{
+				"id": "csv (tilde)",
+				"aliases": [
+					"CSV (tilde)",
+					"csv (tilde)"
+				],
+				"extensions": []
+			},
+			{
+				"id": "csv (whitespace)",
+				"aliases": [
+					"CSV (whitespace)",
+					"csv (whitespace)"
+				],
+				"extensions": []
+			},
+			{
+				"id": "csv (caret)",
+				"aliases": [
+					"CSV (caret)",
+					"csv (caret)"
+				],
+				"extensions": []
+			},
+			{
+				"id": "csv (colon)",
+				"aliases": [
+					"CSV (colon)",
+					"csv (colon)"
+				],
+				"extensions": []
+			},
+			{
+				"id": "csv (double quote)",
+				"aliases": [
+					"CSV (double quote)",
+					"csv (double quote)"
+				],
+				"extensions": []
+			},
+			{
+				"id": "csv (equals)",
+				"aliases": [
+					"CSV (equals)",
+					"csv (equals)"
+				],
+				"extensions": []
+			},
+			{
+				"id": "csv (dot)",
+				"aliases": [
+					"CSV (dot)",
+					"csv (dot)"
+				],
+				"extensions": []
+			},
+			{
+				"id": "csv (hyphen)",
+				"aliases": [
+					"CSV (hyphen)",
+					"csv (hyphen)"
+				],
+				"extensions": []
+			},
+			{
+				"id": "csv (semicolon)",
+				"aliases": [
+					"CSV (semicolon)",
+					"csv (semicolon)"
+				],
+				"extensions": []
+			}
+		],
+		"commands": [
+			{
+				"command": "extension.CSVLint",
+				"title": "CSV Lint"
+			},
+			{
+				"command": "extension.SetVirtualHeader",
+				"category": "Rainbow CSV",
+				"title": "Set virtual header"
+			},
+			{
+				"command": "extension.RBQL",
+				"category": "Rainbow CSV",
+				"title": "RBQL"
+			},
+			{
+				"command": "extension.SetJoinTableName",
+				"category": "Rainbow CSV",
+				"title": "Set join table name for RBQL"
+			},
+			{
+				"command": "extension.ColumnEditBefore",
+				"category": "Rainbow CSV",
+				"title": "Column edit before"
+			},
+			{
+				"command": "extension.ColumnEditAfter",
+				"category": "Rainbow CSV",
+				"title": "Column edit after"
+			},
+			{
+				"command": "extension.ColumnEditSelect",
+				"category": "Rainbow CSV",
+				"title": "Column edit select"
+			},
+			{
+				"command": "extension.RainbowSeparator",
+				"title": "Set as Rainbow separator"
+			},
+			{
+				"command": "extension.RainbowSeparatorOff",
+				"title": "RainbowSeparatorOff"
+			},
+			{
+				"command": "extension.Align",
+				"category": "Rainbow CSV",
+				"title": "Align CSV Columns"
+			},
+			{
+				"command": "extension.Shrink",
+				"category": "Rainbow CSV",
+				"title": "Shrink CSV table: Remove leading and trailing whitespaces from all fields"
+			},
+			{
+				"command": "extension.CopyBack",
+				"title": "CopyBack"
+			},
+			{
+				"command": "extension.SampleHead",
+				"title": "Preview big CSV: head"
+			},
+			{
+				"command": "extension.SampleTail",
+				"title": "Preview big CSV: tail"
+			}
+		],
+		"grammars": [
+			{
+				"language": "csv",
+				"scopeName": "text.csv",
+				"path": "./syntaxes/csv.tmLanguage.json"
+			},
+			{
+				"language": "tsv",
+				"scopeName": "text.tsv",
+				"path": "./syntaxes/tsv.tmLanguage.json"
+			},
+			{
+				"language": "csv (pipe)",
+				"scopeName": "text.psv",
+				"path": "./syntaxes/pipe_simple.tmLanguage.json"
+			},
+			{
+				"language": "csv (tilde)",
+				"scopeName": "text.tldsv",
+				"path": "./syntaxes/tldsv.tmLanguage.json"
+			},
+			{
+				"language": "csv (whitespace)",
+				"scopeName": "text.wspcsv",
+				"path": "./syntaxes/wspcsv.tmLanguage.json"
+			},
+			{
+				"language": "csv (caret)",
+				"scopeName": "text.crtsv",
+				"path": "./syntaxes/crtsv.tmLanguage.json"
+			},
+			{
+				"language": "csv (colon)",
+				"scopeName": "text.clnsv",
+				"path": "./syntaxes/clnsv.tmLanguage.json"
+			},
+			{
+				"language": "csv (double quote)",
+				"scopeName": "text.dbqsv",
+				"path": "./syntaxes/dbqsv.tmLanguage.json"
+			},
+			{
+				"language": "csv (equals)",
+				"scopeName": "text.eqlsv",
+				"path": "./syntaxes/eqlsv.tmLanguage.json"
+			},
+			{
+				"language": "csv (dot)",
+				"scopeName": "text.dotsv",
+				"path": "./syntaxes/dotsv.tmLanguage.json"
+			},
+			{
+				"language": "csv (hyphen)",
+				"scopeName": "text.hypsv",
+				"path": "./syntaxes/hypsv.tmLanguage.json"
+			},
+			{
+				"language": "csv (semicolon)",
+				"scopeName": "text.scsv",
+				"path": "./syntaxes/scsv.tmLanguage.json"
+			}
+		]
+	},
+	"capabilities": {
+		"hoverProvider": "true"
+	},
+	"devDependencies": {
+		"vscode": "^1.1.6"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mechatroner/vscode_rainbow_csv"
+	},
+	"__metadata": {
+		"id": "3792588c-3d35-442d-91ea-fe6a755e8155",
+		"publisherId": "0d5438b6-325a-4f88-aa28-6192aa2cf2a6",
+		"publisherDisplayName": "mechatroner"
+	}
+}
