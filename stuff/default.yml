@@ -1,0 +1,7 @@
+# $USER/.config/tmuxinator/default.yml
+
+name: default
+windows:
+  - editor: fun
+  - commandline: fun
+  - logs: fun & htop
