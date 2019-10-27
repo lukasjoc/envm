@@ -2,26 +2,20 @@
 
 > Collection of really useful environment/setup files and scripts
 
-Content:
-
-```
+### Content:
   - Shell setup for zsh and bash
-  - VIM configuration with very light Vundle setup
-  - Very usefull scripts for day to day hassles 
-  - Other really cool stuff LIKE .inputrc AND .gitconfig with aliases 🦄👹
-```
+  - Vim configuration with very light Vundle setup
+  - very usefull scripts for day to day hassles 
+  - other really cool stuff like `.inputrc` & `.gitconfig` with aliases
 
-Info & Setup
-```
----
-VIM:
+### Info
+
+  - Vim:
   - run :PluginInstall
-  - For WakaTime to work run :WakaTimeApiKey followed by your API-Key 
----
-Shell:
-  - you should have zsh with ozsh or plain bash
-  - you should have ether $HOME/Sync/w or $HOME/w/ for your workdir 
+  - for WakaTime to work run :WakaTimeApiKey followed by your API-Key 
   
-```
-
-by [lukasjoc](https://lukasjoc.com), 2019
+  - Shell:
+  - you should have `zsh with ozsh` or `plain bash`
+  - you should have ether `$HOME/Sync/w` or `$HOME/w/` for .zshrc
+  
+[lukasjoc](https://lukasjoc.com), 2018- 2019
