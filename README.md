@@ -1,6 +1,6 @@
 # envm
 
-> Collection of really useful environment/setup files and scripts
+> 💥 Collection of environment files, vimhacks and scripts
 
 ### Content:
   - Shell setup for zsh and bash
