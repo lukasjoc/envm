@@ -8,13 +8,9 @@
   - very usefull scripts for day to day hassles 
   - other really cool stuff like `.inputrc` & `.gitconfig` with aliases
 
-### Info
-
-  - Vim:
+### Info for Vim and Shell Configs
   - run :PluginInstall
   - for WakaTime to work run :WakaTimeApiKey followed by your API-Key 
-  
-  - Shell:
   - you should have `zsh with ozsh` or `plain bash`
   - you should have ether `$HOME/Sync/w` or `$HOME/w/` for .zshrc
   
