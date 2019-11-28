@@ -6,8 +6,8 @@ export PATH="/usr/local/bin:${PATH}"
 
 # Good ozsh stuff
 export ZSH="$HOME/.oh-my-zsh"
-export UPDATE_ZSH_DAYS=7
-ZSH_THEME="gentoo"
+export UPDATE_ZSH_DAYS=7000
+ZSH_THEME="gianu"
 DISABLE_UPDATE_PROMPT="true"
 DISABLE_MAGIC_FUNCTIONS=true
 CASE_SENSITIVE=false
@@ -25,7 +25,6 @@ export GOPATH="$HOME/go"
 export GO111MODULE=on #Module support on| turn it off for module usage in $GOPATH
 export PATH=$PATH:$GOPATH/bin:PATH
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-alias go_tools="sh ~/go-tools.sh"
 
 # Python
 eval "$(pyenv init -)"
