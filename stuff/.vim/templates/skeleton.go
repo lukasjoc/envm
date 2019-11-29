@@ -3,5 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Start gophering! (@) ")
+  str  := "like a cool Gopher"
+  fmt.Printf("Gophering with VIM --> %v\n", str)
 }
+
