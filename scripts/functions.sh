@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/sh
 
 # runbrewstuff updates, upgrades and cleans homebrew and caskroom
 function runbrewstuff() {
@@ -11,7 +11,7 @@ function runbrewstuff() {
 
 # chmodx gives files the exec permission & moves them into /usr/local/bin
 function chmodx() {
-  BIN_DIR=/usr/local/bin
+  BIN_DIR="/usr/local/bin"
   chmod +x $1
   cp $1 $2
   mv $2 $BIN_DIR

@@ -1,3 +1,5 @@
+#!/usr/bin/sh
+
 # Startup checks path prints a cool 
 # motto command and $USERname ASCI with figlet
 

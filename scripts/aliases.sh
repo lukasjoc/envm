@@ -1,3 +1,5 @@
+#!/usr/bin/sh
+
 alias pb="perlbrew"
 alias pbl="perlbrew list"
 alias ..="cd ../"
@@ -10,3 +12,4 @@ alias mkdir="mkdir -p"
 alias rmdir="rm -rf"
 alias cat="ccat"
 alias count='ls -l | grep "" -c'
+
