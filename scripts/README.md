@@ -1,4 +1,4 @@
-# envm/scripts/*
-> Collection of really useful scripts for day to day hassles
+# scripts
+> Custom aliases and bash functions
 
-by [lukasjoc](https://lukasjoc.com), 2019
+[lukasjoc](https://lukasjoc.com), 2019

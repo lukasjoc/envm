@@ -11,4 +11,3 @@ set expand-tilde off
 
 "\e[1;3C": forward-word
 "\e[1;3D": backward-word
-
