@@ -11,5 +11,8 @@ alias ll="ls -alF"
 alias mkdir="mkdir -p"
 alias rmdir="rm -rf"
 alias cat="ccat"
-alias count='ls -l | grep "" -c'
-
+alias count="ls -l | grep "" -c"
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+alias cat="ccat"
