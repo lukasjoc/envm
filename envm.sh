@@ -8,7 +8,6 @@ if $ENVM_PATH == "" ; then
 fi
 
 # TODO: ENVM_UPDATE_EPOCH
-
 if $ENVM_AUTO_UPDATE == 1 ; then
   if ! -e /tmp/.envm || test $(find /tmp/.envm -type f -mmin +480) ; then
     cd $ENVM_LOCAL
@@ -19,5 +18,7 @@ if $ENVM_AUTO_UPDATE == 1 ; then
   fi
 fi
 
-source "$ENVM_LOCAL/scripts/functions.sh"
-source "$ENVM_LOCAL/scritps/aliases.sh"
+SCRIPTS_DIR="$ENVM/scripts"
+source "$SCRIPTS_DIR/functions.sh"
+source "$SCRIPTS_DIR/aliases.sh"
+
