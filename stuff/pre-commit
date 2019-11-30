@@ -1,0 +1,26 @@
+#!/usr/bin/env perl -w
+
+#searches for all whitespace chars in all to be commited files 
+use strict;
+use warnings;
+use Data::Dumper;
+
+my @files = split m{\n}xms, `git diff-index --cached --name-only HEAD~1`;
+
+my $error = 0;
+for my $file ( @files ) {
+   $/=undef;
+   if (-e $file) {
+     open( DAT, "<", $file) || die "Error opening $file";
+     my $data = <DAT>;
+     close(DAT);
+     if ( $data =~ m{ [ ]+\n }xms ) {
+       $e_msg"REJECTED!!! Trailing Whitespace in file : $file\n";
+       print Dumper($e_msg);
+       $error++;
+     }
+  }
+}
+
+exit $error;
+

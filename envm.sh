@@ -20,4 +20,3 @@ fi
 
 source "$SCRIPTS_DIR/functions.sh"
 source "$SCRIPTS_DIR/aliases.sh"
-
