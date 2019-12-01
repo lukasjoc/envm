@@ -1,7 +1,7 @@
-#!/usr/local/bin/bash
 
 # Load and source all scripts, means functions, aliases, plugins etc
-for script in "$ENVM/scripts/*"; do
+# info loads bash,sh,zsh,fish anything really with sh at the ending
+for script in $ENVM/scripts/*sh; do
   source $script
 done
 
@@ -12,15 +12,12 @@ fi
 
 # Check for AUTO_UPDATE Variavle and update if changes have been detected
 if [[ $ENABLE_ENVM_AUTO_UPDATE == "true" ]]; then
-
-  CHECK_REMOTE_STATUS="git status -uno" 
-  HEAD_HASH="git rev-parse HEAD"
-
-  if [[ $(CHECK_REMOTE_STATUS) != "" ]]  ; then
-    cd $ENVM
+  echo "Looking for Updates in $ENVM"
+  cd $ENVM
+  if [[ ! $(git status -uno) ]]; then
     echo "Updating envm..."
-    touch /tmp/envm-HEAD-$(HEAD_HASH)-$(sdate)
-    git pull | 2>&1 | tee testdir
+    # touch /tmp/envm-HEAD-$(git rev-pase HEAD)-$(sdate)
+    # git pull | 2>&1 | tee testdir
+    echo "Processing pull.."
   fi
-
 fi

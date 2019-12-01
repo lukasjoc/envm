@@ -17,7 +17,7 @@ export ENVM="$HOME/.envm"
 export ENVM_WDIR="$HOME/Sync/"
 ENABLE_ENVM_AUTO_UPDATE="true"
 source $ENVM/envm.sh
-source $ENVM/scripts/startup.sh
+
 
 # Editor
 export EDITOR="vim"
@@ -26,15 +26,14 @@ if [[ -n $SSH_CONNECTION ]]; then
 fi
 
 # Go
-export GOPATH="$HOME/go"
-export GO111MODULE=on #Module support on| turn it off for module usage in $GOPATH
 export PATH=$PATH:$GOPATH/bin:PATH
+export GOPATH="$HOME/go"
+export GO111MODULE=on
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-alias go_tools="sh ~/go-tools.sh"
 
 # Python
 eval "$(pyenv init -)"
-if which pyenv-virtualenv-init > /dev/null; then 
+if tooltest pyenv-virtualenv-init; then
   eval "$(pyenv virtualenv-init -)"; 
 fi
 
