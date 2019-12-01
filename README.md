@@ -9,11 +9,12 @@
 
 ### Setup envm:
 - ``git clone https://github.com/lukasjoc/envm.vim.git ~/.envm``
+- Setup ENVM Environment Variables ($ENVM, $ENVM_WDIR, $ENABLE_ENVM_AUTO_UPDATE)
 - Type ``vim`` and then type ``Shift+:PluginInstall``
-- Open ``~/.zshrc`` and append ENVM_WDIR="PATH_TO_YOUR_WORKING_DIR"
 
 ### SYNOPSIS:
-- $ENVM => Path of the envm repository on your system usually ``~/.envm``
+- $ENVM => Path of the envm repository on your system only in ``~/.envm``
 - $ENVM_WDIR => Path to your working dir. The place where the magic happens
-- $ENVM_AUTO_UPDATE => Auto Update ENVM if changes have been detected
+- $ENABLE_ENVM_AUTO_UPDATE => Auto Update ENVM if changes have been detected
+
 [lukasjoc](https://lukasjoc.com), year
