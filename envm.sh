@@ -8,8 +8,8 @@ if [[ $ENVM_WDIR == "" ]]; then
   export ENVM_WDIR="$HOME/Sync/"
 fi
 
-if [[ ! $(git status -uno) ]]; then
-  if [[ $ENABLE_ENVM_AUTO_UPDATE == "true" ]]; then
+if [[ $ENABLE_ENVM_AUTO_UPDATE == "true" ]]; then
+  if [[ ! $(git status -uno) ]]; then
     echo "Updating envm..."
     CURR_DATE="$(sdate)"
     REV_HEAD="$(git rev-pase HEAD)"
