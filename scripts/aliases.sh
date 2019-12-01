@@ -3,7 +3,6 @@
 alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"
-alias do="docker"
 alias dc="docker-compose"
 alias kctl="kubectl"
 alias mkube="minikube"
