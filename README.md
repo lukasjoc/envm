@@ -13,8 +13,8 @@
 - Type ``vim`` and then type ``Shift+:PluginInstall``
 
 ### SYNOPSIS:
-- $ENVM => Path of the envm repository on your system only in ``~/.envm``
-- $ENVM_WDIR => Path to your working dir. The place where the magic happens
-- $ENABLE_ENVM_AUTO_UPDATE => Auto Update ENVM if changes have been detected
+- ``$ENVM`` => Path of the envm repository on your system only in ``~/.envm``
+- ``$ENVM_WDIR`` => Path to your working dir. The place where the magic happens
+- ``$ENABLE_ENVM_AUTO_UPDATE`` => Auto Update ENVM if changes have been detected
 
 [lukasjoc](https://lukasjoc.com), year
