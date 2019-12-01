@@ -57,3 +57,7 @@ checkdocker() {
     echo "Docker Not Installed"
   fi
 }
+
+# Reformat date output, remove all whitespaces
+# TOTHIS: variant1(default): Sun-Dec1-16:26:01-CET-2019, variant2(-s --> short): 1-12-2019
+# sdate() {}
