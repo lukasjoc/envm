@@ -48,16 +48,3 @@ tooltest() {
   fi
 }
 
-createCobraApp() {
-  if ! command -v cobra ; then
-    echo "Cobra is not installed..."
-    echo "Install it with go get -u github.com/spf13/cobra/cobra"
-    exit
-  fi
-  cobra init test2 / 
-  --pkg-name github.com/lukasjoc/test / 
-  --config test2 / 
-  --viper=false / 
-  -l=MIT /
-  -a $USER
-}
