@@ -15,15 +15,11 @@ chmodx() {
   mv $2 $BIN_DIR
 }
 
+# TODO: add counting of images, and so on
 cooldocker() {
-  declare -a commands=(
-    "images"
-    "container ls -a"
-    "network ls"
-    "volume ls"
-  )
-  for cmd in "commands[@]" ; do
-    echo "$cmd"
+  commands=( "images" "container ls -a" "network ls" "volume ls" )
+  for command ($commands); do
+    exec docker $command
   done
 }
 
@@ -47,4 +43,5 @@ tooltest() {
     exit
   fi
 }
+
 

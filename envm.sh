@@ -1,13 +1,14 @@
 #!/usr/local/bin/bash
 
-# Checking the $ENVM_WDIR variable which contains the path to our synced working dir
-if [ $ENVM_PATH == "" ]; then
+# Checking the $ENVM_WDIR variable which contains the path to the synced working dir
+if [ $ENVM_WDIR == "" ]; then
   export ENVM_WDIR="$HOME/Sync/"
 fi
 
-if [ $ENVM_AUTO_UPDATE == 1 ]; then
+# Check for AUTO_UPDATE Variavle and update if changes have been detected
+if [ $ENVM_AUTO_UPDATE == "true" ]; then
   if [[ ! -e /tmp/.envm ]] || test $(find /tmp/.envm -type f -mmin +480) ; then
-    cd $envm
+    cd $ENVM
     echo "Updating envm..."
     git checkout master
     git pull
@@ -15,5 +16,5 @@ if [ $ENVM_AUTO_UPDATE == 1 ]; then
   fi
 fi
 
-source "$envm/scripts/aliases.sh"
-source "$envm/scripts/functions.sh"
+source "$ENVM/scripts/aliases.sh"
+source "$ENVM/scripts/functions.sh"

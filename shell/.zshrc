@@ -15,6 +15,7 @@ source $ZSH/oh-my-zsh.sh
 # ENVM Stuff
 export ENVM="$HOME/.envm"
 export ENVM_WDIR="$HOME/Sync/"
+ENABLE_ENVM_AUTO_UPDATE="true"
 source $ENVM/envm.sh
 source $ENVM/scripts/startup.sh
 
