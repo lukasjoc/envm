@@ -17,4 +17,4 @@
 - ``$ENVM_WDIR`` => Path to your working dir. The place where the magic happens
 - ``$ENABLE_ENVM_AUTO_UPDATE`` => Auto Update ENVM if changes have been detected
 
-[lukasjoc](https://lukasjoc.com), year
+[lukasjoc](https://lukasjoc.com), 2019
