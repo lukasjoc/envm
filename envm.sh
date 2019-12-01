@@ -11,8 +11,11 @@ fi
 if [[ ! $(git status -uno) ]]; then
   if [[ $ENABLE_ENVM_AUTO_UPDATE == "true" ]]; then
     echo "Updating envm..."
-    # touch /tmp/envm-HEAD-$(git rev-pase HEAD)-$(sdate)
-    # git pull | 2>&1 | tee testdir
-    echo "Processing pull.."
+    CURR_DATE="$(sdate)"
+    REV_HEAD="$(git rev-pase HEAD)"
+    NEWDIR="/tmp/envm-HEAD-$REV_HEAD-$CURR_DATE"
+    touch $NEWDIR
+    echo "Processing pull... Writing logs into $NEWDIR"
+    git pull | 2>&1 | tee $NEWDIR
   fi
 fi
