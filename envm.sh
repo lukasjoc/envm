@@ -20,12 +20,12 @@ if [[ $ENABLE_ENVM_AUTO_UPDATE == true ]]; then
   if [ ! -f $DAT_FILE ]; then
     touch $DAT_FILE
     printf "$(date +%s)" > $DAT_FILE
-    value=`cat $DAT_FILE`
+    START_EPOCH=`cat $DAT_FILE`
   else
-    value=`cat $DAT_FILE`
+    START_EPOCH=`cat $DAT_FILE`
   fi
 
-  declare -i UPDATE_EPOCH=$(( 3600 * $ENVM_AUTO_UPDATE_DAYS + ${value} ))
+  declare -i UPDATE_EPOCH=$(( 3600 * $ENVM_AUTO_UPDATE_DAYS + ${START_EPOCH} ))
   if [[ $(date +%s) -ge $UPDATE_EPOCH ]]; then
     echo "Updating..."
     cd $ENVM
