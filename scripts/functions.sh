@@ -14,33 +14,30 @@ chmodx() {
   mv $2 "/usr/local/bin"
 }
 
-# FIXME: this is not recognizing docker command
+# FIXME: this is not nice but it works. Somehow the docker command is not recognized during looping
 cooldocker() {
-  declare -a commands=( 
-    "images"
-    "container ls -a"
-    "network ls"
-    "volume ls"
-  )
-  docker="docker"
-  for cmd ($commands); do
-    "$docker $cmd"
-  done
+  echo
+  docker images
+  echo
+  docker container ls -a
+  echo
+  docker network ls
+  echo
+  docker volume ls
 }
 
-# FIXME: this is not recognizing docker command
+# FIXME: this is not nice but it works. Somehow the docker command is not recognized during looping
 killdocker() {
-  declare -a commands=(
-    "stop $(docker container ls -a -q)"
-    "rm $(docker container ls -a -q)"
-    "volume prune"
-    "network prune"
-    "rmi $(docker images -a -q)"
-  )
-  docker="docker"
-  for cmd ($commands); do
-    "$docker $cmd"
-  done
+  echo
+  docker stop $(docker container ls -a -q)
+  echo
+  docker rm $(docker container ls -a -q)
+  echo
+  docker volume prune
+  echo
+  docker network prune
+  echo
+  docker rmi $(docker images -a -q)
 }
 
 tooltest() {
