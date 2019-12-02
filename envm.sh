@@ -27,11 +27,11 @@ if [[ $ENABLE_ENVM_AUTO_UPDATE == true ]]; then
 
   declare -i UPDATE_EPOCH=$(( 3600 * $ENVM_AUTO_UPDATE_DAYS + ${START_EPOCH} ))
   if [[ $(date +%s) -ge $UPDATE_EPOCH ]]; then
+    printf "$(date +%s)" > $DAT_FILE
     echo "Updating..."
     cd $ENVM
     git ch master
     git pull
     cd $ENVM_WDIR
-    printf "$(date +%s)" > $DAT_FILE
   fi
 fi
