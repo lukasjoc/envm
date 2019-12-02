@@ -15,7 +15,7 @@ fi
 echo "Hello, $USER. Happy Coding.. :)"
 # ------------------------------------------------
 
-if [ -v ENABLE_ENVM_AUTO_UPDATE ] || [[ $ENABLE_ENVM_AUTO_UPDATE == true ]]; then
+if [[ $ENABLE_ENVM_AUTO_UPDATE == true ]]; then
   DAT_FILE="$ENVM/cache/start_epoch.dat"
   if [ ! -f $DAT_FILE ]; then
     touch $DAT_FILE
