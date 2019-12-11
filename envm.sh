@@ -16,18 +16,15 @@ echo "Hello, $USER. Happy Coding.. :)"
 # ------------------------------------------------
 
 if [[ $ENABLE_ENVM_AUTO_UPDATE == true ]]; then
-  DAT_FILE="$ENVM/cache/start_epoch.dat"
-  if [ ! -f $DAT_FILE ]; then
-    touch $DAT_FILE
-    printf "$(date +%s)" > $DAT_FILE
-    START_EPOCH=`cat $DAT_FILE`
-  else
-    START_EPOCH=`cat $DAT_FILE`
-  fi
 
-  declare -i UPDATE_EPOCH=$(( 3600 * $ENVM_AUTO_UPDATE_DAYS + ${START_EPOCH} ))
+  dat_file="$ENVM/cache/start_epoch.dat"
+  if [ ! -f $dat_file ]; then
+    date +%s  > $dat_file
+  fi
+  
+  declare -i UPDATE_EPOCH=$(( 60 * 60 * 24 * $ENVM_AUTO_UPDATE_DAYS + $(cat $dat_file) ))
   if [[ $(date +%s) -ge $UPDATE_EPOCH ]]; then
-    printf "$(date +%s)" > $DAT_FILE
+    date +%s  > $dat_file
     echo "Updating..."
     cd $ENVM
     git ch master
