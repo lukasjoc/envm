@@ -6,7 +6,7 @@
 [help]
   autocorrect = 9
 [alias]
-  br=branch -a
+  br=branch
   ch=checkout
   st=status
 [filter "lfs"]
