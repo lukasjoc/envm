@@ -67,7 +67,7 @@ checkBr() {
       echo "Diverged"
     fi
   else
-    :
+    echo "Not a Git Repo"
   fi
 }
 
