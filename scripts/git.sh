@@ -3,8 +3,8 @@ LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse "$UPSTREAM")
 BASE=$(git merge-base @ "$UPSTREAM")
 
-git remote update
-checkBr() {
+if git rev-parse --git-dir > /dev/null 2>&1; then
+  git remote update
   if [ $LOCAL = $REMOTE ]; then
     echo "Up-to-date"
   elif [ $LOCAL = $BASE ]; then
@@ -14,4 +14,6 @@ checkBr() {
   else
     echo "Diverged"
   fi
-}
+else
+  exit
+fi
