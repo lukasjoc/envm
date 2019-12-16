@@ -47,8 +47,26 @@ tooltest() {
   fi
 }
 
+# Checks git branches states
+checkBr() {
+  upstream=${1:-'@{u}'}
+  localBr=$(git rev-parse @)
+  remote=$(git rev-parse "$upstream")
+  base=$(git merge-base @ "$upstream")
+
+  if [ $localBr = $remote ]; then
+    echo "Up-to-date"
+  elif [ $localBr = $base ]; then
+    echo "Need to pull"
+  elif [ $remote = $base ]; then
+    echo "Need to push"
+  else
+    echo "Diverged"
+  fi
+}
+
 # Reformat date output, remove all whitespaces
 # TOTHIS: variant1(default): Sun-Dec1-16:26:01-CET-2019, variant2(-s --> short): 1-12-2019
-sdate() {
-  echo "DD-MM-YYYY" 
-}
+#sdate() {
+#  echo "DD-MM-YYYY"
+#}
