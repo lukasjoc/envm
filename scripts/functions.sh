@@ -54,6 +54,7 @@ checkBr() {
   remote=$(git rev-parse "$upstream")
   base=$(git merge-base @ "$upstream")
 
+  git remote update
   if [ $localBr = $remote ]; then
     echo "Up-to-date"
   elif [ $localBr = $base ]; then
