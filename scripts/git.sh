@@ -3,6 +3,7 @@ LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse "$UPSTREAM")
 BASE=$(git merge-base @ "$UPSTREAM")
 
+git remote update
 checkBr() {
   if [ $LOCAL = $REMOTE ]; then
     echo "Up-to-date"
