@@ -49,17 +49,16 @@ tooltest() {
 
 # Checks git branches states
 checkBr() {
-  upstream=${1:-'@{u}'}
-  localBr=$(git rev-parse @)
-  remote=$(git rev-parse "$upstream")
-  base=$(git merge-base @ "$upstream")
-
+  UPSTREAM=${1:-'@{u}'}
+  LOCAL=$(git rev-parse @)
+  REMOTE=$(git rev-parse "$UPSTREAM")
+  BASE=$(git merge-base @ "$UPSTREAM")
   git remote update
-  if [ $localBr = $remote ]; then
+  if [ $LOCAL = $REMOTE ]; then
     echo "Up-to-date"
-  elif [ $localBr = $base ]; then
+  elif [ $LOCAL = $BASE ]; then
     echo "Need to pull"
-  elif [ $remote = $base ]; then
+  elif [ $REMOTE = $BASE ]; then
     echo "Need to push"
   else
     echo "Diverged"
