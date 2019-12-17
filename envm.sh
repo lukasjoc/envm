@@ -21,7 +21,7 @@ if [[ $ENABLE_ENVM_AUTO_UPDATE == true ]]; then
   if [ ! -f $dat_file ]; then
     date +%s  > $dat_file
   fi
-  
+
   declare -i UPDATE_EPOCH=$(( 60 * 60 * 24 * $ENVM_AUTO_UPDATE_DAYS + $(cat $dat_file) ))
   if [[ $(date +%s) -ge $UPDATE_EPOCH ]]; then
     date +%s  > $dat_file
@@ -30,5 +30,6 @@ if [[ $ENABLE_ENVM_AUTO_UPDATE == true ]]; then
     git ch master
     git pull
     cd $ENVM_WDIR
+    exec $SHELL -l
   fi
 fi
