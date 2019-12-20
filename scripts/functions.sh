@@ -1,4 +1,5 @@
-#!/usr/local/bin/bash
+l
+!/usr/local/bin/bash
 
 runbrewstuff() {
   brew update 
@@ -50,18 +51,17 @@ tooltest() {
 # Check Branch state and if git repo
 checkBr() {
   if git rev-parse --git-dir > /dev/null 2>&1; then
-    UPSTREAM=${1:-'@{u}'}
-    LOCAL=$(git rev-parse @)
-    REMOTE=$(git rev-parse "$UPSTREAM")
-    BASE=$(git merge-base @ "$UPSTREAM")
+    upstream=${1:-'@{u}'
+    local=$(git rev-parse @)
+    remote=$(git rev-parse "$upstream")
+    base=$(git merge-base @ "$upstream")
 
-  git remote update
-  
-    if [ $LOCAL = $REMOTE ]; then
+    git remote update
+    if [ $local = $remote ]; then
       echo "Up-to-date"
-    elif [ $LOCAL = $BASE ]; then
+    elif [ $local = $base ]; then
       echo "Need to pull"
-    elif [ $REMOTE = $BASE ]; then
+    elif [ $remote = $base ]; then
       echo "Need to push"
     else
       echo "Diverged"
@@ -73,6 +73,6 @@ checkBr() {
 
 # Reformat date output, remove all whitespaces
 # TOTHIS: variant1(default): Sun-Dec1-16:26:01-CET-2019, variant2(-s --> short): 1-12-2019
-#sdate() {
+# sdate() {
 #  echo "DD-MM-YYYY"
-#}
+# }

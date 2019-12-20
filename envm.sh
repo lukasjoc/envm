@@ -1,35 +1,35 @@
-for script ($ENVM/scripts/*sh); do
+for script ($envm/scripts/*sh); do
   source $script
 done
 
-if [ ! -v ENVM_WDIR ]; then
-  echo "Wdir not set"
-  export ENVM_WDIR="$HOME/Sync/"
+if [ ! -v envm_wdir ]; then
+  echo "wdir not set"
+  export envm_wdir="$HOME/Sync/"
 fi
 
-if [ ! -d "$ENVM_WDIR" ]; then
-  echo "Wdir does not exist"
+if [ ! -d "$envm_wdir" ]; then
+  echo "wdir does not exist"
 fi
 
-# ------------------------------------------------
+# MESSAGE ------------------------------------------------
 echo "Hello, $USER. Happy Coding.. :)"
 # ------------------------------------------------
 
-if [[ $ENABLE_ENVM_AUTO_UPDATE == true ]]; then
+if [[ $envm_auto_update_days -ge 1 ]]; then
 
-  dat_file="$ENVM/cache/start_epoch.dat"
+  dat_file="$envm/cache/start_epoch.dat"
   if [ ! -f $dat_file ]; then
     date +%s  > $dat_file
   fi
 
-  declare -i UPDATE_EPOCH=$(( 60 * 60 * 24 * $ENVM_AUTO_UPDATE_DAYS + $(cat $dat_file) ))
-  if [[ $(date +%s) -ge $UPDATE_EPOCH ]]; then
+  declare -i update_epoch=$(( 60 * 60 * 24 * $envm_auto_update_days + $(cat $dat_file) ))
+  if [[ $(date +%s) -ge $update_epoch ]]; then
     date +%s  > $dat_file
     echo "Updating..."
-    cd $ENVM
+    cd $envm
     git ch master
     git pull
-    cd $ENVM_WDIR
+    cd $envm_wdir
     exec $SHELL -l
   fi
 fi

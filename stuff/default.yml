@@ -1,7 +1,0 @@
-# $USER/.config/tmuxinator/default.yml
-
-name: default
-windows:
-  - vim: ll
-  - zsh: ll
-  - misc: htop
