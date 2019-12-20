@@ -13,12 +13,11 @@ HISTFILESIZE=2000
 shopt -s histappend
 shopt -s checkwinsize
 
-# ENVM Stuff
-export ENVM="$HOME/.envm"
-export ENVM_WDIR="$HOME/Sync/"
-ENABLE_ENVM_AUTO_UPDATE="true"
-source $ENVM/envm.sh
-source $ENVM/scripts/startup.sh
+# envm stuff
+export envm="$HOME/.envm"
+export envm_wdir="$HOME/Sync/"
+export envm_auto_update_days=1
+source $envm/envm.sh
 
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
