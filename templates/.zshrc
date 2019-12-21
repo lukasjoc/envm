@@ -17,12 +17,8 @@ if [[ -n $SSH_CONNECTION ]]; then
 fi
 
 # Go
-export PATH=$PATH:$GOPATH/bin:PATH
+export PATH=$PATH:$GOPATH/bin
 export GOPATH="$HOME/go"
 export GO111MODULE=on
-
-zstyle ':completion:*' menu select
-zstyle ':completion:*' completer _complete
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 
 PS1="%{%F{red}%}%n%{%f%}@%{%F{blue}%}%m %{%F{yellow}%}%~ %f%}% \$ "

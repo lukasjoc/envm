@@ -48,7 +48,7 @@ tooltest() {
 # Check Branch state and if git repo
 checkBr() {
   if git rev-parse --git-dir > /dev/null 2>&1; then
-    upstream=${1:-'@{u}'
+    upstream=${1:-'@{u}'}
     local=$(git rev-parse @)
     remote=$(git rev-parse "$upstream")
     base=$(git merge-base @ "$upstream")
