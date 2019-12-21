@@ -8,7 +8,7 @@ runbrewstuff() {
   echo " ✅ DONE"
 }
 
-chmodx() {
+makeglobal() {
   chmod +x $1
   cp $1 $2
   mv $2 "/usr/local/bin"
@@ -41,7 +41,7 @@ killdocker() {
 tooltest() {
   if ! command -v $1; then
     echo "$1 is not installed :( "
-    exit
+    return
   fi
 }
 
