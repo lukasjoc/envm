@@ -2,14 +2,12 @@
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
-shopt -s histappend
-shopt -s checkwinsize
 export PATH="/usr/local/bin:${PATH}"
 
 # envm stuff
 export envm="$HOME/.envm"
 export envm_wdir="$HOME/Sync/"
-export envm_auto_update_days=1
+export envm_auto_update_days=30
 source $envm/envm.sh
 
 # Editor
@@ -22,3 +20,9 @@ fi
 export PATH=$PATH:$GOPATH/bin:PATH
 export GOPATH="$HOME/go"
 export GO111MODULE=on
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' completer _complete
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
+
+PS1="%{%F{red}%}%n%{%f%}@%{%F{blue}%}%m %{%F{yellow}%}%~ %f%}% \$ "

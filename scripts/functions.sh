@@ -1,4 +1,4 @@
-!/usr/local/bin/bash
+#!/bin/sh
 
 runbrewstuff() {
   brew update 
@@ -14,7 +14,6 @@ chmodx() {
   mv $2 "/usr/local/bin"
 }
 
-# FIXME: this is not nice but it works. Somehow the docker command is not recognized during looping
 cooldocker() {
   echo
   docker images
@@ -26,7 +25,6 @@ cooldocker() {
   docker volume ls
 }
 
-# FIXME: this is not nice but it works. Somehow the docker command is not recognized during looping
 killdocker() {
   echo
   docker stop $(docker container ls -a -q)

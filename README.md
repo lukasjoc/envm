@@ -1,20 +1,22 @@
 # envm
 
-> 🍕 Environment Files, Vim Hackeros and other cool stuff
+> Environment files and stuff
 
 ### Prerequisites
-- ZSH Shell in ``/usr/local/bin/zsh`` or ``/usr/local/bin/zsh``
-- OH-MY-ZSH installed into ``$HOME/.oh-my-zsh``
+---
+- zsh,bash -> `which zsh/bash`
 - Vundle installed to ``~/.vim/bundle/Vundle``
 
 ### Setup envm:
+---
 - ``git clone https://github.com/lukasjoc/envm.vim.git ~/.envm``
-- Setup ENVM Environment Variables ($ENVM, $ENVM_WDIR, $ENABLE_ENVM_AUTO_UPDATE)
+- Setup envm Environment Variables ($envm, $envm_wdir, $enable_envm_auto_update)
 - Type ``vim`` and then type ``Shift+:PluginInstall``
 
 ### SYNOPSIS:
-- ``$ENVM`` => Path of the envm repository on your system only in ``~/.envm``
-- ``$ENVM_WDIR`` => Path to your working dir. The place where the magic happens
-- ``$ENABLE_ENVM_AUTO_UPDATE`` => Auto Update ENVM if changes have been detected
+---
+- ``$envm`` => Path of the envm repository on your system only in ``~/.envm``
+- ``$envm_wdir`` => Path to your working dir. The place where the magic happens
+- ``$enable_envm_auto_update`` => Auto Update envm if changes have been detected
 
 [lukasjoc](https://lukasjoc.com), 2019

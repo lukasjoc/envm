@@ -4,7 +4,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'wakatime/vim-wakatime'
 Plugin 'fatih/vim-go'
-Plugin 'posva/vim-vue'
 call vundle#end()
 """"
 
