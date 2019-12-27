@@ -26,16 +26,11 @@ cooldocker() {
 }
 
 killdocker() {
-  echo
-  docker stop $(docker container ls -a -q)
-  echo
-  docker rm $(docker container ls -a -q)
-  echo
-  docker volume prune
-  echo
-  docker network prune
-  echo
-  docker rmi $(docker images -a -q)
+  docker stop $(docker container ls -a -q) # stop all running containers
+  docker rm $(docker container ls -a -q) # remove all containers
+  docker volume prune -f # prune all volumes without asking
+  docker network prune -f # prune all networks without asking
+  docker rmi $(docker images -a -q) # remove all images
 }
 
 tooltest() {
