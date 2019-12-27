@@ -41,7 +41,7 @@ killdocker() {
 }
 
 tooltest() {
-  if [[ ! command -v $1 >/dev/null 2>&1 ]]; then
+  if ! command -v $1 >/dev/null 2>&1; then
     echo "$1 is not installed :( "
     return
   fi
