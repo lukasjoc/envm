@@ -12,7 +12,8 @@ if [ ! -d "$envm_wdir" ]; then
 fi
 
 # msg ------------------------------------------------
-echo "Hello, $USER. Happy Coding.. :)"
+figlet "Hello, $USER"
+echo "Happy Coding... :)"
 # ------------------------------------------------
 
 if [[ $envm_auto_update_days -ge 1 ]]; then
