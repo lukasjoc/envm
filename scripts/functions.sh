@@ -33,18 +33,11 @@ cooldocker() {
 }
 
 killdocker() {
-  echo "Do you wish to install this program?"
-  select yn in "Yes" "No"
-  case $yn in
-      Yes )
-        docker stop $(docker container ls -aq) # stop all running containers
-        docker rm $(docker container ls -aq) # remove all containers
-        docker volume prune -f # prune all volumes without asking
-        docker network prune -f # prune all networks without asking
-        docker rmi $(docker images -aq) # remove all images
-        ;;
-      No ) exit;;
-  esac
+  docker stop $(docker container ls -aq) # stop all running containers
+  docker rm $(docker container ls -aq) # remove all containers
+  docker volume prune -f # prune all volumes without asking
+  docker network prune -f # prune all networks without asking
+  docker rmi $(docker images -aq) # remove all images
 }
 
 tooltest() {
