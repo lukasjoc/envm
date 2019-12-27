@@ -17,7 +17,7 @@ makeglobal() {
 cooldocker() {
   # List all images and count them
   echo "\nIMAGES: $(docker images -aq | wc -l)"
-  docker images -a && echo
+  docker images -a --digests && echo
 
   # List all containers and count them
   echo "\nCONTAINER: $(docker container ls -aq | wc -l)"
