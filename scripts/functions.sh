@@ -5,7 +5,7 @@ runbrewstuff() {
   brew upgrade 
   bc upgrade 
   brew cleanup
-  echo " ✅ DONE"
+  echo "Done {'/.\'}"
 }
 
 makeglobal() {
@@ -15,26 +15,40 @@ makeglobal() {
 }
 
 cooldocker() {
-  echo
-  docker images
-  echo
+  # List all images and count them
+  echo "IMAGES: $(docker images -aq | wc -l)"
+  docker images -a
+  
+  # List all containers and count them
+  echo "CONTAINER: $(docker container ls -aq | wc -l)"
   docker container ls -a
-  echo
+
+  # List all docker networks and count them 
+  echo "NETS: $(docker network ls -aq | wc -l)"
   docker network ls
-  echo
+
+  # List all volumes and count them
+  echo "VOLUMES: $(docker volume ls -aq | wc -l)"
   docker volume ls
 }
 
 killdocker() {
-  docker stop $(docker container ls -a -q) # stop all running containers
-  docker rm $(docker container ls -a -q) # remove all containers
-  docker volume prune -f # prune all volumes without asking
-  docker network prune -f # prune all networks without asking
-  docker rmi $(docker images -a -q) # remove all images
+  echo "Do you wish to install this program?"
+  select yn in "Yes" "No"
+  case $yn in
+      Yes )
+        docker stop $(docker container ls -aq) # stop all running containers
+        docker rm $(docker container ls -aq) # remove all containers
+        docker volume prune -f # prune all volumes without asking
+        docker network prune -f # prune all networks without asking
+        docker rmi $(docker images -aq) # remove all images
+        ;;
+      No ) exit;;
+  esac
 }
 
 tooltest() {
-  if ! command -v $1; then
+  if [[ ! command -v $1 >/dev/null 2>&1 ]]; then
     echo "$1 is not installed :( "
     return
   fi
