@@ -18,7 +18,7 @@ cooldocker() {
   # List all images and count them
   echo "IMAGES: $(docker images -aq | wc -l)"
   docker images -a
-  
+
   # List all containers and count them
   echo "CONTAINER: $(docker container ls -aq | wc -l)"
   docker container ls -a
@@ -48,7 +48,7 @@ killdocker() {
 }
 
 tooltest() {
-  if [[ ! command -v $1 >/dev/null 2>&1 ]]; then
+  if [ ! command -v $1 >/dev/null 2>&1 ]; then
     echo "$1 is not installed :( "
     return
   fi
@@ -56,7 +56,7 @@ tooltest() {
 
 # Check Branch state and if git repo
 checkBr() {
-  if git rev-parse --git-dir > /dev/null 2>&1; then
+  if [ git rev-parse --git-dir > /dev/null 2>&1 ]; then
     upstream=${1:-'@{u}'}
     local=$(git rev-parse @)
     remote=$(git rev-parse "$upstream")
