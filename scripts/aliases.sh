@@ -19,7 +19,7 @@ alias newshell="exec $SHELL -l"
 alias prunegit="git branch --merged master --no-color | grep -v master | grep -v stable | xargs git branch -d"
 alias npmls="npm list -g --depth=0"
 alias fun="cd $envm_wdir"
-alias python="python3"
+alias py="python3"
 alias pip="pip3"
 alias pipls="pip3 list"
 
