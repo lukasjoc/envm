@@ -16,20 +16,20 @@ makeglobal() {
 
 cooldocker() {
   # List all images and count them
-  echo "IMAGES: $(docker images -aq | wc -l)"
-  docker images -a
+  echo "\nIMAGES: $(docker images -aq | wc -l)"
+  docker images -a && echo
 
   # List all containers and count them
-  echo "CONTAINER: $(docker container ls -aq | wc -l)"
-  docker container ls -a
+  echo "\nCONTAINER: $(docker container ls -aq | wc -l)"
+  docker container ls -a && echo
 
   # List all docker networks and count them 
-  echo "NETS: $(docker network ls -aq | wc -l)"
-  docker network ls
+  echo "\nNETS: $(docker network ls -q | wc -l)"
+  docker network ls && echo
 
   # List all volumes and count them
-  echo "VOLUMES: $(docker volume ls -aq | wc -l)"
-  docker volume ls
+  echo "\nVOLUMES: $(docker volume ls -q | wc -l)"
+  docker volume ls && echo
 }
 
 killdocker() {
