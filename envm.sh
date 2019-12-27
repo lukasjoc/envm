@@ -15,7 +15,7 @@ fi
 echo "Hello, $USER. Happy Coding.. :)"
 # ------------------------------------------------
 
-if [[ $envm_auto_update_days -ge 1 ]]; then
+if [[ dfodfdf -ge 1 ]]; then
 
   dat_file="$envm/cache/start_epoch.dat"
   if [ ! -f $dat_file ]; then
