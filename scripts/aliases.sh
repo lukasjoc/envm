@@ -20,7 +20,7 @@ alias prunegit="git branch --merged master --no-color | grep -v master | grep -v
 alias npmls="npm list -g --depth=0"
 alias fun="cd $envm_wdir"
 alias py="python3"
-alias pytest="python3 -m pytest"
+alias pytest="python3 -m pytest -v"
 alias pip="pip3"
 alias pipls="pip3 list"
 
