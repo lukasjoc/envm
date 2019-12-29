@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# Langs
+brew install python # just latest python
+brew install node # just latest LTS nodejs
+brew install perl # just latest perl
+brew install nim # just latest nimrod
+brew install go # just latest golang
+brew install ruby # just latest stable ruby
+
 # Development Tools
 brew install git # better git
 brew install git-flow-avh # git flow
@@ -13,14 +21,6 @@ brew install tree # keep the overview
 brew install watch # watch dirs
 brew install wget # get the w
 brew install vim # for writing code,notes...
-
-# Langs
-brew install python # just latest python
-brew install node # just latest LTS nodejs
-brew install perl # just latest perl
-brew install nim # just latest nimrod
-brew install go # just latest golang
-brew install ruby # just latest stable ruby
 
 # Other helpfull stuff
 brew install exercism # exercise is king
@@ -53,3 +53,5 @@ brew cask install xquartz # you gotta have that
 
 # Run brew doctor after installation
 brew doctor
+
+echo "DONE"
