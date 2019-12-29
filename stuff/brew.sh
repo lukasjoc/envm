@@ -56,6 +56,7 @@ brew cask install visual-studio-code # for reading code
 brew cask install vlc # play tracks and any media
 brew cask install whatsapp # talk to jerks
 brew cask install xquartz # you gotta have that
+brew cask install cyberduck # cool ftp/sftp client
 
 # Run brew doctor after installation
 brew doctor
