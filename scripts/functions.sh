@@ -5,6 +5,7 @@ runbrewstuff() {
   brew upgrade
   brew cask upgrade
   brew cleanup
+  brew doctor
   echo "Done ;)"
 }
 

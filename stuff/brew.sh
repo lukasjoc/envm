@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if ! command -v "brew"; then
+  echo "Brew not installed..."
+  echo "Run /usr/bin/ruby -e '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)' to install it..."
+  echo "Happy brewing. :)"
+fi
+
 # Langs
 brew install python # just latest python
 brew install node # just latest LTS nodejs
