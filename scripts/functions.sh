@@ -1,11 +1,11 @@
 #!/bin/sh
 
 runbrewstuff() {
-  brew update 
-  brew upgrade 
-  bc upgrade 
+  brew update
+  brew upgrade
+  brew cask upgrade
   brew cleanup
-  echo "Done {'/.\'}"
+  echo "Done ;)"
 }
 
 makeglobal() {
@@ -33,11 +33,11 @@ cooldocker() {
 }
 
 killdocker() {
-  docker stop $(docker container ls -aq) # stop all running containers
-  docker rm $(docker container ls -aq) # remove all containers
-  docker volume prune -f # prune all volumes without asking
-  docker network prune -f # prune all networks without asking
-  docker rmi $(docker images -aq) # remove all images
+  docker kill $(docker container ls -aq)
+  docker rm $(docker container ls -aq)
+  docker volume prune -f
+  docker network prune -f
+  docker rmi $(docker images -aq)
 }
 
 tooltest() {
