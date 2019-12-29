@@ -33,7 +33,7 @@ cooldocker() {
 }
 
 killdocker() {
-  docker kill $(docker container ls -aq)
+  docker stop $(docker container ls -aq)
   docker rm $(docker container ls -aq)
   docker volume prune -f
   docker network prune -f
