@@ -57,7 +57,7 @@ brew cask install vlc # play tracks and any media
 brew cask install whatsapp # talk to jerks
 brew cask install xquartz # you gotta have that
 brew cask install cyberduck # cool ftp/sftp client
-
+brew cask install vagrant # vagrant ;)
 # Run brew doctor after installation
 brew doctor
 
