@@ -7,14 +7,17 @@ if ! command -v "brew"; then
 fi
 
 # Langs
+echo "Installing Langs..."
 brew install python # just latest python
 brew install node # just latest LTS nodejs
 brew install perl # just latest perl
 brew install nim # just latest nimrod
 brew install go # just latest golang
 brew install ruby # just latest stable ruby
+brew install lua # latest stable lua
 
 # Development Tools
+echo "Installing Development Tools..."
 brew install git # better git
 brew install git-flow-avh # git flow
 brew install ack # better grep
@@ -28,16 +31,17 @@ brew install watch # watch dirs
 brew install wget # get the w
 brew install vim # for writing code,notes...
 
-# Other helpfull stuff
+# Other helpful stuff
+echo "Installing other helpful stuff..."
 brew install exercism # exercise is king
 brew install figlet # funny ascii printer
 brew install htop # processies screen of the gods
 brew install iproute2mac # ip addr for mac
 brew install kubernetes-cli # kubernetes
 brew install mysql # just latest mysql
-brew install syncthing # syncing files
 
 # Install Casks
+echo "Installing caskrooms..."
 brew cask install alfred # easy lookup
 brew cask install authy # 2fa codes
 brew cask install cleanmymac # clean up system
@@ -57,7 +61,9 @@ brew cask install vlc # play tracks and any media
 brew cask install whatsapp # talk to jerks
 brew cask install xquartz # you gotta have that
 brew cask install cyberduck # cool ftp/sftp client
-brew cask install vagrant # vagrant ;)
+brew cask install vagrant
+brew cask install sync
+
 # Run brew doctor after installation
 brew doctor
 
