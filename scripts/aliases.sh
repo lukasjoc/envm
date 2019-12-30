@@ -24,4 +24,6 @@ alias py="python3"
 alias pytest="python3 -m pytest -v"
 alias pip="pip3"
 alias pipls="pip3 list"
+alias gobench="go test -v --bench . --benchmem"
+alias exer="exercism"
 

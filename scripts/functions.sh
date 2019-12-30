@@ -71,3 +71,14 @@ checkBr() {
   fi
 }
 
+# submit solution to exercism and test before submitting. [supported: golang|python|nim]
+# $1 language, $2 file
+exercism_submit() {
+  if ! command -v exercism >/dev/null 2>&1; then
+    echo "Exercism is not installed... "
+    return
+  fi
+  exercism submit $2
+}
+
+
