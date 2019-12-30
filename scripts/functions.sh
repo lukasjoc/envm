@@ -1,10 +1,18 @@
 #!/bin/sh
 
 runbrewstuff() {
+  echo " 🍺 Running brew update..."
   brew update
+
+  echo " 🍺 Running brew upgrade..."
   brew upgrade
+
+  echo " 🍺  Running brew cask upgrade..."
   brew cask upgrade
+
+  echo " 🍻 Running brew cleanup..."
   brew cleanup
+
   brew doctor
   echo "Done ;)"
 }
@@ -45,29 +53,6 @@ tooltest() {
   if ! command -v $1 >/dev/null 2>&1; then
     echo "$1 is not installed :( "
     return
-  fi
-}
-
-# Check Branch state and if git repo
-checkBr() {
-  if [ git rev-parse --git-dir > /dev/null 2>&1 ]; then
-    upstream=${1:-'@{u}'}
-    local=$(git rev-parse @)
-    remote=$(git rev-parse "$upstream")
-    base=$(git merge-base @ "$upstream")
-
-    git remote update
-    if [ $local = $remote ]; then
-      echo "Up-to-date"
-    elif [ $local = $base ]; then
-      echo "Need to pull"
-    elif [ $remote = $base ]; then
-      echo "Need to push"
-    else
-      echo "Diverged"
-    fi
-  else
-    echo "Not a Git Repo"
   fi
 }
 
