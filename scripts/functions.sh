@@ -71,14 +71,14 @@ checkBr() {
   fi
 }
 
-# submit solution to exercism and test before submitting. [supported: golang|python|nim]
-# $1 language, $2 file
+# just submit pre-tested solutions to exercism
+# !!CAUTION: TESTING IS STILL ON YOU
 exercism_submit() {
   if ! command -v exercism >/dev/null 2>&1; then
     echo "Exercism is not installed... "
     return
   fi
-  exercism submit $2
+  exercism submit $1
 }
 
 
