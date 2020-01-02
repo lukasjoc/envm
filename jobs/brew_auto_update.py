@@ -16,3 +16,4 @@ sc.every(720).hours.do(brew_auto_update)
 while 1:
     sc.run_pending()
     time.sleep(1)
+
