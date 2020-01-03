@@ -1,4 +1,4 @@
-for script ($envm/scripts/*sh); do
+for script in $envm/scripts/*.sh; do
   source $script
 done
 
