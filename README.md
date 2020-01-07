@@ -17,4 +17,4 @@
 - ``$envm_wdir`` => Path to your working dir. The place where the magic happens
 - ``$envm_auto_update_days`` => if >= 1 update is enabled
 
-[lukasjoc](https://lukasjoc.com), 2019
+[lukasjoc](https://lukasjoc.com), 2020
