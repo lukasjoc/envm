@@ -14,7 +14,7 @@ runbrewstuff() {
 
 makeglobal() { 
   if [ $# -eq 0 ]; then
-    printf "%s/n" "Usage: makeglobal <current_name_with_extension> <target_name_without_extension>"
+    printf "%s\n" "Usage: makeglobal <current_name_with_extension> <target_name_without_extension>"
     return
   fi
   chmod +x $1
@@ -52,7 +52,7 @@ tooltest() {
 # !!CAUTION: TESTING IS STILL ON YOU
 exercism_submit() {
   if [ $# -eq 0 ]; then
-    printf "%s/n" "Usage: exercism_submit <solution_file>"
+    printf "%s\n" "Usage: exercism_submit <solution_file>"
     return
   fi
   if ! command -v exercism >/dev/null 2>&1; then
@@ -66,7 +66,7 @@ exercism_submit() {
 # $1 pane(1,2,3..), $2 name("test","test1"...)
 mv_tmux() {
   if [ $# -eq 0 ]; then
-    printf "%s/n" "Usage: mv_tmux <pane_number> <pane_name>"
+    printf "%s\n" "Usage: mv_tmux <pane_number> <pane_name>"
     return
   fi
   tmux rename-window -t $1 $2
