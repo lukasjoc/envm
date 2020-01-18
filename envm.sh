@@ -28,7 +28,7 @@ if [[ $envm_auto_update_days -ge 1 ]]; then
     date +%s > $dat_file
     echo "Updating..."
     cd $envm
-    git ch master && git pull
+    git ch master && git pull --rebase --stat origin master
     cd $envm_wdir
     exec $SHELL -l
   fi
