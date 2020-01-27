@@ -1,3 +1,5 @@
+#!/bin/bash
+
 for script in $envm/scripts/*.sh; do
   source $script
 done

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 runbrewstuff() {
   echo "🍺 Running brew update..."
