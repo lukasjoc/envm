@@ -76,10 +76,12 @@ mv_tmux() {
 # or taking an URL as argument
 function pingtime(){
   if [ $# -eq 0 ]; then
-    ping -c 4 www.google.de | tail -1 | awk '{print $4}' | cut -d '/' -f 2
+    echo "Pinging www.goog.de"
+    ping -c 4 www.google.de | tail -1 | awk '{print PING OK AVG $4}' | cut -d '/' -f 2
     return
   else
-    ping -c 4 $1 | tail -1| awk '{print $4}' | cut -d '/' -f 2
+    echo "Pinging $1"
+    ping -c 4 $1 | tail -1| awk '{print PING OK AVG $4}' | cut -d '/' -f 2
     return
   fi
 }
