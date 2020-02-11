@@ -13,8 +13,10 @@ HISTFILESIZE=2000
 shopt -s histappend
 shopt -s checkwinsize
 
-# Effective Notes
+# random stuff i need globally
+export PATH="/usr/local/sbin:$PATH"
 export effective_notes_init="$HOME/Sync/w/notes"
+export mac_ip=$(ifconfig en9 | grep inet | awk '$1=="inet" {print $2}')
 
 # Go
 export GOPATH="$HOME/.go"
@@ -73,4 +75,7 @@ function parse_git_dirty {
 }
 
 # Colored Shell Prompt with git status
-export PS1="\[\e[1;32m\]\u\[\e[m\]@\[\e[1;31m\]\h\[\e[m\] \[\e[1;10m\]\W\[\e[m\]\\$ \[\e[1;36m\]\`parse_git_branch\`\[\e[m\]"
+export PS1="\[\e[1;32m\]\u\[\e[m\]::\[\e[1;31m\]\h\[\e[m\] \[\e[1;10m\]\W\[\e[m\]\\$ \[\e[1;36m\]\`parse_git_branch\`\[\e[m\]"
+
+# Starting a new TMUX Session as soon as everything is loaded
+tmux
