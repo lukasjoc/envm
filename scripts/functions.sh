@@ -71,3 +71,14 @@ mv_tmux() {
   fi
   tmux rename-window -t $1 $2
 }
+
+# Return the AVG PingTime in your current network for pinging a high frequented server at google 
+# or taking an URL as argument
+function pingtime(){
+  if [ $# -eq 0 ]; then
+    return ping -c 4 www.google.com | tail -1| awk '{print $4}' | cut -d '/' -f 2
+  else
+    return ping -c $1 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
+  fi
+}
+
