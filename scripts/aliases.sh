@@ -12,7 +12,7 @@ alias bc="brew cask"
 
 alias ls="ls -GF"
 alias sl="ls -GF"
-alias ll="ls -alF"
+alias ll="ls -hal"
 
 alias mkdir="mkdir -p"
 alias rmdir="rm -rf"
