@@ -41,3 +41,4 @@ alias goclean="go clean -x -r -cache -modcache"
 
 alias exer="exercism"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
+alias ±="cd $HOME"
