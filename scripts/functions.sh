@@ -3,12 +3,15 @@
 runbrewstuff() {
   echo "🍺 Running brew update..."
   brew update
-  echo "🍺 Running brew upgrade..."
   brew upgrade
-  echo "🍺  Running brew cask upgrade..."
-  brew cask upgrade
+
+  echo "🍺 Running brew upgrade..."
+  brew cask upgrade --greedy
+
   echo "🍻 Running brew cleanup..."
+  rm -rf $(brew --cache)
   brew cleanup && brew doctor
+
   echo "Done ;)"
 }
 
