@@ -4,14 +4,11 @@ runbrewstuff() {
   echo "🍺 Running brew update..."
   brew update
   brew upgrade
-
   echo "🍺 Running brew upgrade..."
   brew cask upgrade --greedy
-
   echo "🍻 Running brew cleanup..."
   rm -rf $(brew --cache)
   brew cleanup && brew doctor
-
   echo "Done ;)"
 }
 
@@ -77,15 +74,14 @@ mv_tmux() {
 
 # Return the AVG PingTime in your current network for pinging a high frequented server at google 
 # or taking an URL as argument
-function pingtime(){
-  if [ $# -eq 0 ]; then
-    echo "Pinging www.goog.de"
-    ping -c 4 www.google.de | tail -1 | awk '{print PING OK AVG $4}' | cut -d '/' -f 2
-    return
-  else
-    echo "Pinging $1"
-    ping -c 4 $1 | tail -1| awk '{print PING OK AVG $4}' | cut -d '/' -f 2
+function pingtest(){
+  if [ $# -le 1 ]; then
+    echo "Pinging $1 4 times..."
+    ping -c 4 $1 | tail -1| awk '{print $4}' | cut -d '/' -f 2
     return
   fi
+  echo "Pinging 8.8.8.8 (dns.google.) 4 times..."
+  ping -c 4 8.8.8.8 | tail -1| awk '{print $4}' | cut -d '/' -f 2
+  return
 }
 
