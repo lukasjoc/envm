@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>DOCS</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="envm">envm</h1>
+<blockquote>
+<p>Environment files and stuff</p>
+</blockquote>
+<h1 id="prerequisites">Prerequisites</h1>
+<ul>
+<li>zsh,bash -&gt; <code>which zsh|bash</code></li>
+<li>Vundle installed to <code>~/.vim/bundle/Vundle</code></li>
+</ul>
+<h1 id="setup-envm">Setup envm:</h1>
+<ul>
+<li><code>git clone git@github.com:lukasjoc/envm.vim.git ~/.envm</code></li>
+<li>Copy a zshrc|bashrc template from the $envm/templates into $HOME</li>
+<li>Setup envm Environment Variables ($envm, $envm_wdir, $enable_envm_auto_update)</li>
+<li>Type <code>vim</code> and then type <code>Shift+:PluginInstall</code></li>
+</ul>
+<h1 id="synopsis">SYNOPSIS:</h1>
+<ul>
+<li><code>$envm</code> =&gt; Path of the envm repository on your system only in <code>~/.envm</code></li>
+<li><code>$envm_wdir</code> =&gt; Path to your working dir. The place where the magic happens</li>
+<li><code>$envm_auto_update_days</code> =&gt; if &gt;= 1 update is enabled</li>
+</ul>
+<p><a href="https://lukasjoc.com">lukasjoc</a>, 2020</p>
+</body>
+</html>

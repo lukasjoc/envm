@@ -27,7 +27,7 @@ export GO111MODULE=on
 export envm="$HOME/.envm"
 export envm_wdir="$HOME/Sync/w/fun"
 export envm_auto_update_days=14
-source $envm/envm.sh
+source $envm/init.sh
 
 case "$TERM" in
   xterm-color|*-256color) color_prompt=yes;;

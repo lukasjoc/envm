@@ -1,52 +1,21 @@
 #!/bin/bash
 
-for script in $envm/scripts/*.sh; do
-  source $script
-done
-
-if [ ! -v envm_wdir ]; then
-  echo "wdir not set"
-  export envm_wdir="$HOME/Sync/"
-fi
-
-if [ ! -d "$envm_wdir" ]; then
-  echo "wdir does not exist"
-fi
-
-# Msg ------------------------------------------------
-figlet "Hello, $USER"
-echo "Happy Coding... :)"
-# ------------------------------------------------
-
-# update envm stuff
-function update() {
-  echo "Updating..."
-  cd $envm
-  git ch master && git pull --rebase --stat origin master
-  cd $envm_wdir
-  exec $SHELL -l
-}
-
-
 # update envm manually
-function envm() {
-  if [ $# == "--update" ]; then
-    update
+function print_help() {
+  if [[ $# -le 1 || $# -gt 2 || $1 == "--help" ]]; then
+    printf '%s\n\n' "Build go app for GOOS(darwin,linux) GOARCH(amd64)"
+    printf '%s\n' "Usage:"
+    printf '%s\n\n'  "  ./go_build.sh arg1: system(darwin/mac, linux), arg2:binary_name(some_name)"
+    printf '%s\n' "Flags:"
+    printf '%s\n\n' "   --help help for this bash script"
+    exit 1
   fi
 }
 
-# automatic update looking at start_epoch.dat
-if [[ $envm_auto_update_days -ge 1 ]]; then
-
-  dat_file="$envm/cache/start_epoch.dat"
-  if [ ! -f $dat_file ]; then
-    date +%s  > $dat_file
-  fi
-
-  declare -i update_epoch=$(( 60 * 60 * 24 * $envm_auto_update_days + $(cat $dat_file) ))
-  if [[ $(date +%s) -ge $update_epoch ]]; then
-    date +%s > $dat_file
-    update
-  fi
-
+# parse args and promt accordingly
+if [ $1 == "--update" ]; then
+  update_envm
+else
+  print_help
 fi
+
