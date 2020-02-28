@@ -30,6 +30,6 @@ if [[ $envm_auto_update_days -ge 1 ]]; then
     date +%s > $dat_file
 
     #update envm quietly
-    envm -q --update
+    envm --update
   fi
 fi
