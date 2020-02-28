@@ -9,8 +9,7 @@
 
 ### Setup/Installation:
 - Clone: ``git@github.com:lukasjoc/envm.git ~/.envm``
-- ``./install.sh`` to get /usr/local/bin/envm utility
+- ``./setup.sh`` to get /usr/local/bin/envm utility
 - Restart terminal or refresh $SHELL with ``exec $SHELL -l``
-
 
 [lukasjoc](https://lukasjoc.com), 2020
