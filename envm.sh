@@ -13,9 +13,14 @@ print_help() {
   fi
 }
 
-# parse args and promt accordingly
+
 if [ $1 == "--update" ]; then
-  update_envm
+  figlet "Updating env M anager..."
+  cd $envm
+  git ch master && git pull --rebase --stat origin master
+  cd $envm_wdir
+  exec $SHELL -l
+  $envm/install.sh
 else
   print_help
 fi

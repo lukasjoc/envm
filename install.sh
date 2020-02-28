@@ -10,7 +10,6 @@ figlet "env M anager"
 
 # Generalise some scripts
 make_global envm.sh envm
-make_global update_envm.sh update_envm
 
 #TODO:
 # check $envm dir
