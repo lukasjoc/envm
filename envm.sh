@@ -14,7 +14,8 @@ print_help() {
 }
 
 if [[ $1 == "--update" ]]; then
-  figlet "Updating env M anager..."
+  echo "Updating"
+  figlet "env M anager..."
   cd $envm
   git ch master && git pull --rebase --stat origin master
   cd $envm_wdir
