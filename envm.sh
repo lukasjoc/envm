@@ -13,7 +13,7 @@ print_help() {
   fi
 }
 
-if [ $1 == "--update" ]; then
+if [[ $1 == "--update" ]]; then
   figlet "Updating env M anager..."
   cd $envm
   git ch master && git pull --rebase --stat origin master
