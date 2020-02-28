@@ -18,6 +18,24 @@ figlet "Hello, $USER"
 echo "Happy Coding... :)"
 # ------------------------------------------------
 
+# update envm stuff
+function update() {
+  echo "Updating..."
+  cd $envm
+  git ch master && git pull --rebase --stat origin master
+  cd $envm_wdir
+  exec $SHELL -l
+}
+
+
+# update envm manually
+function envm() {
+  if [ $# == "--update" ]; then
+    update
+  fi
+}
+
+# automatic update looking at start_epoch.dat
 if [[ $envm_auto_update_days -ge 1 ]]; then
 
   dat_file="$envm/cache/start_epoch.dat"
@@ -28,10 +46,7 @@ if [[ $envm_auto_update_days -ge 1 ]]; then
   declare -i update_epoch=$(( 60 * 60 * 24 * $envm_auto_update_days + $(cat $dat_file) ))
   if [[ $(date +%s) -ge $update_epoch ]]; then
     date +%s > $dat_file
-    echo "Updating..."
-    cd $envm
-    git ch master && git pull --rebase --stat origin master
-    cd $envm_wdir
-    exec $SHELL -l
+    update
   fi
+
 fi

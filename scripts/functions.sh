@@ -12,7 +12,7 @@ runbrewstuff() {
   echo "Done ;)"
 }
 
-makeglobal() { 
+makeglobal() {
   if [ $# -eq 0 ]; then
     printf "%s\n" "Usage: makeglobal <current_name_with_extension> <target_name_without_extension>"
     return
@@ -74,7 +74,7 @@ mv_tmux() {
 
 # Return the AVG PingTime in your current network for pinging a high frequented server at google 
 # or taking an URL as argument
-function pingtest(){
+pingtest(){
   if [ $# -ge 1 ]; then
     echo "Pinging $1 4 times..."
     ping -c 4 $1 | tail -1| awk '{print $4}' | cut -d '/' -f 2
