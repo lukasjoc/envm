@@ -3,7 +3,7 @@
 print_help() {
   # check for too less or to much args and exit appropriately
   if [[ $# -le 1 || $# -gt 2 || $1 == "--help" ]]; then
-    printf '%s\n\n' "Environment Manager at your disposal ;)"
+    printf '%s\n\n' "env M anager at your disposal ;)"
     printf '%s\n' "Usage:"
     printf '%s\n\n'  "  envm [--flag]"
     printf '%s\n' "Flags:"
@@ -13,14 +13,13 @@ print_help() {
   fi
 }
 
-
 if [ $1 == "--update" ]; then
   figlet "Updating env M anager..."
   cd $envm
   git ch master && git pull --rebase --stat origin master
   cd $envm_wdir
   exec $SHELL -l
-  $envm/install.sh
+  $envm/setup.sh
 else
   print_help
 fi
