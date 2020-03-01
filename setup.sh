@@ -1,5 +1,6 @@
 #!/bin/bash
 
-chmod +x ./envm.sh
-cp ./envm.sh envm
-mv ./envm "/usr/local/bin/"
+chmod +x $envm/envm.sh
+cp $envm/envm.sh $envm/envm
+mv $envm/envm "/usr/local/bin/"
+
