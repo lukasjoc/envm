@@ -19,7 +19,7 @@ if [[ $1 == "--update" ]]; then
   cd $envm
   git ch master && git pull --rebase --stat origin master
   cd $envm_wdir
-  .$envm/setup.sh
+  .$envmsetup.sh
   exec $SHELL -l
 else
   print_help
