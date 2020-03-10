@@ -23,13 +23,13 @@ makeglobal() {
 }
 
 cooldocker() {
-  printf "%s\n" "🐳 IMAGES: $(docker images -aq | wc -l)"
+  printf "%s\n" "🐳 IMAGES: $(docker images -q | wc -l)"
   docker images -a --digests && echo
-  printf "%s\n" "🐳 CONTAINER: $(docker container ls -aq | wc -l)"
+  printf "%s\n" "🐳 CONTAINER: $(docker container ls -q | wc -l)"
   docker container ls -a && echo
-  printf "%s\n" "🐳 NETS: $(docker network ls -q | wc -l)"  
+  printf "%s\n" "🐳 NETS: $(docker network ls -q | wc -l)"
   docker network ls && echo
-  printf "%s\n" "🐳 VOLUMES: $(docker volume ls -q | wc -l)" 
+  printf "%s\n" "🐳 VOLUMES: $(docker volume ls -q | wc -l)"
   docker volume ls && echo
 }
 
@@ -62,7 +62,7 @@ exercism_submit() {
   exercism submit $1
 }
 
-# rename tmux window given the pane and new name 
+# rename tmux window given the pane and new name
 # $1 pane(1,2,3..), $2 name("test","test1"...)
 mv_tmux() {
   if [ $# -eq 0 ]; then
@@ -72,7 +72,7 @@ mv_tmux() {
   tmux rename-window -t $1 $2
 }
 
-# Return the AVG PingTime in your current network for pinging a high frequented server at google 
+# Return the AVG PingTime in your current network for pinging a high frequented server at google
 # or taking an URL as argument
 pingtest(){
   if [ $# -ge 1 ]; then
