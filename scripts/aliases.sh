@@ -11,17 +11,15 @@ alias sl="ls -GF"
 alias ll="ls -hal"
 
 alias mkdir="mkdir -p"
-alias rmdir="rm -rf"
 
 alias datef="date +'%d.%m.%y'"
 alias count="ls -l | wc -l"
 alias watchdir="watch -d ls -halFG "
-alias mysqlroot="mysql -uroot"
+alias mysqlr="mysql -uroot"
 alias ns="exec $SHELL -l"
 
 alias pgit="git branch --merged master --no-color | grep -v master | grep -v stable | xargs git branch -d"
 alias gp="git pull"
-alias gits="git branch && echo && git status"
 
 alias npmls="npm list -g --depth=0" # oh my fu**ing good I hate npm and node EcoS so much
 alias fun="cd $envm_wdir"
