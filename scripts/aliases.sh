@@ -29,9 +29,9 @@ alias fun="cd $envm_wdir"
 alias python="python3" # this is overwriting the bullshit apple python
 alias pytest="python3 -m pytest -v"
 alias pip="pip3"
-
 alias gobench="go test -v --bench . --benchmem"
 alias goclean="go clean -x -r -cache -modcache"
-
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
-alias ±="cd $HOME"
+
+# Convert file to 2 spaces.. Converted output is stdout taken from https://unix.stackexchange.com/questions/47171/sed-convert-4-spaces-to-2
+alias sed2="sed -e 's/^/~/' -e ': r' -e 's/^\( *\)~    /\1  ~/' -e 't r' -e 's/~//' $1"
