@@ -4,13 +4,15 @@ for script in $envm/scripts/*.sh; do
   source $script
 done
 
-if [ ! -v envm_wdir ]; then
+if [ -z ${envm_wdir+x} ]; then
   echo "wdir not set"
-  export envm_wdir="$HOME/Sync/"
+	echo "Please set envm_wdir variable like this echo 'export envm_wdir='~/some/dir'' >> ~/.bashrc "
 fi
 
-if [ ! -d "$envm_wdir" ]; then
-  echo "wdir does not exist"
+if [ ! -z ${envm_wdir+x} ]; then
+	if [ ! -d "$envm_wdir" ]; then
+  	echo "wdir does not exist"
+	fi
 fi
 
 # Msg ------------------------------------------------
