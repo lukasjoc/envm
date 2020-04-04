@@ -11,6 +11,7 @@ alias sl="ls -GF"
 alias ll="ls -hal"
 
 alias mkdir="mkdir -p"
+alias rm="rm -i"
 
 alias datef="date +'%d.%m.%y'"
 alias count="ls -l | wc -l"
