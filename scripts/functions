@@ -17,7 +17,7 @@ makeglobal() {
     printf "%s\n" "Usage: makeglobal <current_name_with_extension> <target_name_without_extension>"
     return
   fi
-  chmod +x $1
+  chmod u+x $1
   cp $1 $2
   mv $2 "/usr/local/bin"
 }
