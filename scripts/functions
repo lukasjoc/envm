@@ -1,12 +1,12 @@
 #!/bin/bash
 
 runbrewstuff() {
-  echo "🍺 Running brew update..."
+  echo "Running brew update..."
   brew update
   brew upgrade
-  echo "🍺 Running brew upgrade..."
+  echo "Running brew upgrade..."
   brew cask upgrade --greedy
-  echo "🍻 Running brew cleanup..."
+  echo "Running brew cleanup..."
   rm -rf $(brew --cache)
   brew cleanup && brew doctor
   echo "Done ;)"
@@ -23,13 +23,18 @@ makeglobal() {
 }
 
 cooldocker() {
-  printf "%s\n" "🐳 IMAGES: $(docker images -q | wc -l)"
-  docker images -a --digests && echo
-  printf "%s\n" "🐳 CONTAINER: $(docker container ls -q | wc -l)"
+	local ic=$(docker images -q | wc -l | sed 's/ //g' )
+  local cc=$(docker container ls -q | wc -l | sed 's/ //g')
+  local nc=$(docker network ls -q | wc -l | sed 's/ //g')
+  local vc=$(docker volume ls -q | wc -l | sed 's/ //g')
+
+	echo "Count:[$ic] | IMAGES:"
+	docker images -a --digests && echo
+  echo "Count: [$cc] | CONTAINER:"
   docker container ls -a && echo
-  printf "%s\n" "🐳 NETS: $(docker network ls -q | wc -l)"
+  echo "Count: [$nc] | NETS:"
   docker network ls && echo
-  printf "%s\n" "🐳 VOLUMES: $(docker volume ls -q | wc -l)"
+  echo "Count: [$vc] | VOLUMES:"
   docker volume ls && echo
 }
 
@@ -41,11 +46,15 @@ killdocker() {
   docker rmi $(docker images -aq)
 }
 
-tooltest() {
+# checks if $1 is installed. If not respond with error message. If $1 is installed
+# return the type value of $1
+tt() {
   if ! command -v $1 >/dev/null 2>&1; then
     echo "$1 is not installed :( "
     return
-  fi
+	else
+		type $1
+	fi
 }
 
 # just submit pre-tested solutions to exercism
@@ -62,14 +71,14 @@ exercism_submit() {
   exercism submit $1
 }
 
-# rename tmux window given the pane and new name
-# $1 pane(1,2,3..), $2 name("test","test1"...)
+# rename the current tmux pane given a name
 mv_tmux() {
   if [ $# -eq 0 ]; then
-    printf "%s\n" "Usage: mv_tmux <pane_number> <pane_name>"
+    printf "%s\n" "Usage: mv_tmux <name>"
     return
   fi
-  tmux rename-window -t $1 $2
+	
+	tmux rename-window -t $(tmux display-message -p '#I') $1
 }
 
 # Return the AVG PingTime in your current network for pinging a high frequented server at google
@@ -77,11 +86,11 @@ mv_tmux() {
 pingtest(){
   if [ $# -ge 1 ]; then
     echo "Pinging $1 4 times..."
-    ping -c 4 $1 | tail -1| awk '{print $4}' | cut -d '/' -f 2
+    ping -c 4 $1 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
     return
   fi
   echo "Pinging 8.8.8.8 (dns.google.) 4 times..."
-  ping -c 4 8.8.8.8 | tail -1| awk '{print $4}' | cut -d '/' -f 2
+  ping -c 4 8.8.8.8 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
   return
 }
 
