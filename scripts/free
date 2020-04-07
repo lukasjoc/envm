@@ -1,0 +1,5 @@
+#!/bin/bash
+
+free() {
+	python3 $envm/bin/free
+}
