@@ -1,0 +1,48 @@
+#!/bin/bash
+
+today() {
+
+	local todo_name=$(date +'%d.%m.%y').md
+	local current_todo=$HOME/todo/$(date +'%m')_$(date +'%y')/$todo_name
+	local todo_repository=$HOME/todo
+	
+	if [ $# -le 0 ]; then
+		cat $current_todo
+		return
+	fi
+	
+	if [[ $1 == "--save" || $1 == "-s" ]]; then
+		cd $todo_repository
+ 		git add $current_todo && git commit -m "add current todo $todo_name"
+		git push
+		cd -
+		return	
+	fi
+
+	if [[ $1 == "--sync" ]]; then
+		cd $todo_repository
+		git checkout master
+		git pull --rebase --stat origin master
+		cd -
+		return
+	fi
+
+	if [[ $1 == "--update" || $1 == "-u" ]]; then
+		$EDITOR $current_todo
+		return
+	fi
+	
+	# print help
+	if [[ $1 == "--help" || $# -gt 1 ]]; then
+ 	 	printf '%s\n\n' "List current todo and save current todo"
+  	printf '%s\n' "Usage:"
+  	printf '%s\n\n'  " today [--help,--save]"
+  	printf '%s\n' "Flags:"
+  	printf '%s\n' "	--help help for this bash script"
+  	printf '%s\n' "	--sync sync current todo repository"
+		printf '%s\n' "	-u,--update update current todo (default: $EDITOR)"
+  	printf '%s\n' "	-s,--save save current todo repository"
+  	return
+	fi
+
+}
