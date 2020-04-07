@@ -27,7 +27,9 @@ alias fun="cd $envm_wdir"
 
 alias python="python3" # this is overwriting the bullshit apple python
 alias pytest="python3 -m pytest -v"
+alias activate_env='. venv/bin/activate'
 alias pip="pip3"
+
 alias gobench="go test -v --bench . --benchmem"
 alias goclean="go clean -x -r -cache -modcache"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
