@@ -23,5 +23,5 @@ gobuild() {
 	GOOS=$(go env GOOS)
 	GOARCH=$(go env GOARCH)
 	echo "Building $1 for $GOARCH on $GOOS"
-	CGO_ENABLED=0 GOOS=$GOOS GOARCH=$GOARCH go build -a -ldflags="-s -w" -o $1
+ 	GOOS=$GOOS GOARCH=$GOARCH go build -a -ldflags="-s -w" -o $1
 }
