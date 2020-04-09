@@ -99,3 +99,15 @@ free() {
 	local path_to_exec=$envm/bin/free
 	base64 -D $path_to_exec | python
 }
+
+# create dir and cd into it
+cddir () {
+	mkdir -p $1
+	cd $1
+	return
+}
+
+# ask before deleteing
+rmdir () {
+	rm -rfi $1
+}
