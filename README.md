@@ -11,7 +11,7 @@
 - Clone: ``git@github.com:lukasjoc/envm.git ~/.envm``
 - ``./setup.sh`` to get /usr/local/bin/envm utility
 - Restart terminal or refresh $SHELL with ``exec $SHELL -l``
-- For example bash-files, vim setup and more visit [lukasjoc/stuff](https://github.com/lukasjoc/stuff)
+- For example bash-files, vim setup and more visit [lukasjoc/dotfiles](https://github.com/lukasjoc/dotfiles)
 - also check if you have setup the ```$EDITOR``` variable
 
 [lukasjoc](https://lukasjoc.com), 2020
