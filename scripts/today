@@ -27,7 +27,7 @@ today() {
 		return
 	fi
 
-	if [[ $1 == "--update" || $1 == "-u" ]]; then
+	if [[ $1 == "--update" || $1 == "-u" || $1 == "--new" || $1 == "-n" ]]; then
 		$EDITOR $current_todo
 		return
 	fi
@@ -42,6 +42,7 @@ today() {
   	printf '%s\n' "	--sync sync current todo repository"
 		printf '%s\n' "	-u,--update update current todo (default: $EDITOR)"
   	printf '%s\n' "	-s,--save save current todo repository"
+  	printf '%s\n' "	-n,--new create new todo for the current day (default: $EDITOR)"
   	return
 	fi
 
