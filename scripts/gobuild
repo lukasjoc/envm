@@ -20,8 +20,10 @@ gobuild() {
 		return
 	fi
 
-	GOOS=$(go env GOOS)
-	GOARCH=$(go env GOARCH)
-	echo "Building $1 for $GOARCH on $GOOS"
- 	GOOS=$GOOS GOARCH=$GOARCH go build -a -ldflags="-s -w" -o $1
+	os=$(go env GOOS)
+	arch=$(go env GOARCH)
+	binary_name="${1%.*}"
+	
+	echo "Building $binary_name for $arch on $os"
+	GOOS=$os GOARCH=$arch go build -a -ldflags="-s -w" -o $binary_name
 }
