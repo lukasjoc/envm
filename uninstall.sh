@@ -6,7 +6,7 @@ while true; do
   [yY][eE][sS]|[yY]*)
     rm -rf $envm
     rm  -rf /usr/local/bin/envm
-    echo "We will miss you at env M anager ;( "
+    echo "Deleted env Manager successfully..."
     break;;
   [nN][oO]|[nN]*)
     echo "Exiting..."

@@ -24,3 +24,4 @@ if [[ $1 == "--update" ]]; then
 else
   print_help
 fi
+
