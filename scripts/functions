@@ -24,18 +24,29 @@ makeglobal() {
 
 cooldocker() {
 	local ic=$(docker images -q | wc -l | sed 's/ //g' )
-  local cc=$(docker container ls -q | wc -l | sed 's/ //g')
+ 	local cc=$(docker container ls -q | wc -l | sed 's/ //g')
   local nc=$(docker network ls -q | wc -l | sed 's/ //g')
   local vc=$(docker volume ls -q | wc -l | sed 's/ //g')
 
-	echo "Count:[$ic] | IMAGES:"
+	echo "[$ic] | IMAGES:"
 	docker images -a --digests && echo
-  echo "Count: [$cc] | CONTAINER:"
-  docker container ls -a && echo
-  echo "Count: [$nc] | NETS:"
+
+	echo "[$cc] | CONTAINERS:"
+	docker container ls | while read line; do
+ 		if `echo $line | grep -q 'CONTAINER ID'`; then
+    	echo -e "$line\t IP ADDRESS"
+    else
+    	cid=$(echo $line | awk '{print $1}');
+    	cip=$(docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" $cid);
+    	printf "${line}\t${cip}\n\n"
+  	fi
+	done;
+
+	echo "[$nc] | NETS:"
   docker network ls && echo
-  echo "Count: [$vc] | VOLUMES:"
-  docker volume ls && echo
+
+	echo "[$vc] | VOLUMES:"
+ 	docker volume ls && echo
 }
 
 killdocker() {
