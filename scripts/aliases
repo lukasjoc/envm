@@ -11,7 +11,6 @@ else
   alias watchdir="watch -d ls -halF --color=auto"
 fi
 
-
 alias ..="cd ../"
 alias ...="cd ../../"
 alias ll="ls -hal"
