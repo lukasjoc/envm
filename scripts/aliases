@@ -1,22 +1,25 @@
 #!/bin/bash
 
-# TEST?
+if [[ $(uname -s) == "Darwin" ]]; then
+  # Macs
+  alias ls="ls -FG"
+  alias watchdir="watch -d ls -halFG"
+  alias bc="brew cask"
+else
+  # Linux Systems
+  alias ls="ls -F --color=auto"
+  alias watchdir="watch -d ls -halF --color=auto"
+fi
+
 
 alias ..="cd ../"
 alias ...="cd ../../"
-
-alias dc="docker-compose"
-alias bc="brew cask"
-
-alias ls="ls -GF"
-alias sl="ls -GF"
 alias ll="ls -hal"
-
 alias mkdir="mkdir -p"
+alias dc="docker-compose"
 alias datef="date +'%d.%m.%y'"
 alias count="ls -l | wc -l"
-alias watchdir="watch -d ls -halFG "
-alias mysqlr="mysql -uroot"
+alias mysqlroot="mysql -uroot"
 alias ns="exec $SHELL -l"
 
 alias pgit="git branch --merged master --no-color | grep -v master | grep -v stable | xargs git branch -d"
@@ -25,7 +28,7 @@ alias gp="git pull"
 alias npmls="npm list -g --depth=0" # oh my fu**ing good I hate npm and node EcoS so much
 alias fun="cd $envm_wdir"
 
-alias python="python3" # this is overwriting the bullshit apple python
+alias python="python3"
 alias pytest="python3 -m pytest -v"
 alias activate_env='. venv/bin/activate'
 alias pip="pip3"
