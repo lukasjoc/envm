@@ -83,14 +83,14 @@ mv_tmux() {
 
 # Return the AVG PingTime in your current network for pinging a high frequented server at google
 # or taking an URL as argument
-pingtest(){
+pingtime(){
   if [ $# -ge 1 ]; then
-    echo "Pinging $1 4 times..."
-    ping -c 4 $1 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
+    echo "Pinging $1 6 times..."
+    ping -c 6 $1 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
     return
   fi
-  echo "Pinging 8.8.8.8 (dns.google.) 4 times..."
-  ping -c 4 8.8.8.8 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
+  echo "Pinging 8.8.8.8 (dns.google.) 6 times..."
+  ping -c 6 8.8.8.8 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
   return
 }
 
@@ -111,3 +111,4 @@ cddir () {
 rmdir () {
 	rm -rfi $1
 }
+
