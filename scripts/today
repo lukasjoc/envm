@@ -36,7 +36,7 @@ today() {
 	if [[ $1 == "--help" || $# -gt 1 ]]; then
  	 	printf '%s\n\n' "List current todo and save current todo"
   	printf '%s\n' "Usage:"
-  	printf '%s\n\n'  " today [--help,--save]"
+  	printf '%s\n\n'  " today <flag>"
   	printf '%s\n' "Flags:"
   	printf '%s\n' "	--help help for this bash script"
   	printf '%s\n' "	--sync sync current todo repository"
