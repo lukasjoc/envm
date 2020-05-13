@@ -119,7 +119,10 @@ cddir () {
 }
 
 # ask before deleteing
-rmdir () {
+rmdir() {
 	rm -rfi $1
 }
 
+finder() {
+	open $1	
+}
