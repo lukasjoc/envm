@@ -8,7 +8,7 @@ esac
 [[ $- != *i* ]] && return
 
 # get current branch in git repo
-function parse_git_branch() {
+parse_git_branch() {
 	local bra=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 	if [ ! "${bra}" == "" ]; then
   	local sta=`parse_git_dirty`
@@ -19,13 +19,15 @@ function parse_git_branch() {
 }
 
 # get current status of git repo
-function parse_git_dirty {
+parse_git_dirty() {
 	local status=`git status 2>&1 | tee`
 	local modified=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
 	local bits=''
+	
 	if [ "${modified}" == "0" ]; then
 		bits="*${bits}"
 	fi
+	
 	if [ ! "${bits}" == "" ]; then
 		echo " ${bits}"
 	else
