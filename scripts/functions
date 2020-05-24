@@ -100,3 +100,9 @@ cddir () {
 	return
 }
 
+
+# places a base ignore into the local repo
+ignore() {
+	cat $HOME/.gitignore >> $PWD/.gitignore
+}
+
