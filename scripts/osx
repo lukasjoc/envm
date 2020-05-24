@@ -1,0 +1,23 @@
+#!/bin/bash
+# !! This is ONLY loaded if on your system uname -s puts "Darwin"
+
+if [[ $(uname -s)  == "Darwin" ]]; then
+	runbrewstuff() {
+	  echo "Running brew update..."
+	  brew update
+	  brew upgrade
+	
+		echo "Running brew upgrade..."
+	  brew cask upgrade --greedy
+	  echo "Running brew cleanup..."
+	  rm -rf $(brew --cache)
+		
+		echo "Cleaning up system..."
+		brew cleanup && brew doctor
+	  echo "Done ;)"
+	}
+	
+	finder() {
+		open $1	
+	}
+fi

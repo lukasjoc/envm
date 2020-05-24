@@ -1,17 +1,5 @@
 #!/bin/bash
 
-runbrewstuff() {
-  echo "Running brew update..."
-  brew update
-  brew upgrade
-  echo "Running brew upgrade..."
-  brew cask upgrade --greedy
-  echo "Running brew cleanup..."
-  rm -rf $(brew --cache)
-  brew cleanup && brew doctor
-  echo "Done ;)"
-}
-
 makeglobal() {
   if [ $# -eq 0 ]; then
     printf "%s\n" "Usage: makeglobal <current_name_with_extension> <target_name_without_extension>"
@@ -23,28 +11,32 @@ makeglobal() {
 }
 
 cooldocker() {
-	local ic=$(docker images -q | wc -l | sed 's/ //g' )
- 	local cc=$(docker container ls -q | wc -l | sed 's/ //g')
-  local nc=$(docker network ls -q | wc -l | sed 's/ //g')
-  local vc=$(docker volume ls -q | wc -l | sed 's/ //g')
 
+	local cc=$(docker container ls -q | wc -l | sed 's/ //g')
+	echo "[$cc] | CONTAINERS:"
+	docker container ls | while read line; do
+		
+		if `echo $line | grep -q 'CONTAINER ID'`; then
+  		echo -e "$line\t IP ADDRESS"
+		else
+			cid=$(echo $line | awk '{print $1}');
+			cip=$(docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" $cid);
+    	printf "${line}\t${cip}\n\n"
+  	fi
+	
+	done;
+	
+
+	local ic=$(docker images -q | wc -l | sed 's/ //g' )
 	echo "[$ic] | IMAGES:"
 	docker images -a --digests && echo
 
-	echo "[$cc] | CONTAINERS:"
-	docker container ls | while read line; do
- 		if `echo $line | grep -q 'CONTAINER ID'`; then
-    	echo -e "$line\t IP ADDRESS"
-    else
-    	cid=$(echo $line | awk '{print $1}');
-    	cip=$(docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" $cid);
-    	printf "${line}\t${cip}\n\n"
-  	fi
-	done;
 
+	local nc=$(docker network ls -qa | wc -l | sed 's/ //g')
 	echo "[$nc] | NETS:"
   docker network ls && echo
 
+	local vc=$(docker volume ls -q | wc -l | sed 's/ //g')
 	echo "[$vc] | VOLUMES:"
  	docker volume ls && echo
 }
@@ -63,37 +55,27 @@ tt() {
   if ! command -v $1 >/dev/null 2>&1; then
     echo "$1 is not installed :( "
     return
-	else
-		type $1
 	fi
+	type $1
 }
 
 # just submit pre-tested solutions to exercism
-# !!CAUTION: TESTING IS STILL ON YOU
 exercism_submit() {
   if [ $# -eq 0 ]; then
     printf "%s\n" "Usage: exercism_submit <solution_file>"
     return
   fi
-  if ! command -v exercism >/dev/null 2>&1; then
+
+	if ! command -v exercism >/dev/null 2>&1; then
     echo "Exercism is not installed... "
     return
   fi
   exercism submit $1
 }
 
-# rename the current tmux pane given a name
-mv_tmux() {
-  if [ $# -eq 0 ]; then
-    printf "%s\n" "Usage: mv_tmux <name>"
-    return
-  fi
-	
-	tmux rename-window -t $(tmux display-message -p '#I') $1
-}
-
-# Return the AVG PingTime in your current network for pinging a high frequented server at google
-# or taking an URL as argument
+# Average ping time
+# TODO: maybe write a better tool in nim. list median ping time and average ping time
+# also some other stats
 pingtime(){
   if [ $# -ge 1 ]; then
     echo "Pinging $1 6 times..."
@@ -118,11 +100,3 @@ cddir () {
 	return
 }
 
-# ask before deleteing
-rmdir() {
-	rm -rfi $1
-}
-
-finder() {
-	open $1	
-}

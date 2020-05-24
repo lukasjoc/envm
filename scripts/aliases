@@ -1,41 +1,63 @@
 #!/bin/bash
 
+# Check for system
 if [[ $(uname -s) == "Darwin" ]]; then
-  # Macs
   alias ls="ls -FG"
   alias watchdir="watch -d ls -halFG"
   alias bc="brew cask"
-	alias vim="mvim -v"
+	
 else
-  # Linux Systems
+
   alias ls="ls -F --color=auto"
   alias watchdir="watch -d ls -halF --color=auto"
+
 fi
 
+alias ll="ls -hal"
 alias ..="cd ../"
 alias ...="cd ../../"
-alias ll="ls -hal"
-alias mkdir="mkdir -p"
-alias dc="docker-compose"
 alias datef="date +'%d.%m.%y'"
-alias count="ls -l | wc -l"
-alias mysqlroot="mysql -uroot"
-alias ns="exec $SHELL -l"
-
-alias pgit="git branch --merged master --no-color | grep -v master | grep -v stable | xargs git branch -d"
-alias gp="git pull"
-
-alias npmls="npm list -g --depth=0" # oh my fu**ing good I hate npm and node EcoS so much
-alias fun="cd $envm_wdir"
-
 alias python="python3"
-alias pytest="python3 -m pytest -v"
-alias activate_env='. venv/bin/activate'
 alias pip="pip3"
+alias mkdir="mkdir -p"
+alias vi="mvim -v"
+alias vim="mvim -v"
+alias rm="rm -r"
+alias dc="docker-compose"
 
-alias gobench="go test -v --bench . --benchmem"
-alias goclean="go clean -x -r -cache -modcache"
-alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
+count() {
+	ls | wc -l
+}
 
-alias gcc="gcc-9"
+ns() {
+	exec $SHELL -l
+}
+
+pgit() {
+	git branch --merged master --no-color | grep -v master | grep -v stable | xargs git branch -d
+}
+
+npmls() {
+	npm list -g --depth=0
+}
+
+fun() {
+	cd $envm_wdir
+}
+
+activate_env() {
+	$PWD venv/bin/activate
+}
+
+gobench() {
+	go test -v --bench . --benchmem
+}
+
+goclean() {
+	go clean -x -r -cache -modcache
+}
+
+speedtest() {
+	curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -
+}
 

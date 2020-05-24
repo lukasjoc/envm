@@ -1,7 +1,7 @@
 #!/bin/bash
 
 for script in $envm/scripts/*; do
-  source $script
+	source $script
 done
 
 if [ -z ${envm_wdir+x} ]; then
@@ -15,7 +15,7 @@ if [ ! -z ${envm_wdir+x} ]; then
 	fi
 fi
 
-# Msg ------------------------------------------------
+# Message ------------------------------------------------
 figlet "Hello, $USER"
 fortune
 # ------------------------------------------------

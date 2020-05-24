@@ -1,7 +1,6 @@
 #!/bin/bash
 
 print_help() {
-  # check for too less or to much args and exit appropriately
   if [[ $# -le 1 || $# -gt 2 || $1 == "--help" ]]; then
     printf '%s\n\n' "env M anager at your disposal ;)"
     printf '%s\n' "Usage:"
@@ -16,9 +15,12 @@ print_help() {
 if [[ $1 == "--update" ]]; then
   echo "Updating"
   figlet "env M anager..."
-  cd $envm
-  git ch master && git pull --rebase --stat origin master
-  cd $envm_wdir
+
+	cd $envm
+  git checkout master && \
+ 	git pull --rebase --stat origin master
+
+	cd $envm_wdir
   source $envm/setup.sh
   exec $SHELL -l
 else

@@ -1,12 +1,5 @@
 #!/bin/bash
 
-case "$TERM" in
-  xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
 # get current branch in git repo
 parse_git_branch() {
 	local bra=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
@@ -35,4 +28,12 @@ parse_git_dirty() {
 	fi
 }
 
+case "$TERM" in
+  xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Setup promt like this: (user)::(hostname) (PWD)$ ((branch) (status))
 export PS1="\[\e[1;32m\]\u\[\e[m\]::\[\e[1;31m\]\h\[\e[m\] \[\e[1;10m\]\W\[\e[m\]\\$ \[\e[1;36m\]\`parse_git_branch\`\[\e[m\]"
