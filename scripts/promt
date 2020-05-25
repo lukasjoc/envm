@@ -32,6 +32,10 @@ case "$TERM" in
   xterm-color|*-256color) color_prompt=yes;;
 esac
 
+
+
+
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
