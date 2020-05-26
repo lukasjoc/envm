@@ -24,7 +24,8 @@ alias vi="mvim -v"
 alias vim="mvim -v"
 alias rm="rm -r"
 alias dc="docker-compose"
-
+alias sqlite="sqlite3"
+alias type="type -a"
 count() {
 	ls | wc -l
 }

@@ -13,8 +13,7 @@ makeglobal() {
 cooldocker() {
 
 	local cc=$(docker container ls -aq | wc -l | sed 's/ //g')
-	echo
-	echo -e "[\e[36m$cc\e[39m] | CONTAINERS:"
+	echo -e "\n[\e[36m$cc\e[39m] | CONTAINERS:"
 	docker container ls | while read line; do
 		
 		if `echo $line | grep -q 'CONTAINER ID'`; then
@@ -106,3 +105,22 @@ ignore() {
 	cat $HOME/.gitignore >> $PWD/.gitignore
 }
 
+start_jupyter_lab() {
+	cd $envm_wdir/ipynb/
+	jupyter-lab
+}
+
+# Taken from https://github.com/jessfraz/dotfiles/blob/master/.functions
+# Thank you github.com/jessfraz
+# Get colors in manual pages
+man() {
+	env \
+		LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
+		LESS_TERMCAP_md="$(printf '\e[1;31m')" \
+		LESS_TERMCAP_me="$(printf '\e[0m')" \
+		LESS_TERMCAP_se="$(printf '\e[0m')" \
+		LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
+		LESS_TERMCAP_ue="$(printf '\e[0m')" \
+		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
+		man "$@"
+}
