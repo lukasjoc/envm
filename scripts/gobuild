@@ -2,7 +2,7 @@
 
 
 gobuild() {
-	if [[ $# -lt 0 || $# -gt 1 || $1 == "" ]]; then
+	if [[ $# -lt 0 || $# -gt 1 || $1 == "" || $1 == "--help" ]]; then
 		echo "Usage: gobuild <target_executable_name>"
 		return
 	fi
