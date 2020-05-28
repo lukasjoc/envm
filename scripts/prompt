@@ -5,7 +5,7 @@ parse_git_branch() {
     local bra=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
     if [ ! "${bra}" == "" ]; then
     local sta=`parse_git_dirty`
-    	echo "${bra} [${sta}] "
+    	echo "(${bra}${sta})"
      else
      	echo ""
   fi
