@@ -24,10 +24,16 @@ fortune
 # automatic update looking for the value in ./cache/start_epoch.dat
 if [[ $envm_auto_update_days -ge 1 ]]; then
 	if [ ! -z ${envm+x} ]; then
-		dat_file="$envm/cache/start_epoch.dat"
+		dat_file="$HOME/.cache/envm/start_epoch.dat"
+
+		if [ ! -d "$HOME/.cache/envm" ]; then
+			mkdir -p $HOME/.cache/envm
+		fi
+
   	if [ ! -f $dat_file ]; then
    		date +%s  > $dat_file
   	fi
+
 
   	declare -i update_epoch=$(( 60 * 60 * 24 * $envm_auto_update_days + $(cat $dat_file) ))
   	if [[ $(date +%s) -ge $update_epoch ]]; then
