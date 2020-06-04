@@ -26,6 +26,7 @@ alias rm="rm -r"
 alias dc="docker-compose"
 alias sqlite="sqlite3"
 alias type="type -a"
+alias cl="clear"
 
 count() {
 	ls | wc -l
