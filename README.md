@@ -2,8 +2,6 @@
 
 > env M anager keeps track of cool functions and aliases to increase your productivity and FOCUS.. Try it.
 
-![start_screen](./doc/start_screen.png)
-
 ## SYNOPSIS:
 - ``$envm`` => Path of the envm repository on your system only in ``~/.envm``
 - ``$envm_wdir`` => Path to your working dir. The place where the magic happens
