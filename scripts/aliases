@@ -5,12 +5,9 @@ if [[ $(uname -s) == "Darwin" ]]; then
   alias ls="ls -FG"
   alias watchdir="watch -d ls -halFG"
   alias bc="brew cask"
-	
 else
-
   alias ls="ls -F --color=auto"
   alias watchdir="watch -d ls -halF --color=auto"
-
 fi
 
 alias ll="ls -hal"
@@ -27,6 +24,7 @@ alias dc="docker-compose"
 alias sqlite="sqlite3"
 alias type="type -a"
 alias cl="clear"
+alias cal="ncal"
 
 count() {
 	ls | wc -l

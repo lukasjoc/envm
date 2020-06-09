@@ -19,6 +19,7 @@ fi
 figlet "Hello, $USER"
 neofetch
 fortune
+cd $envm_wdir
 # ------------------------------------------------
 
 # automatic update looking for the value in ./cache/start_epoch.dat

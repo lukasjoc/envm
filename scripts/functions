@@ -124,3 +124,26 @@ man() {
 		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
 		man "$@"
 }
+
+
+
+# get github issues for repo into file
+
+# URL: https://api.github.com/repos/lukasjoc/lukasjoc/issues/5
+# SHORTCUT: #5
+# STATUS: open
+# TITLE: update books for links that DONT CHANGE :(((
+# DETAILS: implement pdf.js for cv pdf
+
+#issues() {
+#	if [ $# -eq 0 ]; then
+#		printf "%s\n" "Usage: issues github_repo"
+#	fi
+#
+#	local username = "lukasjoc"
+#	local baseurl = https://api.github.com/repos/$username/$1/issues
+#	
+#	# curl baseurl | jq ".url, .number, .state, .title, .body" > /tmp/envm/issues.txt
+#}	
+
+
