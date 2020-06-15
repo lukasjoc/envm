@@ -1,10 +1,5 @@
 #!/bin/bash
 # Author: lukasjoc
-# Desc: Handles initialization of all scripts
-set -u
-
-#!/bin/bash
-# Author: lukasjoc
 # Desc: Provokes and defines some aliases and functions
 set -u
 
