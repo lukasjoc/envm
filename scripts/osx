@@ -1,8 +1,11 @@
 #!/bin/bash
-# !! This is ONLY loaded if on your system uname -s puts "Darwin"
+# Author: lukasjoc
+# Desc: Scripts for mac, JUST for mac
+set -u
 
 if [[ $(uname -s)  == "Darwin" ]]; then
 
+	# update brew packages, and casks, clean package system and do a doctor
 	runbrewstuff() {
 	  echo "Running brew update..."
 	  brew update
@@ -18,6 +21,7 @@ if [[ $(uname -s)  == "Darwin" ]]; then
 	  echo "Done ;)"
 	}
 	
+	# alias the open command to the finder alias to be more connected to the apple system
 	finder() {
 		open $1	
 	}

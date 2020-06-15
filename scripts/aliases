@@ -1,4 +1,12 @@
 #!/bin/bash
+# Author: lukasjoc
+# Desc: Handles initialization of all scripts
+set -u
+
+#!/bin/bash
+# Author: lukasjoc
+# Desc: Provokes and defines some aliases and functions
+set -u
 
 # Check for system
 if [[ $(uname -s) == "Darwin" ]]; then
@@ -26,39 +34,63 @@ alias type="type -a"
 alias cl="clear"
 alias cal="ncal"
 
+# count the current items in $PWD
 count() {
 	ls | wc -l
 }
 
+# reload $SHELL with -
 ns() {
 	exec $SHELL -l
 }
 
+# prune git branches
 pgit() {
 	git branch --merged master --no-color | grep -v master | grep -v stable | xargs git branch -d
 }
 
+# ls all global installed npm packages
 npmls() {
 	npm list -g --depth=0
 }
 
+# quick alias to cd into working dir
 fun() {
 	cd $envm_wdir
 }
 
+# activate your venv when in $PWD
 activate_env() {
 	$PWD venv/bin/activate
 }
 
+# test and benchmark go code
 gobench() {
 	go test -v --bench . --benchmem
 }
 
+# clean modcache and cache for golang mod paths
 goclean() {
 	go clean -x -r -cache -modcache
 }
 
+# run a simple and clean speedtest with python
 speedtest() {
 	curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -
+}
+
+# Taken from https://github.com/jessfraz/dotfiles/blob/master/.functions
+# Thank you github.com/jessfraz
+# Get colors in manual pages
+man() {
+	env \
+		LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
+		LESS_TERMCAP_md="$(printf '\e[1;31m')" \
+		LESS_TERMCAP_me="$(printf '\e[0m')" \
+		LESS_TERMCAP_se="$(printf '\e[0m')" \
+		LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
+		LESS_TERMCAP_ue="$(printf '\e[0m')" \
+		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
+		man "$@"
 }
 

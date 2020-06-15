@@ -1,4 +1,6 @@
 #!/bin/bash
+# Author: lukasjoc
+# Desc: Handles initialization of all scripts
 set -u
 
 for script in $envm/scripts/*; do

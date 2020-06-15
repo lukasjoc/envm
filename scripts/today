@@ -1,5 +1,9 @@
 #!/bin/bash
+# Author: lukasjoc
+# Desc: TODAY is the really simple todo command using $EDITOR for writing and a git repo for hosting all things
+set -u
 
+#	write and update todos, sync between systems. Uses a git repos for storage
 today() {
 
 	local todo_name=$(date +'%d.%m.%y').md

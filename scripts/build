@@ -1,5 +1,9 @@
 #!/bin/bash
+# Author: lukasjoc
+# Desc: Defines build wappers for some often used build commands
+set -u
 
+# savely build a golang programm more efficient
 gobuild() {
 	local os=$(go env GOOS)
 	local arch=$(go env GOARCH)
@@ -9,6 +13,7 @@ gobuild() {
 	GOOS=$os GOARCH=$arch go build -a -ldflags="-s -w" -o $binary_name
 }
 
+# build your tex files to pdfs  into a more standardized out/ dir so its a bit clearer
 pdfbuild() {
 	if [[ ! -d "out" ]]; then
 		mkdir -p $PWD/out

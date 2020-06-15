@@ -1,15 +1,9 @@
 #!/bin/bash
+# Author: lukasjoc
+# Desc: Defines just some essential functions.. Functions that are not used at least twice per week are being stripped
+set -u
 
-makeglobal() {
-  if [ $# -eq 0 ]; then
-    printf "%s\n" "Usage: makeglobal <current_name_with_extension> <target_name_without_extension>"
-    return
-  fi
-  chmod u+x $1
-  cp $1 $2
-  mv $2 "/usr/local/bin"
-}
-
+# list docker info neatly and with color
 cooldocker() {
 
 	local cc=$(docker container ls -aq | wc -l | sed 's/ //g')
@@ -41,6 +35,7 @@ cooldocker() {
 
 }
 
+# stop, remove all containers, images, volumes, networks
 killdocker() {
 	docker stop $(docker container ls -aq)
 	docker rm $(docker container ls -aq)
@@ -63,7 +58,7 @@ exercism_submit() {
   exercism submit $1
 }
 
-# Average ping time
+# Get Average ping time
 pingtime(){
   if [ $# -ge 1 ]; then
     echo "Pinging $1 6 times..."
@@ -81,35 +76,14 @@ free() {
 	base64 -D $path_to_exec | python3
 }
 
-# create dir and cd into it
-cddir () {
-	mkdir -p $1
-	cd $1
-	return
-}
-
 # places a base ignore into the local repo
 ignore() {
 	cat $HOME/.gitignore >> $PWD/.gitignore
 }
 
+# start jupyter notebook in a certain dir to have it in a central place there
 start_jupyter_lab() {
 	cd $envm_wdir/ipynb/
 	jupyter-lab
-}
-
-# Taken from https://github.com/jessfraz/dotfiles/blob/master/.functions
-# Thank you github.com/jessfraz
-# Get colors in manual pages
-man() {
-	env \
-		LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
-		LESS_TERMCAP_md="$(printf '\e[1;31m')" \
-		LESS_TERMCAP_me="$(printf '\e[0m')" \
-		LESS_TERMCAP_se="$(printf '\e[0m')" \
-		LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
-		LESS_TERMCAP_ue="$(printf '\e[0m')" \
-		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
-		man "$@"
 }
 
