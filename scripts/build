@@ -1,0 +1,18 @@
+#!/bin/bash
+
+gobuild() {
+	local os=$(go env GOOS)
+	local arch=$(go env GOARCH)
+	local binary_name="${1%.*}"
+	
+	echo -e "Building \e[37m$binary_name\e[39m for $arch on $os"
+	GOOS=$os GOARCH=$arch go build -a -ldflags="-s -w" -o $binary_name
+}
+
+pdfbuild() {
+	if [[ ! -d "out" ]]; then
+		mkdir -p $PWD/out
+	fi
+
+	pdflatex -output-directory=out -output-format=pdf -8bit $1
+}

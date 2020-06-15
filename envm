@@ -1,4 +1,5 @@
 #!/bin/bash
+set -u
 
 for script in $envm/scripts/*; do
 	source $script
@@ -19,7 +20,6 @@ fi
 figlet "Hello, $USER"
 neofetch
 fortune
-cd $envm_wdir
 # ------------------------------------------------
 
 # automatic update looking for the value in ./cache/start_epoch.dat

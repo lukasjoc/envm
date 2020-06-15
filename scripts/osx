@@ -2,6 +2,7 @@
 # !! This is ONLY loaded if on your system uname -s puts "Darwin"
 
 if [[ $(uname -s)  == "Darwin" ]]; then
+
 	runbrewstuff() {
 	  echo "Running brew update..."
 	  brew update
@@ -20,4 +21,5 @@ if [[ $(uname -s)  == "Darwin" ]]; then
 	finder() {
 		open $1	
 	}
+
 fi

@@ -38,24 +38,15 @@ cooldocker() {
 		echo -e "[\e[36m$vc\e[39m] | VOLUMES:"
  		docker volume ls && echo
 	fi
+
 }
 
 killdocker() {
-  docker stop $(docker container ls -aq)
-  docker rm $(docker container ls -aq)
-  docker volume prune -f
-  docker network prune -f
-  docker rmi $(docker images -aq)
-}
-
-# checks if $1 is installed. If not respond with error message. If $1 is installed
-# return the type value of $1
-tt() {
-  if ! command -v $1 >/dev/null 2>&1; then
-    echo "$1 is not installed :( "
-    return
-	fi
-	type $1
+	docker stop $(docker container ls -aq)
+	docker rm $(docker container ls -aq)
+	docker volume prune -f
+	docker network prune -f
+	docker rmi $(docker images -aq)
 }
 
 # just submit pre-tested solutions to exercism
@@ -73,8 +64,6 @@ exercism_submit() {
 }
 
 # Average ping time
-# TODO: maybe write a better tool in nim. list median ping time and average ping time
-# also some other stats
 pingtime(){
   if [ $# -ge 1 ]; then
     echo "Pinging $1 6 times..."
@@ -89,7 +78,7 @@ pingtime(){
 # System RAM Stats and stuff. Executing a base64 encoded program in $envm/bin/free
 free() {
 	local path_to_exec=$envm/bin/free
-	base64 -D $path_to_exec | python
+	base64 -D $path_to_exec | python3
 }
 
 # create dir and cd into it
@@ -98,7 +87,6 @@ cddir () {
 	cd $1
 	return
 }
-
 
 # places a base ignore into the local repo
 ignore() {
@@ -124,26 +112,4 @@ man() {
 		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
 		man "$@"
 }
-
-
-
-# get github issues for repo into file
-
-# URL: https://api.github.com/repos/lukasjoc/lukasjoc/issues/5
-# SHORTCUT: #5
-# STATUS: open
-# TITLE: update books for links that DONT CHANGE :(((
-# DETAILS: implement pdf.js for cv pdf
-
-#issues() {
-#	if [ $# -eq 0 ]; then
-#		printf "%s\n" "Usage: issues github_repo"
-#	fi
-#
-#	local username = "lukasjoc"
-#	local baseurl = https://api.github.com/repos/$username/$1/issues
-#	
-#	# curl baseurl | jq ".url, .number, .state, .title, .body" > /tmp/envm/issues.txt
-#}	
-
 

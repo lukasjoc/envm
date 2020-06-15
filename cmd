@@ -1,4 +1,5 @@
 #!/bin/bash
+set -u
 
 print_help() {
   if [[ $# -le 1 || $# -gt 2 || $1 == "--help" ]]; then

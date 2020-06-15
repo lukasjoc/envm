@@ -1,4 +1,5 @@
 #!/bin/bash
+set -u
 
 while true; do
   read -rp "Are you sure you want to say goodbye to env M anager? [N/y]" input
