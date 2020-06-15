@@ -1,4 +1,3 @@
-#!/bin/bash
 # Author: lukasjoc
 # Desc: Defines just some essential functions.. Functions that are not used at least twice per week are being stripped
 set -u

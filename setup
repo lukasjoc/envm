@@ -1,4 +1,3 @@
-#!/bin/bash
 # Author: lukasjoc
 # Desc: Handles setup of the envm commandline tooling placed into /usr/local/bin
 set -u
