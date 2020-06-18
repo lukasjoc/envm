@@ -1,3 +1,4 @@
+#!/bin/bash
 # Author: lukasjoc
 # Desc: TODAY is the really simple todo command using $EDITOR for writing and a git repo for hosting all things
 set -u
@@ -5,47 +6,57 @@ set -u
 #	write and update todos, sync between systems. Uses a git repos for storage
 today() {
 
-	local todo_name=$(date +'%d.%m.%y').md
-	local current_todo=$HOME/todo/$(date +'%m')_$(date +'%y')/$todo_name
-	local todo_repository=$HOME/todo
+	local todo_name="$(date +'%d.%m.%y').md"
 	
-	if [ $# -le 0 ]; then
-		cat $current_todo
+	local current_todo="$HOME/todo/$(date +'%m')_$(date +'%y')/$todo_name"
+
+	if [ "$#" -le 0 ]; then
+		if ! command -v less >/dev/null 2>&1; then
+			cat "$current_todo"
+			return
+		fi
+
+		less "$current_todo"
 		return
 	fi
 	
-	if [[ $1 == "--save" || $1 == "-s" ]]; then
-		cd $todo_repository
- 		git add $current_todo && git commit -m "add current todo $todo_name"
+	local todo_repository="$HOME/todo"
+	if [[ "$1" == "--save" || "$1" == "-s" ]]; then
+		cd "$todo_repository" || exit
+ 		git add "$current_todo" && git commit -m "add current todo $todo_name"
 		git push
-		cd -
+		cd - || exit
 		return	
 	fi
 
-	if [[ $1 == "--sync" ]]; then
-		cd $todo_repository
+	if [[ "$1" == "--sync" ]]; then
+		cd "$todo_repository" || exit
 		git checkout master
 		git pull --rebase --stat origin master
-		cd -
+		cd - || exit
 		return
 	fi
 
-	if [[ $1 == "--update" || $1 == "-u" || $1 == "--new" || $1 == "-n" ]]; then
-		$EDITOR $current_todo
+	if [[ "$1" == "--update" || "$1" == "-u" || "$1" == "--new" || "$1" == "-n" ]]; then
+		"$EDITOR" "$current_todo"
 		return
 	fi
 	
 	# print help
 	if [[ $1 == "--help" || $# -gt 1 ]]; then
- 	 	printf '%s\n\n' "List current todo and save current todo"
-  	printf '%s\n' "Usage:"
-  	printf '%s\n\n'  " today <flag>"
-  	printf '%s\n' "Flags:"
-  	printf '%s\n' "	--help help for this bash script"
-  	printf '%s\n' "	--sync sync current todo repository"
-		printf '%s\n' "	-u,--update update current todo (default: $EDITOR)"
-  	printf '%s\n' "	-s,--save save current todo repository"
-  	printf '%s\n' "	-n,--new create new todo for the current day (default: $EDITOR)"
+
+ 	 	printf '\n%s\n\n' "Manage todos without overhead and within the workflow"
+
+  	printf '%s\n\n' "USAGE:"
+  		printf '%s\n\n'  " today < --save as -s, --update as -u, --new as -n, --help, --sync >"
+
+  	printf '%s\n\n' "FlAGS:"
+  		printf '%s\n' " --help help for this bash script"
+  		printf '%s\n' " --sync sync current todo repository"
+  		printf '%s\n' " -s,--save save current todo repository"
+			printf '%s\n' " -u,--update update current todo (default: $EDITOR)"
+  		printf '%s\n\n' " -n,--new create new todo for the current day (default: $EDITOR)"
+
   	return
 	fi
 
