@@ -11,12 +11,7 @@ today() {
 	local current_todo="$HOME/todo/$(date +'%m')_$(date +'%y')/$todo_name"
 
 	if [ "$#" -le 0 ]; then
-		if ! command -v less >/dev/null 2>&1; then
-			cat "$current_todo"
-			return
-		fi
-
-		less "$current_todo"
+		less "$current_todo" || cat "$current_todo" # fallback is cat should be on all system hence less is not on mac per default
 		return
 	fi
 	
