@@ -3,9 +3,7 @@
 # Desc: Handles initialization of all scripts
 set -u
 
-readonly $envm_scripts_dir="$envm"/scripts
-
-for script in "$envm_scripts_dir/*"; do
+for script in $envm/scripts/*; do
 	source "$script"
 done
 
@@ -22,13 +20,13 @@ fi
 
 # Message ------------------------------------------------
 figlet "Hello, $USER"
-neofetch || uname -a
-fortune || true
+neofetch
+fortune
 # ------------------------------------------------
 
 # automatic update looking for the value in ./cache/start_epoch.dat
 if [[ $envm_auto_update_days -le 1 ]]; then
-	if [ ! -n "${envm+x}" ]; then
+	if [ ! -z "${envm+x}" ]; then
 		dat_file="$HOME/.cache/envm/start_epoch.dat"
 
 		if [ ! -d "$HOME/.cache/envm" ]; then

@@ -1,7 +1,6 @@
 #!/bin/bash
 # Author: lukasjoc
-# Desc: defines functions for git data in PS1 and defines the prompt layout and style
-set -u
+# Desc: Sets up my nice shell prompt with git functionality
 
 # get current branch in git repo
 parse_git_branch() {
