@@ -1,9 +1,0 @@
-# Author: lukasjoc
-# Desc: Handles setup of the envm commandline tooling placed into /usr/local/bin
-set -u
-
-echo "Updating env M anager..."
-chmod u+x $envm/cmd.sh
-cp $envm/cmd.sh $envm/envm
-mv $envm/envm  "/usr/local/bin/"
-

@@ -1,0 +1,26 @@
+#!/bin/bash
+# Author: lukasjoc
+# Desc: Define functions for the inner working in envm
+set -u
+
+envmupdate() {
+	cd "$envm" || exit 1
+  git checkout master
+ 	git pull --rebase --stat origin master
+	cd - || exit 1
+}
+
+envmuninstall() {
+	read -p "Are your sure you want to delete all of envm? [Y/n] " -n 1 -r
+	echo
+	
+	[[ ! "$REPLY" =~ ^[Yy]$ ]] && return 1
+	
+	rm -rf "$envm" || true
+	rm -rf "$XDG_CONFIG_HOME/.envm" || true
+	rm -rf "$XDG_CACHE_HOME/.envm" || true
+
+	echo "DONE! See you. Make sure you delete .envm configs in your .bashrc manually"
+	return 0
+}
+

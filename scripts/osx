@@ -1,3 +1,4 @@
+#!/bin/bash
 # Author: lukasjoc
 # Desc: Scripts for mac, JUST for mac
 set -u

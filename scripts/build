@@ -1,3 +1,4 @@
+#!/bin/bash
 # Author: lukasjoc
 # Desc: Defines build wappers for some often used build commands
 set -u
