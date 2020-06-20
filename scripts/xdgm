@@ -1,0 +1,71 @@
+#!/bin/bash
+# Author: lukasjoc
+# License: MIT
+# Desc: Manage your XDG_* path. Show contents & delete stuff from it
+
+xdgm() {
+
+	local GREEN_FG="\e[40;38;5;82m"
+	local GREEN_BG="\e[41;48;1;82m"
+
+	local -a XDG_PATHS=(
+		"$HOME"/.config
+		"$HOME"/.local/share
+		"$HOME"/.cache
+	)
+
+	# list if no args
+	if [[ "$#" == 0 ]]; then
+
+		for p in "${XDG_PATHS[@]}"; do
+			local total_apps="$(ls "$p" | wc -l | sed 's/ //g' )"
+			local total_size="$(du -sh "$p" | awk '{print $1}')"
+			echo -e "==> $GREEN_FG$p $GREEN_BG AppsCount: $total_apps \ DiskSpace: $total_size  \e[0m"
+
+			ls -F "$p" && echo
+		done
+
+		return 0
+	fi
+
+
+	if [[ "$1" == "rm" ]]; then
+
+		if [[ "$#" -le 1 ]]; then
+  		printf '%s\n\n'  "What do you want to delete?"
+  		printf '%s\n\n' "USAGE:"
+   		printf '%s\n\n'  " xdgm rm 'some_name' "
+ 			return 1
+ 		fi
+		
+		for p in "${XDG_PATHS[@]}"; do
+ 			local candidate="${p:?}/$2"
+			if [[	-d "$candidate" ]]; then
+ 				echo "Found candidate for $2 in $p Pruning..."
+ 				rm -rf "$candidate"
+			else
+ 				echo -e "Found $GREEN_FG 0 \e[0m candidates for $2 in $p Skipping..."
+			fi
+ 		done
+
+ 	fi
+
+
+	if [[ "$1" == "--help" || $# -gt 2 ]]; then
+
+ 		printf '%s\n\n' "Manage your XDG_* path. Show contents & delete stuff from it"
+
+  	printf '%s\n\n' "USAGE:"
+  	printf '%s\n\n'  " xdgm"
+  	printf '%s\n\n'  " xdgm [rm, --help]"
+
+  	printf '%s\n\n' "COMMANDS:"
+  	printf '%s\n\n' " rm remove folder from XDG DIRs (hint: recursive action)"
+
+		printf '%s\n\n' "FlAGS:"
+		printf '%s\n\n' " --help help for this bash script"
+
+  	return
+	fi
+
+}
