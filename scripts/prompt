@@ -4,13 +4,13 @@
 
 # get current branch in git repo
 parse_git_branch() {
-    local bra=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-    if [ ! "${bra}" == "" ]; then
-    local sta=`parse_git_dirty`
-    	echo "(${bra}${sta}) "
-     else
-     	echo ""
-  fi
+	local bra=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${bra}" == "" ]; then
+		local sta=`parse_git_dirty`
+		echo "(${bra}${sta}) "
+	else
+		echo ""
+	fi
 }
 
 # get current status of git repo

@@ -7,15 +7,15 @@ set -u
 today() {
 
 	local todo_name="$(date +'%d.%m.%y').md"
-	
-	local current_todo="$HOME/todo/$(date +'%m')_$(date +'%y')/$todo_name"
+	local todo_repository="$HOME/.local/share/todo" # Following XDG path conventions
+	local current_todo="$todo_repository/$(date +'%m')_$(date +'%y')/$todo_name"
 
 	if [ "$#" -le 0 ]; then
-		less "$current_todo" || cat "$current_todo" # fallback is cat should be on all system hence less is not on mac per default
+ 		# fallback is cat should be on all system hence less is not on mac per defaul`t
+		less "$current_todo" || cat "$current_todo"
 		return
 	fi
 	
-	local todo_repository="$HOME/todo"
 	if [[ "$1" == "--save" || "$1" == "-s" ]]; then
 		cd "$todo_repository" || exit
  		git add "$current_todo" && git commit -m "add current todo $todo_name"
@@ -24,7 +24,7 @@ today() {
 		return	
 	fi
 
-	if [[ "$1" == "--sync" ]]; then
+	if [[ "$1" == "--sync" || "$1" == "-sy" ]]; then
 		cd "$todo_repository" || exit
 		git checkout master
 		git pull --rebase --stat origin master
@@ -32,25 +32,30 @@ today() {
 		return
 	fi
 
+	if [[ "$1" == "--list" || "$1" == "--ls"  ]]; then
+		ls -R ${todo_repository:?}/* || return
+	fi
+	
 	if [[ "$1" == "--update" || "$1" == "-u" || "$1" == "--new" || "$1" == "-n" ]]; then
 		"$EDITOR" "$current_todo"
 		return
 	fi
 	
 	# print help
-	if [[ $1 == "--help" || $# -gt 1 ]]; then
+	if [[ "$1" == "--help" || "$1" == "-h" || "$#" -gt 1 ]]; then
 
  	 	printf '\n%s\n\n' "Manage todos without overhead and within the workflow"
 
   	printf '%s\n\n' "USAGE:"
-  		printf '%s\n\n'  " today < --save as -s, --update as -u, --new as -n, --help, --sync >"
+  	printf '%s\n\n'  " today <FlAG>"
 
   	printf '%s\n\n' "FlAGS:"
-  		printf '%s\n' " --help help for this bash script"
-  		printf '%s\n' " --sync sync current todo repository"
-  		printf '%s\n' " -s,--save save current todo repository"
-			printf '%s\n' " -u,--update update current todo (default: $EDITOR)"
-  		printf '%s\n\n' " -n,--new create new todo for the current day (default: $EDITOR)"
+  	printf '%s\n' " -h --help help for this bash script"
+  	printf '%s\n' " -sy --sync sync current todo repository"
+  	printf '%s\n' " -s,--save save current todo repository"
+		printf '%s\n' " -u,--update update current todo (default: $EDITOR)"
+  	printf '%s\n' " -n,--new create new todo for the current day (default: $EDITOR)"
+  	printf '%s\n\n' " -ls,--list list todos recursively"
 
   	return
 	fi
