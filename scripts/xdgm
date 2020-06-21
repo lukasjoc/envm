@@ -5,8 +5,7 @@
 
 xdgm() {
 
-	local GREEN_FG="\e[40;38;5;82m"
-	local GREEN_BG="\e[41;48;1;82m"
+	local status_color="\e[1;32m"
 
 	local -a XDG_PATHS=(
 		"$HOME"/.config
@@ -20,7 +19,7 @@ xdgm() {
 		for p in "${XDG_PATHS[@]}"; do
 			local total_apps="$(ls "$p" | wc -l | sed 's/ //g' )"
 			local total_size="$(du -sh "$p" | awk '{print $1}')"
-			echo -e "==> $GREEN_FG$p $GREEN_BG AppsCount: $total_apps \ DiskSpace: $total_size  \e[0m"
+			echo -e "==> $status_color$p  AppsCount: $total_apps \ DiskSpace: $total_size  \e[0m"
 
 			ls -F "$p" && echo
 		done
