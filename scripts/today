@@ -8,7 +8,13 @@ today() {
 
 	local todo_name="$(date +'%d.%m.%y').md"
 	local todo_repository="$HOME/.local/share/todo" # Following XDG path conventions
-	local current_todo="$todo_repository/$(date +'%m')_$(date +'%y')/$todo_name"
+	local todo_collection="$(date +'%m')_$(date +'%y')"
+	local current_todo="$todo_repository/$todo_collection/$todo_name"
+
+	# Create Month dir if not present
+	if [[ -d "$todo_repository/$todo_collection" ]]; then
+		mkdir -p "$todo_repository/$todo_collection"
+	fi 
 
 	if [ "$#" -le 0 ]; then
  		# fallback is cat should be on all system hence less is not on mac per defaul`t
