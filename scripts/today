@@ -21,7 +21,7 @@ today() {
 	__usage() {
 		printf '\n%s\n\n' "Manage todos without overhead and within the workflow"
 		printf '%s\n\n' "USAGE:"
-		printf '%s\n\n'  " today [ -h ] [ new (With: $EDITOR) ]
+		printf '%s\n\n'  " today [ -h ] [ -n <-1...> ] [ new (With: $EDITOR) ]
 		[ update (With: $EDITOR) ]
 		[ save ] [ sync ] [ list ]"
 	}
@@ -52,11 +52,22 @@ today() {
 		ls -R "$todo_repository"
 		return 0
 	}
+	
+	__list_gone() {
+		local file day
+		day=$(( $(date '+%d') "$1"))
+		if [[ "$day" -le 9 ]]; then
+			day="0$day"
+		fi
+
+		file=$day.$(date +'%m.%y').md
+		cat "$todo_repository/$todo_collection/$file"
+	}
 
 	# list current todolist for the current day
 	# using less or cat
 	if [[ "$#" == "0" ]]; then
-		less "$current_todo" || cat "$current_todo"
+		cat "$current_todo"
 		return 0
 	fi
 
@@ -64,10 +75,12 @@ today() {
 	local opt
 	local OPTARG
 	local OPTIND
-	while getopts ":h" opt; do
+	while getopts ":hn:" opt; do
 		case ${opt} in
 			h) __usage;;
+			n) __list_gone "$OPTARG";;
 			\?) echo "Invalid Option: -$OPTARG" 1>&2;  return 1;;
+			:) echo "Required Data: -$OPTARG" 1>&2;  return 1;;
 		esac
 	done
 	
