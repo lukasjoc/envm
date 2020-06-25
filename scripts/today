@@ -1,69 +1,85 @@
 #!/bin/bash
 # Author: lukasjoc
-# Desc: TODAY is the really simple todo command using $EDITOR for writing and a git repo for hosting all things
+# License: MIT
+# Desc: today the really simple todo command using $EDITOR for writing and a git repo for hosting all things
+#######
 set -u
 
-#	write and update todos, sync between systems. Uses a git repos for storage
 today() {
+	local todo_name todo_repository todo_collection current_todo
 
-	local todo_name="$(date +'%d.%m.%y').md"
-	local todo_repository="$HOME/.local/share/todo" # Following XDG path conventions
-	local todo_collection="$(date +'%m')_$(date +'%y')"
-	local current_todo="$todo_repository/$todo_collection/$todo_name"
+	todo_name="$(date +'%d.%m.%y').md"
+	todo_repository="$HOME/.local/share/todo" # Following XDG path conventions
+	todo_collection="$(date +'%m')_$(date +'%y')"
+	current_todo="$todo_repository/$todo_collection/$todo_name"
 
-	# Create Month dir if not present
+	# Create month dir if not present
 	if [[ -d "$todo_repository/$todo_collection" ]]; then
 		mkdir -p "$todo_repository/$todo_collection"
-	fi 
-
-	if [ "$#" -le 0 ]; then
- 		# fallback is cat should be on all system hence less is not on mac per defaul`t
-		less "$current_todo" || cat "$current_todo"
-		return
 	fi
+
+	__usage() {
+		printf '\n%s\n\n' "Manage todos without overhead and within the workflow"
+		printf '%s\n\n' "USAGE:"
+		printf '%s\n\n'  " today [ -h ] [ new (With: $EDITOR) ]
+		[ update (With: $EDITOR) ]
+		[ save ] [ sync ] [ list ]"
+	}
 	
-	if [[ "$1" == "--save" || "$1" == "-s" ]]; then
+	__change() {
+		"$EDITOR" "$current_todo"
+		return 0
+	}
+
+	__save() {
 		cd "$todo_repository" || exit
- 		git add "$current_todo" && git commit -m "add current todo $todo_name"
+		git add "$current_todo" && git commit -m "add current todo $todo_name"
 		git push
 		cd - || exit
-		return	
-	fi
+		return 0
+	}
 
-	if [[ "$1" == "--sync" || "$1" == "-sy" ]]; then
+	__sync() {
 		cd "$todo_repository" || exit
-		git checkout master
-		git pull --rebase --stat origin master
-		cd - || exit
-		return
+		git checkout main
+		git pull --rebase --stat origin main
+		cd "$OLDPWD" || exit
+
+		return 0
+	}
+
+	__list() {
+		ls -R "$todo_repository"
+		return 0
+	}
+
+	# list current todolist for the current day
+	# using less or cat
+	if [[ "$#" == "0" ]]; then
+		less "$current_todo" || cat "$current_todo"
+		return 0
 	fi
 
-	if [[ "$1" == "--list" || "$1" == "--ls"  ]]; then
-		ls -R ${todo_repository:?}/* || return
-	fi
+	## handle single flags upper and lowercase
+	local opt
+	local OPTARG
+	local OPTIND
+	while getopts ":h" opt; do
+		case ${opt} in
+			h) __usage;;
+			\?) echo "Invalid Option: -$OPTARG" 1>&2;  return 1;;
+		esac
+	done
 	
-	if [[ "$1" == "--update" || "$1" == "-u" || "$1" == "--new" || "$1" == "-n" ]]; then
-		"$EDITOR" "$current_todo"
-		return
-	fi
-	
-	# print help
-	if [[ "$1" == "--help" || "$1" == "-h" || "$#" -gt 1 ]]; then
+	local cmd
+	cmd="${1:-}"; shift
+	case "$cmd" in
+		new) __change;;
+		update) __change;;
+		save) __save;;
+		sync) __sync;;
+		list) __list;;
+	esac
 
- 	 	printf '\n%s\n\n' "Manage todos without overhead and within the workflow"
-
-  	printf '%s\n\n' "USAGE:"
-  	printf '%s\n\n'  " today <FlAG>"
-
-  	printf '%s\n\n' "FlAGS:"
-  	printf '%s\n' " -h --help help for this bash script"
-  	printf '%s\n' " -sy --sync sync current todo repository"
-  	printf '%s\n' " -s,--save save current todo repository"
-		printf '%s\n' " -u,--update update current todo (default: $EDITOR)"
-  	printf '%s\n' " -n,--new create new todo for the current day (default: $EDITOR)"
-  	printf '%s\n\n' " -ls,--list list todos recursively"
-
-  	return
-	fi
-
+	shift $((OPTIND -1))
 }

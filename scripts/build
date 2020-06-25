@@ -5,19 +5,33 @@ set -u
 
 # savely build a golang programm more efficient
 gobuild() {
-	local os=$(go env GOOS)
-	local arch=$(go env GOARCH)
-	local binary_name="${1%.*}"
+	local os arch binary_name
+
+	os=$(go env GOOS)
+	arch=$(go env GOARCH)
+	binary_name="${1%.*}"
 	
-	echo -e "Building \e[37m$binary_name\e[39m for $arch on $os"
-	GOOS=$os GOARCH=$arch go build -a -ldflags="-s -w" -o $binary_name
+	echo -e "INFO: Building \e[37m$binary_name\e[0m for $arch on $os"
+	GOOS="$os" GOARCH="$arch" go build \
+		-a \
+		-ldflags="-s -w" \
+		-race \
+		-o "$binary_name"
+
 }
 
 # build your tex files to pdfs  into a more standardized out/ dir so its a bit clearer
 pdfbuild() {
-	if [[ ! -d "out" ]]; then
-		mkdir -p $PWD/out
+	local out_dir out_format
+
+	out_dir="$PWD/out"
+	if [[ ! -d "$out_dir" ]]; then
+		mkdir -p "$out_dir"
 	fi
 
-	pdflatex -output-directory=out -output-format=pdf -8bit $1
+	pdflatex \
+		-output-directory="$out_dir" \
+		-output-format="$out_format" \
+		-8bit "$@"
+
 }

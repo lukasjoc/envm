@@ -4,9 +4,9 @@
 set -u
 
 envmupdate() {
-	cd "$envm" || exit 1
-  git checkout master
- 	git pull --rebase --stat origin master
+	cd "$ENVM" || exit 1
+	git checkout master
+	git pull --rebase --stat origin master
 	cd - || exit 1
 }
 
@@ -16,11 +16,11 @@ envmuninstall() {
 	
 	[[ ! "$REPLY" =~ ^[Yy]$ ]] && return 1
 	
-	rm -rf "$envm" || true
-	rm -rf "$XDG_CONFIG_HOME/.envm" || true
-	rm -rf "$XDG_CACHE_HOME/.envm" || true
+	rm -rf \
+		"$ENVM" || true \
+		"$XDG_CONFIG_HOME/.envm" || true \
+		"$XDG_CACHE_HOME/.envm" || true
 
-	echo "DONE! See you. Make sure you delete .envm configs in your .bashrc manually"
-	return 0
+	echo "DONE! See you. ;) Make sure you delete .envm configs in your .bashrc manually"
 }
 

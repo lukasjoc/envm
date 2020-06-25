@@ -2,69 +2,72 @@
 # Author: lukasjoc
 # License: MIT
 # Desc: Manage your XDG_* path. Show contents & delete stuff from it
+#######
+set -u
 
 xdgm() {
 
-	local status_color="\e[1;32m"
+	__usage() {
+		printf '\n%s\n\n' "Manage your XDG PATH. Show contents & delete stuff from it"
+		printf '%s\n\n'  " xdgm [ -h ] [ rm -n <name> ]"
+	}
 
+	local status_color="\e[1;32m"
 	local -a XDG_PATHS=(
-		"$HOME"/.config
-		"$HOME"/.local/share
-		"$HOME"/.cache
+		"$HOME/.config"
+		"$HOME/.local/share"
+		"$HOME/.cache"
 	)
 
-	# list if no args
-	if [[ "$#" == 0 ]]; then
+	__rm() {
+	
+		if [[ "$#" == 0 ]]; then
+			__usage
+			return 1
+		fi
 
 		for p in "${XDG_PATHS[@]}"; do
-			local total_apps="$(ls "$p" | wc -l | sed 's/ //g' )"
-			local total_size="$(du -sh "$p" | awk '{print $1}')"
-			echo -e "==> $status_color$p  AppsCount: $total_apps \ DiskSpace: $total_size  \e[0m"
+			local candidate="${p:?}/$*"
 
-			ls -F "$p" && echo
-		done
-
-		return 0
-	fi
-
-
-	if [[ "$1" == "rm" ]]; then
-
-		if [[ "$#" -le 1 ]]; then
-  		printf '%s\n\n'  "What do you want to delete?"
-  		printf '%s\n\n' "USAGE:"
-   		printf '%s\n\n'  " xdgm rm 'some_name' "
- 			return 1
- 		fi
-		
-		for p in "${XDG_PATHS[@]}"; do
- 			local candidate="${p:?}/$2"
-			if [[	-d "$candidate" ]]; then
- 				echo "Found candidate for $2 in $p Pruning..."
- 				rm -rf "$candidate"
+			if [[ -d "$candidate" ]]; then
+				echo "Found candidate for $* in $p Pruning..."
+				rm -rf "$candidate"
+				echo "removing $candidate"
 			else
- 				echo -e "Found $GREEN_FG 0 \e[0m candidates for $2 in $p Skipping..."
+				echo -e "Found $status_color 0 \e[0m candidates for $* in $p Skipping..."
 			fi
- 		done
 
- 	fi
+		done
+	}
 
-
-	if [[ "$1" == "--help" || $# -gt 2 ]]; then
-
- 		printf '%s\n\n' "Manage your XDG_* path. Show contents & delete stuff from it"
-
-  	printf '%s\n\n' "USAGE:"
-  	printf '%s\n\n'  " xdgm"
-  	printf '%s\n\n'  " xdgm [rm, --help]"
-
-  	printf '%s\n\n' "COMMANDS:"
-  	printf '%s\n\n' " rm remove folder from XDG DIRs (hint: recursive action)"
-
-		printf '%s\n\n' "FlAGS:"
-		printf '%s\n\n' " --help help for this bash script"
-
-  	return
+	# list XDG PATH
+	if [[ "$#" == "0" ]]; then
+		local total_apps total_size
+		for p in "${XDG_PATHS[@]}"; do
+			total_apps="$(find "$p" | wc -l | sed 's/ //g' )"
+			total_size="$(du -sh "$p" | awk '{print $1}')"
+			echo -e "==> $status_color$p  [ AppsCount: $total_apps \ DiskSpace: $total_size ]   \e[0m"
+			ls -F "$p" && return 1
+		done
 	fi
 
+
+	local opt OPTARG OPTIND
+	
+	# handle global flags
+	while getopts ":h" opt; do
+		case ${opt} in
+			h) __usage;;
+			\?) echo "Invalid Option: -$OPTARG" 1>&2;  return 1;;
+		esac
+	done
+
+	# handle global subcommands
+	local cmd
+	cmd="${1:-}"; shift
+	case "$cmd" in
+		rm) __rm "$@";;
+	esac
+
+	shift $((OPTIND -1))
 }

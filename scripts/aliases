@@ -4,10 +4,10 @@
 set -u
 
 # Check for system
-if [[ $(uname -s) == "Darwin" ]]; then
+if [[ "$(uname -s)" == "Darwin" ]]; then
   alias ls="ls -FG"
   alias watchdir="watch -d ls -halFG"
-  alias bc="brew cask"
+  alias	brc="brew cask"
 	alias updatedb="sudo /usr/libexec/locate.updatedb"
 	alias vi="mvim -v"
 	alias vim="mvim -v"
@@ -31,7 +31,7 @@ alias cal="ncal"
 
 # reload $SHELL with -
 ns() {
-	exec $SHELL -l
+	exec "$SHELL" -l
 }
 
 # prune git branches
@@ -46,17 +46,17 @@ npmls() {
 
 # quick alias to cd into working dir
 fun() {
-	cd $envm_wdir
+	cd "$ENVM_WDIR" || return
 }
 
 # activate your venv when in $PWD
 activate_env() {
-	$PWD venv/bin/activate
+	"$PWD" venv/bin/activate
 }
 
 # test and benchmark go code
 gobench() {
-	go test -v --bench . --benchmem
+	go test -v --bench . --benchmem -race
 }
 
 # clean modcache and cache for golang mod paths
@@ -87,6 +87,6 @@ man() {
 # cd to goals repository
 goals() {
 	local goals_path="${XDG_DATA_HOME:?}/goals"
-	cd $goals_path || return
+	cd "$goals_path" || return
 }
 

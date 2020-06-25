@@ -1,35 +1,36 @@
 #!/bin/bash
 # Author: lukasjoc
-# Desc: Defines just some essential functions.. Functions that are not used at least twice per week are being stripped
+# Desc: Defines just some essential functions.. Functions that are not used at least twice per week are being removed
 set -u
 
 # list docker info neatly and with color
 cooldocker() {
 
-	local cc=$(docker container ls -aq | wc -l | sed 's/ //g')
-	echo -e "\n[\e[36m$cc\e[39m] | CONTAINERS:"
-	docker container ls | while read line; do
-		
-		if `echo $line | grep -q 'CONTAINER ID'`; then
-  		echo -e "$line\t IP ADDRESS"
-		else
-			cid=$(echo $line | awk '{print $1}');
-			cip=$(docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" $cid);
-    	printf "${line}\t${cip}\n\n"
-  	fi
-	done;
+	local ic nc vc cc
 
-	local ic=$(docker images -q | wc -l | sed 's/ //g' )
+	cc=$(docker container ls -aq | wc -l | sed 's/ //g')
+	echo -e "\n[\e[36m$cc\e[39m] | CONTAINERS:"
+	docker container ls | while read -r line; do
+		if echo "$line" | grep -q "CONTAINER ID"; then
+	  	echo -e "$line\t IP ADDRESS"
+		else
+			cid=$(echo "$line" | awk '{print $1}');
+			cip=$(docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "$cid");
+	  	echo -e "${line}\t${cip}\n\n"
+	  fi
+	done
+	
+	ic=$(docker images -q | wc -l | sed 's/ //g' )
 	echo -e "[\e[36m$ic\e[39m] | IMAGES:"
 	docker images && echo
 
-	local nc=$(docker network ls -q | wc -l | sed 's/ //g')
+	nc=$(docker network ls -q | wc -l | sed 's/ //g')
 	echo -e "[\e[36m$nc\e[39m] | NETS:"
-  docker network ls && echo
+ 	docker network ls && echo
 
-	local vc=$(docker volume ls -q | wc -l | sed 's/ //g')
-	if [ $vc -ge 1 ]; then
-		echo -e "[\e[36m$vc\e[39m] | VOLUMES:"
+	vc=$(docker volume ls -q | wc -l | sed 's/ //g')
+	if [ "$vc" -ge 1 ]; then
+		echo -e "[ \e[36m$vc\e[0m ] | VOLUMES:"
  		docker volume ls && echo
 	fi
 
@@ -37,53 +38,53 @@ cooldocker() {
 
 # stop, remove all containers, images, volumes, networks
 killdocker() {
-	docker stop $(docker container ls -aq)
-	docker rm $(docker container ls -aq)
+	docker stop "$(docker container ls -aq)"
+	docker rm "$(docker container ls -aq)"
 	docker volume prune -f
 	docker network prune -f
-	docker rmi $(docker images -aq)
+	docker rmi "$(docker images -aq)"
 }
 
 # just submit pre-tested solutions to exercism
 exercism_submit() {
-  if [ $# -eq 0 ]; then
+  if [[ "$#" == "0" ]]; then
     printf "%s\n" "Usage: exercism_submit <solution_file>"
-    return
+    return 1
   fi
 
 	if ! command -v exercism >/dev/null 2>&1; then
     echo "Exercism is not installed... "
     return
   fi
-  exercism submit $1
+  exercism submit "$@"
 }
 
 # Get Average ping time
 pingtime(){
-  if [ $# -ge 1 ]; then
+  if [[ "$#" -ge "1" ]]; then
     echo "Pinging $1 6 times..."
-    ping -c 6 $1 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
-    return
+    ping -c 6 "$1" | tail -1 | awk '{print $4}' | cut -d '/' -f 2
+    return 0
   fi
+
   echo "Pinging 8.8.8.8 (dns.google.) 6 times..."
   ping -c 6 8.8.8.8 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
-  return
 }
 
-# System RAM Stats and stuff. Executing a base64 encoded program in $envm/bin/free
+# System RAM Stats and stuff.
 free() {
-	local path_to_exec=$envm/bin/free
-	base64 -D $path_to_exec | python3
+	local path_to_exec="$ENVM/bin/free"
+	base64 -D "$path_to_exec" | python3
 }
 
 # places a base ignore into the local repo
 ignore() {
-	cat $HOME/.gitignore >> $PWD/.gitignore
+	cat "$HOME"/.gitignore >> "$PWD"/.gitignore
 }
 
 # start jupyter notebook in a certain dir to have it in a central place there
 start_jupyter_lab() {
-	cd $envm_wdir/ipynb/
+	cd "$ENVM_WDIR/ipynb/" || return 1
 	jupyter-lab
 }
 
