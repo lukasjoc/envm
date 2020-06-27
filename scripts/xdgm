@@ -44,10 +44,10 @@ xdgm() {
 	if [[ "$#" == "0" ]]; then
 		local total_apps total_size
 		for p in "${XDG_PATHS[@]}"; do
-			total_apps="$(find "$p" | wc -l | sed 's/ //g' )"
+			total_apps="$(ls "$p" | wc -l | sed 's/ //g' )"
 			total_size="$(du -sh "$p" | awk '{print $1}')"
 			echo -e "==> $status_color$p  [ AppsCount: $total_apps \ DiskSpace: $total_size ]   \e[0m"
-			ls -F "$p" && return 1
+			ls -F "$p" && echo
 		done
 	fi
 
