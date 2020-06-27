@@ -16,19 +16,19 @@ parse_git_dirty() {
 	bits=''
 
 	if [ "${renamed}" == "0" ]; then
-		bits="r${bits}"
+		bits="+-${bits}"
 	fi
 	if [ "${ahead}" == "0" ]; then
-		bits="a${bits}"
+		bits="^${bits}"
 	fi
 	if [ "${newfile}" == "0" ]; then
-		bits="n${bits}"
+		bits="++${bits}"
 	fi
 	if [ "${untracked}" == "0" ]; then
-		bits="u${bits}"
+		bits="*${bits}"
 	fi
 	if [ "${deleted}" == "0" ]; then
-		bits="d${bits}"
+		bits="-${bits}"
 	fi
 	if [ "${dirty}" == "0" ]; then
 		bits="*${bits}"
