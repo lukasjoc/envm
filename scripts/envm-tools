@@ -5,8 +5,8 @@ set -u
 
 envmupdate() {
 	cd "$ENVM" || exit 1
-	git checkout master
-	git pull --rebase --stat origin master
+	git checkout main
+	git pull --rebase --stat origin main
 	cd - || exit 1
 }
 

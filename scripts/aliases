@@ -36,7 +36,7 @@ ns() {
 
 # prune git branches
 pgit() {
-	git branch --merged master --no-color | grep -v master | grep -v stable | xargs git branch -d
+	git branch --merged main --no-color | grep -v main | grep -v stable | xargs git branch -d
 }
 
 # ls all global installed npm packages
@@ -66,10 +66,10 @@ goclean() {
 
 # run a simple and clean speedtest with python
 speedtest() {
-	curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -
+	curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/main/speedtest.py | python -
 }
 
-# Taken from https://github.com/jessfraz/dotfiles/blob/master/.functions
+# Taken from https://github.com/jessfraz/dotfiles/blob/main/.functions
 # Thank you github.com/jessfraz
 # Get colors in manual pages
 man() {
