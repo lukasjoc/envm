@@ -13,11 +13,6 @@ today() {
 	todo_collection="$(date +'%m')_$(date +'%y')"
 	current_todo="$todo_repository/$todo_collection/$todo_name"
 
-	# Create month dir if not present
-	if [[ -d "$todo_repository/$todo_collection" ]]; then
-		mkdir -p "$todo_repository/$todo_collection"
-	fi
-
 	__usage() {
 		printf '\n%s\n\n' "Manage todos without overhead and within the workflow"
 		printf '%s\n\n' "USAGE:"
@@ -27,6 +22,11 @@ today() {
 	}
 	
 	__change() {
+		# Create month dir if not present
+		if [[ ! -d "$todo_repository/$todo_collection" ]]; then
+			mkdir -p "$todo_repository/$todo_collection"
+		fi
+
 		"$EDITOR" "$current_todo"
 		return 0
 	}
