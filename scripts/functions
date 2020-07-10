@@ -9,7 +9,7 @@ cooldocker() {
 	local ic nc vc cc
 
 	cc=$(docker container ls -aq | wc -l | sed 's/ //g')
-	echo -e "\n[\e[36m$cc\e[39m] | CONTAINERS:"
+	echo -e "\n[ \e[36m$cc\e[0m ] | CONTAINERS:"
 	docker container ls | while read -r line; do
 		if echo "$line" | grep -q "CONTAINER ID"; then
 	  	echo -e "$line\t IP ADDRESS"
@@ -21,11 +21,11 @@ cooldocker() {
 	done
 	
 	ic=$(docker images -q | wc -l | sed 's/ //g' )
-	echo -e "[\e[36m$ic\e[39m] | IMAGES:"
+	echo -e "[ \e[36m$ic\e[0m ] | IMAGES:"
 	docker images && echo
 
 	nc=$(docker network ls -q | wc -l | sed 's/ //g')
-	echo -e "[\e[36m$nc\e[39m] | NETS:"
+	echo -e "[ \e[36m$nc\e[0m ] | NETS:"
  	docker network ls && echo
 
 	vc=$(docker volume ls -q | wc -l | sed 's/ //g')
