@@ -29,4 +29,10 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 		open "$@"	
 	}
 
+	# System RAM Stats and stuff.
+	free() {
+		local path_to_exec="$ENVM/bin/free"
+		base64 -D "$path_to_exec" | python3
+	}
+
 fi

@@ -71,12 +71,6 @@ pingtime(){
   ping -c 6 8.8.8.8 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
 }
 
-# System RAM Stats and stuff.
-free() {
-	local path_to_exec="$ENVM/bin/free"
-	base64 -D "$path_to_exec" | python3
-}
-
 # places a base ignore into the local repo
 ignore() {
 	cat "$HOME"/.gitignore >> "$PWD"/.gitignore
