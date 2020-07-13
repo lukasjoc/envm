@@ -93,7 +93,6 @@ man() {
 
 # cd to goals repository
 goals() {
-	local goals_path="${XDG_DATA_HOME:?}/goals"
-	cd "$goals_path" || return
+	cd "$HOME/owncloud/goals" || return
 }
 
