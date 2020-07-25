@@ -55,7 +55,7 @@ today() {
 	
 	__list_gone() {
 		local file day
-		day=$(( $(date '+%d') "$1"))
+		day=$( ($(date '+%d') "$1" ) )
 		if [[ "$day" -le 9 ]]; then
 			day="0$day"
 		fi

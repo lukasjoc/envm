@@ -20,18 +20,11 @@ gobuild() {
 
 }
 
-# build your tex files to pdfs  into a more standardized out/ dir so its a bit clearer
-pdfbuild() {
-	local out_dir out_format
 
-	out_dir="$PWD/out"
-	if [[ ! -d "$out_dir" ]]; then
-		mkdir -p "$out_dir"
+pdflatexbuild() {
+	if [[ $# -ge 1 ]]; then
+		pdflatex \
+			-output-directory=out \
+			"$1"
 	fi
-
-	pdflatex \
-		-output-directory="$out_dir" \
-		-output-format="$out_format" \
-		-8bit "$@"
-
 }

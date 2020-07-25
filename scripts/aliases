@@ -54,8 +54,6 @@ fn() {
 	cd "$ENVM_WDIR" || return
 }
 
-
-
 # activate your venv when in $PWD
 activate_env() {
 	"$PWD" venv/bin/activate
