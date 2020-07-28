@@ -3,48 +3,6 @@
 # Desc: Defines just some essential functions.. Functions that are not used at least twice per week are being removed
 set -u
 
-# list docker info neatly and with color
-cooldocker() {
-
-	local ic nc vc cc
-
-	cc=$(docker container ls -aq | wc -l | sed 's/ //g')
-	echo -e "\n[ \e[36m$cc\e[0m ] | CONTAINERS:"
-	docker container ls | while read -r line; do
-		if echo "$line" | grep -q "CONTAINER ID"; then
-	  	echo -e "$line\t IP ADDRESS"
-		else
-			cid=$(echo "$line" | awk '{print $1}');
-			cip=$(docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "$cid");
-	  	echo -e "${line}\t${cip}\n\n"
-	  fi
-	done
-	
-	ic=$(docker images -q | wc -l | sed 's/ //g' )
-	echo -e "[ \e[36m$ic\e[0m ] | IMAGES:"
-	docker images && echo
-
-	nc=$(docker network ls -q | wc -l | sed 's/ //g')
-	echo -e "[ \e[36m$nc\e[0m ] | NETS:"
- 	docker network ls && echo
-
-	vc=$(docker volume ls -q | wc -l | sed 's/ //g')
-	if [ "$vc" -ge 1 ]; then
-		echo -e "[ \e[36m$vc\e[0m ] | VOLUMES:"
- 		docker volume ls && echo
-	fi
-
-}
-
-# stop, remove all containers, images, volumes, networks
-killdocker() {
-	docker stop "$(docker container ls -aq)"
-	docker rm "$(docker container ls -aq)"
-	docker volume prune -f
-	docker network prune -f
-	docker rmi "$(docker images -aq)"
-}
-
 # just submit pre-tested solutions to exercism
 exercism_submit() {
   if [[ "$#" == "0" ]]; then
@@ -75,34 +33,6 @@ pingtime(){
 start_jupyter_lab() {
 	cd "$ENVM_WDIR/ipynb/" || return 1
 	jupyter-lab
-}
-
-# get an unlicense for any project ;) and make sure to > UNLICENSE
-license() {
-cat << EOM
-													Simplified BSD License
-
-Copyright (c) 2020, Lukas Jocham
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-EOM
 }
 
 # sane defaults for vim users on linux or mac
@@ -156,6 +86,25 @@ Temporary Items
 .apdisk
 
 tags
+EOM
+}
+
+# print a current ISC License
+license() {
+cat << EOM
+Copyright (c) $(date +'%Y') $USER, $EMAIL, $HOMEPAGE
+
+Permission to use, copy, modify, and distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 EOM
 }
 
