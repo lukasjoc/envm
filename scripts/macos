@@ -14,13 +14,15 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 	
 		echo "Running brew upgrade..."
 	  brew cask upgrade --greedy
+
 		echo "Running brew cleanup..."
 		rm -rf "$(brew --cache)"
 		
 		echo "Cleaning up system..."
 		brew cleanup
 		brew doctor
-	  echo "Done ;)"
+
+		echo "Done ;)"
 	}
 	
 	# alias the open command to the finder
