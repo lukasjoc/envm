@@ -29,6 +29,13 @@ alias type="type -a"
 alias cl="clear"
 alias cal="ncal"
 
+doom() {
+	if ! command -v emacs >/dev/null 2>&1; then
+		return 0
+	fi
+	"$HOME/.emacs.d/bin/doom" "$@"
+}
+
 # reload $SHELL with -
 ns() {
 	exec "$SHELL" -l
