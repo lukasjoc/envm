@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/bashGG
 # Author: lukasjoc
-# Desc: Sets up my nice shell prompt with git functionality
+# Desc: Sets up my nice shell prompt with git functionalityG
 
 # get current status of git repo
 # SRC: http://ezprompt.net/
@@ -8,7 +8,7 @@ parse_git_dirty() {
 	local status untracked ahead newfile renamed deleted bits
 	status=$(git status 2>&1 | tee)
 	dirty=$(echo -n "${status}" 2>/dev/null | grep "modified:" &>/dev/null; echo "$?")
-	untracked=$(echo -n "${status}" 2>/dev/null | grep "Untracked files" &>/dev/null; echo "$?")
+	untracked=$(echo -n "${status}" 2>/dev/null | grep "Untracked files" &>/dev/null; echo "$?")G
 	ahead=$(echo -n "${status}" 2>/dev/null | grep "Your branch is ahead of" &>/dev/null; echo "$?")
 	newfile=$(echo -n "${status}" 2>/dev/null | grep "new file:" &>/dev/null; echo "$?")
 	renamed=$(echo -n "${status}" 2>/dev/null | grep "renamed:" &>/dev/null; echo "$?")
@@ -49,7 +49,7 @@ parse_git_branch() {
 	if [ -n "${branch}" ]; then
 		local stat
 		stat=$(parse_git_dirty)
-		echo "(${branch}${stat}) $ "
+		echo "(${branch}${stat})"
 	else
 		echo ""
 	fi
@@ -58,7 +58,6 @@ parse_git_branch() {
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Setup promt like this: (user)::(hostname) (PWD)$ ((branch) (status))
-export PS1="\[\e[1;32m\]\u\[\e[m\]::\[\e[1;31m\]\h\[\e[m\] \[\e[1;10m\]\W\[\e[m\]\\$ \[\e[1;36m\]\`parse_git_branch\`\[\e[m\]"
-
+# Setup promt like this: (user)::(hostname) (PWD)$ ((branch) (status))	
+export PS1="\[\e[1;32m\]\u\[\e[m\]::\[\e[1;31m\]\w\[\e[m\] \[\e[1;36m\]\`parse_git_branch\`\[\e[m\] $ "
 
