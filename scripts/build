@@ -17,14 +17,10 @@ gobuild() {
 		-ldflags="-s -w" \
 		-race \
 		-o "$binary_name"
-
 }
-
 
 pdflatexbuild() {
 	if [[ $# -ge 1 ]]; then
-		pdflatex \
-			-output-directory=out \
-			"$1"
+		pdflatex -output-directory=out "$1"
 	fi
 }
