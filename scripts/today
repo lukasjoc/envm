@@ -61,13 +61,13 @@ today() {
 		fi
 
 		file=$day.$(date +'%m.%y').md
-		cat "$todo_repository/$todo_collection/$file"
+		chroma "$todo_repository/$todo_collection/$file"
 	}
 
 	# list current todolist for the current day
-	# using less or cat
+	# using less or chroma to have colored
 	if [[ "$#" == "0" ]]; then
-		cat "$current_todo"
+		chroma "$current_todo"
 		return 0
 	fi
 

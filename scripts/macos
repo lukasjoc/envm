@@ -8,27 +8,27 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 	# update brew packages, and casks,
 	# clean package system and do a doctor
 	runbrewstuff() {
-	  echo "Running brew update..."
-	  brew update
-	  brew upgrade
-	
+		echo "Running brew update..."
+		brew update
+		brew upgrade
+
 		echo "Running brew upgrade..."
-	  brew cask upgrade --greedy
+		brew cask upgrade --greedy
 
 		echo "Running brew cleanup..."
 		rm -rf "$(brew --cache)"
-		
+
 		echo "Cleaning up system..."
 		brew cleanup
 		brew doctor
 
 		echo "Done ;)"
 	}
-	
+
 	# alias the open command to the finder
 	# alias to be more connected to the apple system
 	finder() {
-		open "$@"	
+		open "$@"
 	}
 
 	# System RAM Stats and stuff.

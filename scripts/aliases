@@ -29,13 +29,7 @@ alias dc="docker-compose"
 alias type="type -a"
 alias cl="clear"
 alias cal="ncal"
-
-doom() {
-	if ! command -v emacs >/dev/null 2>&1; then
-		return 0
-	fi
-	"$HOME/.emacs.d/bin/doom" "$@"
-}
+alias ccat="chroma"
 
 # reload $SHELL with -
 ns() {
@@ -61,6 +55,13 @@ fun() {
 fn() {
 	cd "$ENVM_WDIR" || return
 }
+
+# quick alias to cd into the builds dir
+# containing sourced repos
+builds() {
+	cd "$HOME/builds" || return
+}
+
 
 # activate your venv when in $PWD
 activate_env() {

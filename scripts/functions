@@ -38,15 +38,8 @@ start_jupyter_lab() {
 # sane defaults for vim users on linux or mac
 ignore() {
 cat << EOM
-# Swap
-[._]*.s[a-v][a-z]
 [._]*.sw[a-p]
-[._]s[a-rt-v][a-z]
-[._]ss[a-gi-z]
-[._]sw[a-p]
-[._]*.un~
 .netrwhist
-*~
 .DS_Store
 tags
 EOM
@@ -55,7 +48,7 @@ EOM
 # print a current ISC License
 license() {
 cat << EOM
-Copyright (c) $(date +'%Y') $USER, $EMAIL, $HOMEPAGE
+Copyright © $(date +'%Y') lukasjoc <jochamlu@gmail.com>
 
 Permission to use, copy, modify, and distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

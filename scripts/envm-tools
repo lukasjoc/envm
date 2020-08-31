@@ -13,9 +13,9 @@ envmupdate() {
 envmuninstall() {
 	read -p "Are your sure you want to delete all of envm? [Y/n] " -n 1 -r
 	echo
-	
+
 	[[ ! "$REPLY" =~ ^[Yy]$ ]] && return 1
-	
+
 	rm -rf \
 		"$ENVM" || true \
 		"$XDG_CONFIG_HOME/.envm" || true \

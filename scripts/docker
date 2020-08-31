@@ -12,32 +12,32 @@ cooldocker() {
 	echo -e "\n[ \e[36m$cc\e[0m ] | CONTAINERS:"
 	docker container ls | while read -r line; do
 		if echo "$line" | grep -q "CONTAINER ID"; then
-	  	echo -e "$line\t IP ADDRESS"
+			echo -e "$line\t IP ADDRESS"
 		else
 			cid=$(echo "$line" | awk '{print $1}');
 			cip=$(docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "$cid");
-	  	echo -e "${line}\t${cip}\n\n"
-	  fi
+			echo -e "${line}\t${cip}\n\n"
+		fi
 	done
-	
+
 	ic=$(docker images -q | wc -l | sed 's/ //g' )
 	echo -e "[ \e[36m$ic\e[0m ] | IMAGES:"
 	docker images && echo
-
+	
 	nc=$(docker network ls -q | wc -l | sed 's/ //g')
 	echo -e "[ \e[36m$nc\e[0m ] | NETS:"
- 	docker network ls && echo
-
+	docker network ls && echo
+	
 	vc=$(docker volume ls -q | wc -l | sed 's/ //g')
 	if [ "$vc" -ge 1 ]; then
 		echo -e "[ \e[36m$vc\e[0m ] | VOLUMES:"
- 		docker volume ls && echo
+		docker volume ls && echo
 	fi
 
 }
 
 # stop, remove all containers, images, volumes, networks
-# HEFTY thing to do BE SURE TO DO it.
+# HEFTY thing to do BE SURE TO DO it. YOLO
 # this is because docker system prune doesn't work reliably
 killdocker() {
 	docker container stop "$(docker container ls -q)"
