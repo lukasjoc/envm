@@ -1,37 +1,48 @@
 #!/bin/bash
 # Author: lukasjoc
-# License: MIT
 # Desc: today the really simple todo command using $EDITOR for writing and a git repo for hosting all things
-#######
 set -u
 
 today() {
 	local todo_name todo_repository todo_collection current_todo
 
 	todo_name="$(date +'%d.%m.%y').md"
-	todo_repository="$HOME/.local/share/todo" # Following XDG path conventions
+	todo_repository="$HOME/.local/share/todo"
 	todo_collection="$(date +'%m')_$(date +'%y')"
 	current_todo="$todo_repository/$todo_collection/$todo_name"
 
-	__usage() {
+	printUsage() {
 		printf '\n%s\n\n' "Manage todos without overhead and within the workflow"
 		printf '%s\n\n' "USAGE:"
-		printf '%s\n\n'  " today [ -h ] [ -n <-1...> ] [ new (With: $EDITOR) ]
-		[ update (With: $EDITOR) ]
+		printf '%s\n\n'  " today [ -h ] [ -n <-1...> ] [ . (With: vim) ]
+		[ update (With: vim) ]
 		[ save ] [ sync ] [ list ]"
 	}
 	
-	__change() {
-		# Create month dir if not present
+	createTodo() {
+		# create month dir if not present
+		if [[ ! -d "$todo_repository/$todo_collection" ]]; then
+			mkdir -p "$todo_repository/$todo_collection"
+		else
+			echo "Todo for today already created! Run today to see it..."
+			return 1
+		fi
+
+		vim -c ":read $HOME/.vim/skels/todo.md" "$current_todo"
+		return 0
+	}
+
+	updateTodo() {
+		# create month dir if not present
 		if [[ ! -d "$todo_repository/$todo_collection" ]]; then
 			mkdir -p "$todo_repository/$todo_collection"
 		fi
 
-		"$EDITOR" "$current_todo"
+		vim "$current_todo"
 		return 0
 	}
 
-	__save() {
+	saveTodo() {
 		cd "$todo_repository" || exit
 		git add "$current_todo" && git commit -m "add current todo $todo_name"
 		git push
@@ -39,21 +50,22 @@ today() {
 		return 0
 	}
 
-	__sync() {
+	syncTodo() {
 		cd "$todo_repository" || exit
 		git checkout main
 		git pull --rebase --stat origin main
 		cd "$OLDPWD" || exit
-
 		return 0
 	}
 
-	__list() {
+	listTodo() {
 		ls -R "$todo_repository"
 		return 0
 	}
 	
-	__list_gone() {
+	# list todo from specific day eg. -n 5 print the
+	# todo of the 5 day of the current month
+	listTodoGone() {
 		local file day
 		day=$( ($(date '+%d') "$1" ) )
 		if [[ "$day" -le 9 ]]; then
@@ -65,7 +77,6 @@ today() {
 	}
 
 	# list current todolist for the current day
-	# using less or chroma to have colored
 	if [[ "$#" == "0" ]]; then
 		chroma "$current_todo"
 		return 0
@@ -77,8 +88,8 @@ today() {
 	local OPTIND
 	while getopts ":hn:" opt; do
 		case ${opt} in
-			h) __usage;;
-			n) __list_gone "$OPTARG";;
+			h) printUsage;;
+			n) listTodoGone "$OPTARG";;
 			\?) echo "Invalid Option: -$OPTARG" 1>&2;  return 1;;
 			:) echo "Required Data: -$OPTARG" 1>&2;  return 1;;
 		esac
@@ -87,11 +98,11 @@ today() {
 	local cmd
 	cmd="${1:-}"; shift
 	case "$cmd" in
-		new) __change;;
-		update) __change;;
-		save) __save;;
-		sync) __sync;;
-		list) __list;;
+		.) createTodo;;
+		update) updateTodo;;
+		save) saveTodo;;
+		sync) syncTodo;;
+		ls) listTodo;;
 	esac
 
 	shift $((OPTIND -1))
