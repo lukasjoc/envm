@@ -23,8 +23,10 @@ today() {
 		# create month dir if not present
 		if [[ ! -d "$todo_repository/$todo_collection" ]]; then
 			mkdir -p "$todo_repository/$todo_collection"
-		else
-			echo "Todo for today already created! Run today to see it..."
+		fi
+
+		if [[ -f "$current_todo" ]]; then
+			echo "TODO already exists. Run today to view it."
 			return 1
 		fi
 
