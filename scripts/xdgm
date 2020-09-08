@@ -1,7 +1,5 @@
 #!/bin/bash
-# Author: lukasjoc
-# License: MIT
-# Desc: Manage your XDG_* path. Show contents & delete stuff from it
+# Manage your XDG_* path. Show contents & delete stuff from it
 #######
 set -u
 

@@ -1,6 +1,5 @@
 #!/bin/bash
-# Author: lukasjoc
-# Desc: Define functions for the inner working in envm
+# Define functions for the inner working in envm
 set -u
 
 envmupdate() {

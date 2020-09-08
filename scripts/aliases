@@ -1,19 +1,18 @@
 #!/bin/bash
-# Author: lukasjoc
-# Desc: Provokes and defines some aliases and functions
+# Provokes and defines some aliases and functions
 set -u
 
 # Check for system
 if [[ "$(uname -s)" == "Darwin" ]]; then
-  alias ls="ls -GF"
-  alias watchdir="watch -d ls -halFG"
-  alias	bc="brew cask"
+	alias ls="ls -GF"
+	alias watchdir="watch -d ls -halFG"
+	alias	bc="brew cask"
 	alias updatedb="sudo /usr/libexec/locate.updatedb"
 	alias vi="mvim -v"
 	alias vim="mvim -v"
 else
-  alias ls="ls -F --color=auto"
-  alias watchdir="watch -d ls -AF --color=auto"
+	alias ls="ls -F --color=auto"
+	alias watchdir="watch -d ls -AF --color=auto"
 fi
 
 alias ll="ls -hl -tr -A"
@@ -97,7 +96,7 @@ man() {
 		LESS_TERMCAP_ue="$(printf '\e[0m')" \
 		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
 		man "$@"
-}
+	}
 
 
 # cd to goals dir

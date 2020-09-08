@@ -1,32 +1,31 @@
 #!/bin/bash
-# Author: lukasjoc
-# Desc: Defines just some essential functions.. Functions that are not used at least twice per week are being removed
+# Defines just some essential functions.. Functions that are not used at least twice per week are being removed
 set -u
 
 # just submit pre-tested solutions to exercism
 exercism_submit() {
-  if [[ "$#" == "0" ]]; then
-    printf "%s\n" "Usage: exercism_submit <solution_file>"
-    return 1
-  fi
+	if [[ "$#" == "0" ]]; then
+		printf "%s\n" "Usage: exercism_submit <solution_file>"
+		return 1
+	fi
 
 	if ! command -v exercism >/dev/null 2>&1; then
-    echo "Exercism is not installed... "
-    return
-  fi
-  exercism submit "$@"
+		echo "Exercism is not installed... "
+		return
+	fi
+	exercism submit "$@"
 }
 
 # Get Average ping time
 pingtime(){
-  if [[ "$#" -ge "1" ]]; then
-    echo "Pinging $1 6 times..."
-    ping -c 6 "$1" | tail -1 | awk '{print $4}' | cut -d '/' -f 2
-    return 0
-  fi
+	if [[ "$#" -ge "1" ]]; then
+		echo "Pinging $1 6 times..."
+		ping -c 6 "$1" | tail -1 | awk '{print $4}' | cut -d '/' -f 2
+		return 0
+	fi
 
-  echo "Pinging 8.8.8.8 (dns.google.) 6 times..."
-  ping -c 6 8.8.8.8 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
+	echo "Pinging 8.8.8.8 (dns.google.) 6 times..."
+	ping -c 6 8.8.8.8 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
 }
 
 # start jupyter notebook in a certain dir to have it in a central place there
@@ -37,7 +36,7 @@ start_jupyter_lab() {
 
 # sane defaults for vim users on linux or mac
 ignore() {
-cat << EOM
+	cat << EOM
 [._]*.sw[a-p]
 .netrwhist
 .DS_Store
@@ -47,7 +46,7 @@ EOM
 
 # print a current ISC License
 license() {
-cat << EOM
+	cat << EOM
 Copyright © $(date +'%Y') lukasjoc <jochamlu@gmail.com>
 
 Permission to use, copy, modify, and distribute this software for any

@@ -1,6 +1,5 @@
 #!/bin/bash
-# Author: lukasjoc
-# Desc: Scripts for mac, JUST for mac
+# Scripts for mac, JUST for mac
 set -u
 
 if [[ "$(uname -s)" == "Darwin" ]]; then

@@ -1,6 +1,5 @@
 #!/bin/bash
-# Author: lukasjoc
-# Desc: Handles initialization of all scripts
+# Handles initialization of all scripts
 set -u
 
 for script in "$ENVM"/scripts/*; do
@@ -17,11 +16,10 @@ if [[ -z "$ENVM_WDIR" ]]; then
 	fi
 fi
 
-# Message on SHELL start
+# Message on start you can force it with exec $SHELl -l or ns ( for `new shell` )
 figlet "Hello, $USER" || echo "Hello, $USER"
 neofetch || true
 fortune || true
-##########
 
 # automatic update looking for the value in ./cache/start_epoch.dat
 if [[ $ENVM_AUTO_UPDATE_DAYS -le 1 ]]; then

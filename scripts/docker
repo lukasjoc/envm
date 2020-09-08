@@ -1,6 +1,5 @@
 #!/bin/bash
-# Author: lukasjoc
-# Desc: Defines just some essential functions.. Functions that are not used at least twice per week are being removed
+# Defines just some essential functions.. Functions that are not used at least twice per week are being removed
 set -u
 
 # list docker info neatly and with color
@@ -37,6 +36,6 @@ cooldocker() {
 
 }
 
-# stop, remove all containers, images, volumes, networks
+# remove all containers, images, volumes, networks
 # HEFTY thing to do BE SURE TO DO it. YOLO
 alias killdocker="docker system prune -a"
