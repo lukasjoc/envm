@@ -5,7 +5,7 @@ set -u
 
 # Check for system
 if [[ "$(uname -s)" == "Darwin" ]]; then
-  alias ls="ls -FG"
+  alias ls="ls -GF"
   alias watchdir="watch -d ls -halFG"
   alias	bc="brew cask"
 	alias updatedb="sudo /usr/libexec/locate.updatedb"
@@ -13,12 +13,13 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 	alias vim="mvim -v"
 else
   alias ls="ls -F --color=auto"
-  alias watchdir="watch -d ls -halF --color=auto"
+  alias watchdir="watch -d ls -AF --color=auto"
 fi
 
-alias ll="ls -hal"
+alias ll="ls -hl -tr -A"
 alias ..="cd ../"
 alias ...="cd ../../"
+alias cdcd="cd ../../../../"
 alias datef="date +'%d.%m.%y'"
 alias python="python3"
 alias pip="pip3"
@@ -38,7 +39,7 @@ ns() {
 
 # prune git branches
 pgit() {
-	git branch --merged main --no-color | grep -v main | grep -v stable | xargs git branch -d
+	git branch --merged "$(git rev-parse --abbrev-ref HEAD)" --no-color | grep -v "main\|stable" | xargs git branch -d
 }
 
 # ls all global installed npm packages
@@ -68,9 +69,9 @@ activate_env() {
 	"$PWD" venv/bin/activate
 }
 
-# test and benchmark go code
+# test and benchmark go code and check for race conditions
 gobench() {
-	go test -v --bench . --benchmem -race
+	go test -v --bench "$PWD" --benchmem -race
 }
 
 # clean modcache and cache for golang mod paths
@@ -98,8 +99,25 @@ man() {
 		man "$@"
 }
 
-# cd to goals repository
+
+# cd to goals dir
 goals() {
-	cd "$HOME/owncloud/goals" || return
+	cd "$OWNCLOUD_DIR/goals" || return
 }
+
+# cd to media dir
+media() {
+	cd "$OWNCLOUD_DIR/media" || return
+}
+
+# cd to finances dir
+fin() {
+	cd "$OWNCLOUD_DIR/finances" || return
+}
+
+# cd to etc dir
+etc() {
+	cd "$OWNCLOUD_DIR/etc" || return
+}
+
 
