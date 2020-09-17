@@ -2,41 +2,15 @@
 # Defines just some essential functions.. Functions that are not used at least twice per week are being removed
 set -u
 
-# just submit pre-tested solutions to exercism
-exercism_submit() {
-	if [[ "$#" == "0" ]]; then
-		printf "%s\n" "Usage: exercism_submit <solution_file>"
-		return 1
-	fi
-
-	if ! command -v exercism >/dev/null 2>&1; then
-		echo "Exercism is not installed... "
-		return
-	fi
-	exercism submit "$@"
-}
-
-# Get Average ping time
-pingtime(){
-	if [[ "$#" -ge "1" ]]; then
-		echo "Pinging $1 6 times..."
-		ping -c 6 "$1" | tail -1 | awk '{print $4}' | cut -d '/' -f 2
-		return 0
-	fi
-
-	echo "Pinging 8.8.8.8 (dns.google.) 6 times..."
-	ping -c 6 8.8.8.8 | tail -1 | awk '{print $4}' | cut -d '/' -f 2
-}
-
-# start jupyter notebook in a certain dir to have it in a central place there
-start_jupyter_lab() {
-	cd "$ENVM_WDIR/ipynb/" || return 1
-	jupyter-lab
+# start jupyter_lab on specific dir
+start_jupyter_lab(){
+	jupyter-lab "$HOME/fun/random/ipynb"
 }
 
 # sane defaults for vim users on linux or mac
 ignore() {
 	cat << EOM
+*~
 [._]*.sw[a-p]
 .netrwhist
 .DS_Store
@@ -47,7 +21,7 @@ EOM
 # print a current ISC License
 license() {
 	cat << EOM
-Copyright © $(date +'%Y') lukasjoc <jochamlu@gmail.com>
+Copyright $(date +'%Y') lukasjoc <jochamlu@gmail.com>
 
 Permission to use, copy, modify, and distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -62,4 +36,53 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 EOM
 }
+
+# print a generic readme
+readme() {
+cat << EOM
+# $1
+
+> $2
+
+[https://lukasjoc.com](lukasjoc), $(date +'%Y')
+EOM
+}
+
+# list docker info neatly and with color
+cooldocker() {
+
+	local ic nc vc cc
+
+	cc=$(docker container ls -q | wc -l | sed 's/ //g')
+	ic=$(docker images -q | wc -l | sed 's/ //g' )
+	nc=$(docker network ls -f dangling=true -q | wc -l | sed 's/ //g')
+	vc=$(docker volume ls -q | wc -l | sed 's/ //g')
+	
+	echo -e "\n[ \e[36m$cc\e[0m ] | CONTAINERS:"
+	docker container ls | while read -r line; do
+		if echo "$line" | grep -q "CONTAINER ID"; then
+			echo -e "$line\t\tIP ADDRESS"
+		else
+			
+			cid=$(echo "$line" | awk '{print $1}');
+			cip=$(docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "$cid");
+			echo -e "${line}\t${cip}"
+		fi
+	done; echo
+
+	echo -e "[ \e[36m$ic\e[0m ] | IMAGES:"
+	docker images -f dangling=false; echo
+	
+	echo -e "[ \e[36m$nc\e[0m ] | NETS:"
+	docker network ls -f dangling=true; echo
+	if [ "$vc" -ge 1 ]; then
+		echo -e "[ \e[36m$vc\e[0m ] | VOLUMES:"
+		docker volume ls; echo
+	fi
+
+}
+
+# remove all containers, images, volumes, networks
+# HEFTY thing to do BE SURE TO DO it. YOLO
+alias killdocker="docker system prune -a"
 

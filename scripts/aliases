@@ -2,23 +2,11 @@
 # Provokes and defines some aliases and functions
 set -u
 
-# Check for system
-if [[ "$(uname -s)" == "Darwin" ]]; then
-	alias ls="ls -GF"
-	alias watchdir="watch -d ls -halFG"
-	alias	bc="brew cask"
-	alias updatedb="sudo /usr/libexec/locate.updatedb"
-	alias vi="mvim -v"
-	alias vim="mvim -v"
-else
-	alias ls="ls -F --color=auto"
-	alias watchdir="watch -d ls -AF --color=auto"
-fi
-
+alias ls="ls -F --color=auto"
+alias watchdir="watch -d ls -HAlF"
 alias ll="ls -hl -tr -A"
 alias ..="cd ../"
 alias ...="cd ../../"
-alias cdcd="cd ../../../../"
 alias datef="date +'%d.%m.%y'"
 alias python="python3"
 alias pip="pip3"
@@ -26,10 +14,42 @@ alias rm="rm -ir"
 alias cp="cp -i"
 alias mv="mv -i"
 alias dc="docker-compose"
-alias type="type -a"
-alias cl="clear"
+alias killdocker="docker system prune -a"  # be CAUTIONS with this!
 alias cal="ncal"
 alias ccat="chroma"
+
+# Check for system (MACOS specific stuff)
+if [[ "$(uname -s)" == "Darwin" ]]; then
+	alias ls="ls -GF"
+	alias	bc="brew cask"
+	alias updatedb="sudo /usr/libexec/locate.updatedb"
+	alias vi="mvim -v"
+	alias vim="mvim -v"
+
+  # keep system up-to-date
+  runbrewstuff() {
+  	echo "Running brew update..."
+    brew update
+    brew upgrade
+
+    echo "Running brew upgrade..."
+    brew cask upgrade --greedy
+
+    echo "Running brew cleanup..."
+    rm -rf "$(brew --cache)"
+
+    echo "Cleaning up system..."
+    brew cleanup
+    brew doctor
+
+    echo "Done ;)"
+  }
+
+  # alias the open command to the finder
+  finder() {
+  	open "$@"
+  }
+fi
 
 # reload $SHELL with -
 ns() {
@@ -48,24 +68,13 @@ npmls() {
 
 # quick alias to cd into working dir
 fun() {
-	cd "$ENVM_WDIR" || return
-}
-
-# quick alias to cd into working dir
-fn() {
-	cd "$ENVM_WDIR" || return
+	cd "$HOME/fun" || return
 }
 
 # quick alias to cd into the builds dir
 # containing sourced repos
 builds() {
 	cd "$HOME/builds" || return
-}
-
-
-# activate your venv when in $PWD
-activate_env() {
-	"$PWD" venv/bin/activate
 }
 
 # test and benchmark go code and check for race conditions
@@ -76,11 +85,6 @@ gobench() {
 # clean modcache and cache for golang mod paths
 goclean() {
 	go clean -x -r -cache -modcache
-}
-
-# run a simple and clean speedtest with python
-speedtest() {
-	curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/main/speedtest.py | python -
 }
 
 # Taken from https://github.com/jessfraz/dotfiles/blob/main/.functions
@@ -97,7 +101,6 @@ man() {
 		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
 		man "$@"
 	}
-
 
 # cd to goals dir
 goals() {
@@ -118,5 +121,4 @@ fin() {
 etc() {
 	cd "$OWNCLOUD_DIR/etc" || return
 }
-
 

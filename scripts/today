@@ -99,7 +99,7 @@ today() {
 	local cmd
 	cmd="${1:-}"; shift
 	case "$cmd" in
-		.) createTodo;;
+		new) createTodo;;
 		update) updateTodo;;
 		save) saveTodo;;
 		sync) syncTodo;;
