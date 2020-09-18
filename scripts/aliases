@@ -17,75 +17,48 @@ alias dc="docker-compose"
 alias killdocker="docker system prune -a"  # be CAUTIONS with this!
 alias cal="ncal"
 alias ccat="chroma"
+alias vi="vim"
 
 # Check for system (MACOS specific stuff)
 if [[ "$(uname -s)" == "Darwin" ]]; then
-	alias ls="ls -GF"
-	alias	bc="brew cask"
+	alias ls="ls -GF"G
+	alias bc="brew cask"
 	alias updatedb="sudo /usr/libexec/locate.updatedb"
 	alias vi="mvim -v"
 	alias vim="mvim -v"
 
-  # keep system up-to-date
-  runbrewstuff() {
-  	echo "Running brew update..."
-    brew update
-    brew upgrade
+	# keep system up-to-date
+	runbrewstuff() {
+		echo "Update/Upgrade Brew Formulars..."
+		brew update; brew upgrade
 
-    echo "Running brew upgrade..."
-    brew cask upgrade --greedy
+		echo "Upgrade Brew CaskRooms.."
+		brew cask upgrade --greedy
 
-    echo "Running brew cleanup..."
-    rm -rf "$(brew --cache)"
+		echo "Cleaning..."
+		rm -rf "$(brew --cache)"
+		brew cleanup; brew doctor
 
-    echo "Cleaning up system..."
-    brew cleanup
-    brew doctor
+		echo "Done ;)"
+	}
 
-    echo "Done ;)"
-  }
-
-  # alias the open command to the finder
-  finder() {
-  	open "$@"
-  }
+	# alias the open command to the finder
+	finder() { open "$@"; }
 fi
 
 # reload $SHELL with -
-ns() {
-	exec "$SHELL" -l
-}
-
-# prune git branches
-pgit() {
-	git branch --merged "$(git rev-parse --abbrev-ref HEAD)" --no-color | grep -v "main\|stable" | xargs git branch -d
-}
+ns() { exec "$SHELL" -l; }
 
 # ls all global installed npm packages
-npmls() {
-	npm list -g --depth=0
-}
+npmls() { npm list -g --depth=0; }
 
-# quick alias to cd into working dir
-fun() {
-	cd "$HOME/fun" || return
-}
+# working dir shortcuts
+fun() { cd "$HOME/fun" || return; }
+builds() { cd "$HOME/builds" || return; }
 
-# quick alias to cd into the builds dir
-# containing sourced repos
-builds() {
-	cd "$HOME/builds" || return
-}
-
-# test and benchmark go code and check for race conditions
-gobench() {
-	go test -v --bench "$PWD" --benchmem -race
-}
-
-# clean modcache and cache for golang mod paths
-goclean() {
-	go clean -x -r -cache -modcache
-}
+# golang stuff
+gobench() { go test -v --bench . --benchmem -race; }
+goclean() { go clean -x -r -cache -modcache; }
 
 # Taken from https://github.com/jessfraz/dotfiles/blob/main/.functions
 # Thank you github.com/jessfraz
@@ -101,24 +74,4 @@ man() {
 		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
 		man "$@"
 	}
-
-# cd to goals dir
-goals() {
-	cd "$OWNCLOUD_DIR/goals" || return
-}
-
-# cd to media dir
-media() {
-	cd "$OWNCLOUD_DIR/media" || return
-}
-
-# cd to finances dir
-fin() {
-	cd "$OWNCLOUD_DIR/finances" || return
-}
-
-# cd to etc dir
-etc() {
-	cd "$OWNCLOUD_DIR/etc" || return
-}
 

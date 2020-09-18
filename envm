@@ -1,24 +1,12 @@
 #!/bin/bash
 set -u
 
-for script in "$ENVM"/scripts/*; do source "$script"; done
+# source all scripts when $ENVM_HOME is available
+for script in "$ENVM_HOME"/scripts/*; do source "$script"; done
 
-# Message on start you can force it with exec $SHELl -l or ns ( for `new shell` )
-figlet "Hello, $USER" || echo "Hello, $USER"; neofetch || true; fortune || true
+# source all OWNCLOUD dirs to functions and make them available as cd shortcuts
+for dir in "$OWNCLOUD_HOME"/*; do eval "nc_${dir##*/}() { cd $dir || return true; }"; done
 
-
-# uninstall envm and remove XDG_PATH links
-envmuninstall() {
-	read -p "Are your sure you want to delete all of envm? [Y/n] " -n 1 -r
-	echo
-
-	[[ ! "$REPLY" =~ ^[Yy]$ ]] && return 1
-
-	rm -rf \
-		"$ENVM" || true \
-		"$XDG_CONFIG_HOME/.envm" || true \
-		"$XDG_CACHE_HOME/.envm" || true
-
-	echo "DONE! See you. ;) Make sure you delete .envm configs in your .bashrc manually"
-}
+# greeting screen
+figlet "Hello, $USER" || echo "Hello, $USER"; neofetch || true; fortune || true;
 
