@@ -54,6 +54,7 @@ npmls() { npm list -g --depth=0; }
 
 # working dir shortcuts
 fun() { cd "$HOME/fun" || return; }
+
 builds() { cd "$HOME/builds" || return; }
 
 # golang stuff

@@ -58,15 +58,17 @@ cooldocker() {
 
 	echo -e "\n[ \e[36m$cc\e[0m ] | CONTAINERS:"
 	docker container ls | while read -r line; do
+
 	if echo "$line" | grep -q "CONTAINER ID"; then
 		echo -e "$line\t\tIP ADDRESS"
 	else
-
 		cid=$(echo "$line" | awk '{print $1}');
 		cip=$(docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "$cid");
 		echo -e "${line}\t${cip}"
 	fi
 done; echo
+
+
 
 echo -e "[ \e[36m$ic\e[0m ] | IMAGES:"
 docker images -f dangling=false; echo
@@ -77,8 +79,8 @@ if [ "$vc" -ge 1 ]; then
 	echo -e "[ \e[36m$vc\e[0m ] | VOLUMES:"
 	docker volume ls; echo
 fi
-
 }
+
 
 # create readme, license file and git ignore even faster
 setupfast() { license > LICENSE.txt; readme pogUchamp pogU, LUL > README.md; ignore > .gitignore; }
