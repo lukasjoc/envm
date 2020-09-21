@@ -15,5 +15,5 @@ jobs:
 
       # Check if all functions work
       - name: check
-        run: ENVM_HOME=./scripts source envm
+        run: ENVM_HOME=$PWD source envm
 
