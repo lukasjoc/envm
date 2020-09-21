@@ -4,8 +4,10 @@ set -u
 # source all scripts when $ENVM_HOME is available
 for script in "$ENVM_HOME"/scripts/*; do source "$script"; done
 
-# source all OWNCLOUD dirs to functions and make them available as cd shortcuts
-for dir in "$OWNCLOUD_HOME"/*; do eval "nc_${dir##*/}() { cd $dir || return true; }"; done
+if [[ -v "$OWNCLOUD_HOME" ]]; then
+	# source all OWNCLOUD dirs to functions and make them available as cd shortcuts
+	for dir in "$OWNCLOUD_HOME"/*; do eval "nc_${dir##*/}() { cd $dir || return true; }"; done
+fi
 
 # greeting screen
 figlet "Hello, $USER" || echo "Hello, $USER"; neofetch || true; fortune || true;
