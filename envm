@@ -2,7 +2,7 @@
 set -u
 
 # source all scripts when $ENVM_HOME is available
-for script in ./scripts/*; do source "$script"; done
+for script in "$PWD"/scripts/*; do source "$script"; done
 
 # greeting screen
 figlet "Hello, $USER" || echo "Hello, $USER"; neofetch || true; fortune || true;
