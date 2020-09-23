@@ -102,7 +102,7 @@ if [[ "$#" -eq 0 ]]; then chroma "$current_todo"; return 0; fi
 
 while [[ "$#" -ne 0 ]]; do
 	case "$1" in
-		-N|--new|new|.) create; return ;;
+		-N|--new|new|.) create; return 0;;
 		-U|--update|update) update; return 0;;
 		-S|--save|save) save; return 0;;
 		-sy|--sync|sync) sync; return 0;;

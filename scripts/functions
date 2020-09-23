@@ -3,7 +3,7 @@
 set -u
 
 # start jupyter_lab on specific dir
-start_jupyter_lab(){ jupyter-lab "$HOME/fun/random/shit/ipynb"; }
+start_jupyter_lab(){ jupyter-lab "$HOME/fun/random/shit/ipynb" &> /dev/null & }
 
 # sane defaults for vim users on linux or mac
 ignore() {
@@ -85,3 +85,15 @@ fi
 # create readme, license file and git ignore even faster
 setupfast() { license > LICENSE.txt; readme pogUchamp pogU, LUL > README.md; ignore > .gitignore; }
 
+# maintaince script for arch systems
+runarchstuff(){
+	# update & upgrade
+	echo "Updating/Upgrading arch/AUR repos..."
+	yes | sudo pacman -Syyu
+	yes | yay -Syuu
+
+	# clean and remove/uninstall build deps that are not needed anymore
+	echo "Cleaning the system..."
+	yes | sudo pacman -R "$(pacman -Qdtq)"
+	yes | yay -R "$(yay -Qdtq)"
+}

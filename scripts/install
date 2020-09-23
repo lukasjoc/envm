@@ -1,0 +1,40 @@
+#!/bin/bash
+# go install like script for any executable
+# path is $HOME/.local/bin/
+# should be in the path ;)
+set -u
+
+em() {
+	
+# print usage information
+__usage() {
+	cat <<EOF
+envm utility functions
+	
+Usage:
+ em [flags]
+ em [command]
+	
+Commands:
+ install   install executable to .local/bin
+ help      print the help message
+	
+Flags:
+ -h, --help   print the help message
+	
+Use "em [help] | [-h|--help]" for more information about this script.
+EOF
+	}
+
+	install() { mv "$1" "$HOME/.local/bin/$1"; }
+
+	while [[ "$#" -ne 0 ]]; do
+		case "$1" in
+			install) install "$2"; return 0;;
+			-h|--help|help) __usage; return 0;; # print help
+			*) __usage; return 1;; # print usage if command, flag not processable
+		esac
+		shift
+	done
+
+}
