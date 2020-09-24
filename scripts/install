@@ -26,7 +26,11 @@ Use "em [help] | [-h|--help]" for more information about this script.
 EOF
 	}
 
-	install() { mv "$1" "$HOME/.local/bin/$1"; }
+	install() {
+		local dest="$HOME/.local/bin/$1"
+		ln -sf "$PWD/$1" "$dest"
+		chmod u+x "$dest"
+	}
 
 	while [[ "$#" -ne 0 ]]; do
 		case "$1" in

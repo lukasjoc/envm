@@ -96,4 +96,9 @@ runarchstuff(){
 	echo "Cleaning the system..."
 	yes | sudo pacman -R "$(pacman -Qdtq)"
 	yes | yay -R "$(yay -Qdtq)"
+
+	if command -v openbox > /dev/null 2>&1; then
+		mmaker -f -t Alacritty
+		openbox --reconfigure
+	fi
 }
