@@ -18,6 +18,7 @@ alias killdocker="docker system prune -a"  # be CAUTIONS with this!
 alias cal="ncal"
 alias ccat="chroma"
 alias vi="vim"
+alias issues="gh issue list"
 
 # Check for system (MACOS specific stuff)
 if [[ "$(uname -s)" == "Darwin" ]]; then

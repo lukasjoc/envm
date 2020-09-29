@@ -29,6 +29,7 @@ local status_color="\e[1;32m"
 local -a XDG_PATHS=(
 	"$HOME/.config"
 	"$HOME/.local/share"
+	"$HOME/.local/bin"
 	"$HOME/.cache"
 )
 

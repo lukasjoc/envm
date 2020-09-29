@@ -5,5 +5,4 @@ set -u
 for script in "$ENVM_HOME"/scripts/*; do source "$script"; done
 
 # greeting screen
-figlet "Hello, $USER" || echo "Hello, $USER"; neofetch || true; fortune || true;
-
+figlet -f slant "Hello, $USER" || echo "Hello, $USER"; neofetch || true; fortune || true;
