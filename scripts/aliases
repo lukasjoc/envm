@@ -53,6 +53,9 @@ ns() { exec "$SHELL" -l; }
 # ls all global installed npm packages
 npmls() { npm list -g --depth=0; }
 
+# list all available scripts
+npmcmd() { jq .scripts package.json;  }
+
 # working dir shortcuts
 fun() { cd "$HOME/fun" || return; }
 
