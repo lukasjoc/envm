@@ -34,7 +34,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 		brew update; brew upgrade
 
 		echo "Upgrade Brew CaskRooms.."
-		brew cask upgrade --greedy
+		brew upgrade --cask --greedy
 
 		echo "Cleaning..."
 		rm -rf "$(brew --cache)"
