@@ -2,9 +2,9 @@
 # Provokes and defines some aliases and functions
 set -u
 
-alias ls="ls -F --color=auto"
-alias watchdir="watch -d ls -HAlF"
-alias ll="ls -hl -tr -A"
+alias ls="exa -F"
+alias watchdir="watch -d ls -al"
+alias ll="ls -alr"
 alias ..="cd ../"
 alias ...="cd ../../"
 alias datef="date +'%d.%m.%y'"
@@ -22,9 +22,8 @@ alias issues="gh issue list"
 
 # Check for system (MACOS specific stuff)
 if [[ "$(uname -s)" == "Darwin" ]]; then
-	alias ls="ls -GF"G
-	alias bc="brew cask"
-	alias updatedb="sudo /usr/libexec/locate.updatedb"
+	alias bc="brew install --cask"
+	alias locate_update="sudo /usr/libexec/locate.updatedb"
 	alias vi="mvim -v"
 	alias vim="mvim -v"
 
