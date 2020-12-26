@@ -10,41 +10,35 @@ alias ...="cd ../../"
 alias datef="date +'%d.%m.%y'"
 alias python="python3"
 alias pip="pip3"
-alias rm="rm -ir"
+alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
 alias dc="docker-compose"
 alias killdocker="docker system prune -a"  # be CAUTIONS with this!
-alias cal="ncal"
-alias ccat="chroma"
-alias vi="vim"
-alias issues="gh issue list"
 alias :wq="exit"
+alias vi="nvim"
+alias vim="nvim"
+
 
 # Check for system (MACOS specific stuff)
 if [[ "$(uname -s)" == "Darwin" ]]; then
-	alias bc="brew install --cask"
 	alias locate_update="sudo /usr/libexec/locate.updatedb"
-	alias vi="mvim -v"
-	alias vim="mvim -v"
 
 	# keep system up-to-date
 	runbrewstuff() {
+    # TODO: add cool spinner with percenteage
 		echo "Update/Upgrade Brew Formulars..."
-		brew update; brew upgrade
-
-		echo "Upgrade Brew CaskRooms.."
-		brew upgrade --cask --greedy
-
-		echo "Cleaning..."
+		brew update
+		brew upgrade --greedy
 		rm -rf "$(brew --cache)"
-		brew cleanup; brew doctor
-
+		brew cleanup
+    brew doctor
 		echo "Done ;)"
 	}
 
-	# alias the open command to the finder
-	finder() { open "$@"; }
+  # install cask with new syntax and
+  # keeping old habits bc install <something>
+  bc() { brew "$1" "$2" --cask; }
 fi
 
 # reload $SHELL with -
@@ -70,6 +64,8 @@ fun() { cd "$HOME/fun" || return; }
 builds() { cd "$HOME/builds" || return; }
 
 # golang stuff
+# TODO: wriite a gocmd script that combines these also with more functionality
+# like finding proper cleaning and creating of go mods and stuff
 gobench() { go test -v --bench . --benchmem -race; }
 goclean() { go clean -x -r -cache -modcache; }
 
@@ -77,7 +73,7 @@ goclean() { go clean -x -r -cache -modcache; }
 # Thank you github.com/jessfraz
 # Get colors in manual pages
 man() {
-	env \
+  env \
 		LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
 		LESS_TERMCAP_md="$(printf '\e[1;31m')" \
 		LESS_TERMCAP_me="$(printf '\e[0m')" \
@@ -86,5 +82,5 @@ man() {
 		LESS_TERMCAP_ue="$(printf '\e[0m')" \
 		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
 		man "$@"
-	}
+}
 
