@@ -49,13 +49,8 @@ npmls() { npm list -g --depth=0; }
 
 # list all available scripts for package.json and composer.json
 sc() {
-	local file
-	if [[ -f "$PWD/package.json" ]]; then
-		file="package.json"
-	else
-		file="composer.json"
-	fi
-	jq .scripts "$file";
+    [[ -f "$PWD/package.json" ]]; jq .scripts "$PWD/package.json"
+    [[ -f "$PWD/composer.json" ]]; jq .scripts "$PWD/composer.json"
 }
 
 # working dir shortcuts
