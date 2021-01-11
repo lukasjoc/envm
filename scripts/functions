@@ -2,9 +2,6 @@
 # Defines just some essential functions.. Functions that are not used at least twice per week are being removed
 set -u
 
-# start jupyter_lab on specific dir
-start_jupyter_lab(){ jupyter-lab "$HOME/fun/random/shit/ipynb" &> /dev/null & }
-
 # sane defaults for vim users on linux or mac
 ignore() {
 	cat << EOM
@@ -68,8 +65,6 @@ cooldocker() {
 	fi
 done; echo
 
-
-
 echo -e "[ \e[36m$ic\e[0m ] | IMAGES:"
 docker images -f dangling=false; echo
 
@@ -80,10 +75,6 @@ if [ "$vc" -ge 1 ]; then
 	docker volume ls; echo
 fi
 }
-
-
-# create readme, license file and git ignore even faster
-setupfast() { license > LICENSE.txt; readme pogUchamp pogU, LUL > README.md; ignore > .gitignore; }
 
 # maintaince script for arch systems
 runarchstuff(){
@@ -102,3 +93,16 @@ runarchstuff(){
 		openbox --reconfigure
 	fi
 }
+
+# music download script using youtube-dl and
+# ffmpeg like reall basic
+get_music() {
+	if ! command -v youtube-dl >/dev/null 2>&1; then
+    echo "youtube-dl is required! but not installed"
+    return 1
+  fi
+  # extract-audio and use audio-format mp3 optimized sound container
+  # format
+  youtube-dl -x "ytsearch:–audio-format=mp3" "$*"
+}
+

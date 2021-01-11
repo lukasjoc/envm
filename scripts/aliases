@@ -15,26 +15,24 @@ alias cp="cp -i"
 alias mv="mv -i"
 alias dc="docker-compose"
 alias killdocker="docker system prune -a"  # be CAUTIONS with this!
-alias :wq="exit"
 alias vi="nvim"
 alias vim="nvim"
 
-
 # Check for system (MACOS specific stuff)
 if [[ "$(uname -s)" == "Darwin" ]]; then
-	alias locate_update="sudo /usr/libexec/locate.updatedb"
+  alias locate_update="sudo /usr/libexec/locate.updatedb"
 
-	# keep system up-to-date
-	runbrewstuff() {
+  # keep system up-to-date
+  runbrewstuff() {
     # TODO: add cool spinner with percenteage
-		echo "Update/Upgrade Brew Formulars..."
-		brew update
-		brew upgrade --greedy
-		rm -rf "$(brew --cache)"
-		brew cleanup
+    echo "Update/Upgrade Brew Formulars..."
+    brew update
+    brew upgrade --greedy
+    rm -rf "$(brew --cache)"
+    brew cleanup
     brew doctor
-		echo "Done ;)"
-	}
+    echo "Done ;)"
+  }
 
   # install cask with new syntax and
   # keeping old habits bc install <something>
@@ -49,8 +47,8 @@ npmls() { npm list -g --depth=0; }
 
 # list all available scripts for package.json and composer.json
 sc() {
-    [[ -f "$PWD/package.json" ]]; jq .scripts "$PWD/package.json"
-    [[ -f "$PWD/composer.json" ]]; jq .scripts "$PWD/composer.json"
+  [[ -f "$PWD/package.json" ]]; jq .scripts "$PWD/package.json"
+  [[ -f "$PWD/composer.json" ]]; jq .scripts "$PWD/composer.json"
 }
 
 # working dir shortcuts
@@ -59,7 +57,6 @@ fun() { cd "$HOME/fun" || return; }
 builds() { cd "$HOME/builds" || return; }
 
 # golang stuff
-# TODO: wriite a gocmd script that combines these also with more functionality
 # like finding proper cleaning and creating of go mods and stuff
 gobench() { go test -v --bench . --benchmem -race; }
 goclean() { go clean -x -r -cache -modcache; }
@@ -69,13 +66,13 @@ goclean() { go clean -x -r -cache -modcache; }
 # Get colors in manual pages
 man() {
   env \
-		LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
-		LESS_TERMCAP_md="$(printf '\e[1;31m')" \
-		LESS_TERMCAP_me="$(printf '\e[0m')" \
-		LESS_TERMCAP_se="$(printf '\e[0m')" \
-		LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
-		LESS_TERMCAP_ue="$(printf '\e[0m')" \
-		LESS_TERMCAP_us="$(printf '\e[1;32m')" \
-		man "$@"
+    LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
+    LESS_TERMCAP_md="$(printf '\e[1;31m')" \
+    LESS_TERMCAP_me="$(printf '\e[0m')" \
+    LESS_TERMCAP_se="$(printf '\e[0m')" \
+    LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
+    LESS_TERMCAP_ue="$(printf '\e[0m')" \
+    LESS_TERMCAP_us="$(printf '\e[1;32m')"
+    man "$@"
 }
 
