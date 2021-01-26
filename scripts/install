@@ -9,7 +9,9 @@ em() {
 # print usage information
 __usage() {
 	cat <<EOF
-envm utility functions
+$(figlet -f slant 'envm')
+
+Some utility functions
 	
 Usage:
  em [flags]
