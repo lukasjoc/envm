@@ -5,3 +5,5 @@ install-mac:
 install-arch:
 	sudo pacman -S figlet fortune fortune-mod
 
+install-debian:
+	sudo apt-get install figlet fortune neofetch
