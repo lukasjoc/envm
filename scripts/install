@@ -2,7 +2,6 @@
 # go install like script for any executable
 # path is $HOME/.local/bin/
 # should be in the path ;)
-set -u
 
 em() {
 	

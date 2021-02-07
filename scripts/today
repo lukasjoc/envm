@@ -1,6 +1,5 @@
 #!/bin/bash
 # today the really simple todo command using $EDITOR for writing and a git repo for hosting all things
-set -u
 
 today() {
 

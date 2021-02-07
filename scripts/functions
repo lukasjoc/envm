@@ -1,6 +1,6 @@
 #!/bin/bash
 # Defines just some essential functions.. Functions that are not used at least twice per week are being removed
-set -u
+
 
 # sane defaults for vim users on linux or mac
 ignore() {

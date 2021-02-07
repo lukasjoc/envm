@@ -1,9 +1,16 @@
+# Make file
+MAC=brew
+ARCH=pacman
+DEB=apt
 
-install-mac:
-	brew install figlet neofetch fortune
+# install on mac with homebrew
+mac:
+	$(MAC) install figlet neofetch fortune
 
-install-arch:
-	sudo pacman -S figlet fortune fortune-mod
+# install on arch with pacman
+arch:
+	$(ARCH) pacman -S figlet fortune fortune-mod
 
-install-debian:
-	sudo apt-get install figlet fortune neofetch
+# install on debian and ubuntu, Pop_OS!
+debian:
+	$(DEB) install figlet fortune neofetch

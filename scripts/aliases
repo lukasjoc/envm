@@ -1,6 +1,5 @@
 #!/bin/bash
 # Provokes and defines some aliases and functions
-set -u
 
 alias ls="exa -F"
 alias watchdir="watch -d ls -al"

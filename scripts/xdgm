@@ -1,7 +1,5 @@
 #!/bin/bash
 # Manage your XDG_* path. Show contents & delete stuff from it
-#######
-set -u
 
 xdgm() {
 
