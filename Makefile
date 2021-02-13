@@ -9,7 +9,7 @@ mac:
 
 # install on arch with pacman
 arch:
-	$(ARCH) pacman -S figlet fortune fortune-mod
+	yes | $(ARCH) pacman -S figlet neofetch fortune-mod
 
 # install on debian and ubuntu, Pop_OS!
 debian:
