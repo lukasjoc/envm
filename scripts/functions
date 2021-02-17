@@ -52,12 +52,11 @@ runarchstuff(){
 
 	# clean and remove/uninstall build deps that are not needed anymore
 	echo "Cleaning the system..."
-	yes | sudo pacman -R "$(pacman -Qdtq)"
-	yes | yay -R "$(yay -Qdtq)"
+	yes | sudo pacman -Rnsc "$(pacman -Qdtq)"
+	yes | yay -Rnsc "$(yay -Qdtq)" 2>/dev/null
 
-	if command -v openbox >/dev/null 2>&1; then
-		mmaker -f -t Alacritty
-		openbox --reconfigure
+	if command -v openbox &>/dev/null; then
+	  openbox --reconfigure
 	fi
 }
 

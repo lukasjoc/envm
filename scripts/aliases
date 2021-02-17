@@ -1,7 +1,7 @@
 #!/bin/bash
 # Provokes and defines some aliases and functions
 
-alias ls="exa -F"
+alias ls="exa -g -F"
 alias watchdir="watch -d ls -al"
 alias ll="ls -alr"
 alias ..="cd ../"
