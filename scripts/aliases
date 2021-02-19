@@ -13,7 +13,6 @@ alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
 alias dc="docker-compose"
-alias killdocker="docker system prune -a"  # be CAUTIONS with this!
 alias vi="nvim"
 alias vim="nvim"
 
@@ -38,7 +37,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   bc() { brew "$1" "$2" --cask; }
 fi
 
-# reload $SHELL with -
+# reload $SHELL with --
 ns() { exec "$SHELL" -l; }
 
 # ls all global installed npm packages
@@ -46,8 +45,8 @@ npmls() { npm list -g --depth=0; }
 
 # list all available scripts for package.json and composer.json
 sc() {
-  [[ -f "$PWD/package.json" ]]; jq .scripts "$PWD/package.json"
-  [[ -f "$PWD/composer.json" ]]; jq .scripts "$PWD/composer.json"
+  [[ -f "$PWD/package.json" ]]; jq .scripts "$PWD/package.json" || ""
+  [[ -f "$PWD/composer.json" ]]; jq .scripts "$PWD/composer.json" || ""
 }
 
 # working dir shortcuts
@@ -74,3 +73,12 @@ man() {
     man "$@"
   }
 
+# Shows the current commits dinstanced from the current base branch
+# Example: so if the branch was branched of from master it shows the diff from the master in commits to the CURRENT HEAD
+mine() {
+  git lg $(git show-branch | sed "s/].*//" \
+    | grep "\*" \
+    | grep -v "$(git rev-parse --abbrev-ref HEAD)" \
+    | head -n1 \
+    | sed "s/^.*\[//")..HEAD
+}
