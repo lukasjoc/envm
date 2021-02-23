@@ -51,7 +51,7 @@ create() {
 		return 1
 	fi
 
-	vim -c ":read $HOME/.vim/skels/todo.md" "$current_todo"
+	$EDITOR ":read $HOME/.vim/skels/todo.md" "$current_todo"
 	return 0
 }
 
@@ -61,7 +61,7 @@ update() {
 		mkdir -p "$todo_repository/$todo_collection"
 	fi
 
-	vim "$current_todo"
+	$EDITOR "$current_todo"
 	return 0
 }
 

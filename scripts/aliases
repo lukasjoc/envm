@@ -1,6 +1,45 @@
 #!/bin/bash
 # Provokes and defines some aliases and functions
 
+# Some sane defaults
+export HISTCONTROL=ignoreboth
+HISTSIZE=500000
+HISTFILESIZE=100000
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+export CLICOLOR=1
+PROMPT_COMMAND='history -a'
+
+# XDG Setup
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_DATA_BIN=$HOME/.local/bin
+export PATH=$XDG_DATA_BIN:$PATH
+
+# Editor Setup
+export MANPAGER="nvim -c 'set ft=man' -"
+export EDITOR="nvim"
+
+# Append to the history file, don't overwrite it
+shopt -s histappend
+
+# Update window size after every command
+shopt -s checkwinsize
+
+# Save multi-line commands as one command
+shopt -s cmdhist
+
+# Prepend cd to directory names automatically
+shopt -s autocd 2> /dev/null
+
+# Correct spelling errors during tab-completion
+shopt -s dirspell 2> /dev/null
+
+# Correct spelling errors in arguments supplied to cd
+shopt -s cdspell 2> /dev/null
+
+CDPATH="."
+
 alias ls="exa -g -F"
 alias watchdir="watch -d ls -al"
 alias ll="ls -alr"
@@ -37,7 +76,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   bc() { brew "$1" "$2" --cask; }
 fi
 
-# reload $SHELL with --
+# reload $SHELL with -
 ns() { exec "$SHELL" -l; }
 
 # ls all global installed npm packages
@@ -49,29 +88,14 @@ sc() {
   [[ -f "$PWD/composer.json" ]]; jq .scripts "$PWD/composer.json" || ""
 }
 
-# working dir shortcuts
-fun() { cd "$HOME/fun" || return; }
-builds() { cd "$HOME/builds" || return; }
-
 # golang stuff
 # like finding proper cleaning and creating of go mods and stuff
 gobench() { go test -v --bench . --benchmem -race; }
 goclean() { go clean -x -r -cache -modcache; }
 
-# Taken from https://github.com/jessfraz/dotfiles/blob/main/.functions
-# Thank you github.com/jessfraz
-# Get colors in manual pages
-man() {
-  env \
-    LESS_TERMCAP_mb="$(printf '\e[1;31m')" \
-    LESS_TERMCAP_md="$(printf '\e[1;31m')" \
-    LESS_TERMCAP_me="$(printf '\e[0m')" \
-    LESS_TERMCAP_se="$(printf '\e[0m')" \
-    LESS_TERMCAP_so="$(printf '\e[1;44;33m')" \
-    LESS_TERMCAP_ue="$(printf '\e[0m')" \
-    LESS_TERMCAP_us="$(printf '\e[1;32m')" \
-    man "$@"
-  }
+# working dir shortcuts
+fun() { cd "$HOME/fun" || return; }
+builds() { cd "$HOME/builds" || return; }
 
 # Shows the current commits dinstanced from the current base branch
 # Example: so if the branch was branched of from master it shows the diff from the master in commits to the CURRENT HEAD
