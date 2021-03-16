@@ -105,4 +105,12 @@ mine() {
     | grep -v "$(git rev-parse --abbrev-ref HEAD)" \
     | head -n1 \
     | sed "s/^.*\[//")..HEAD
+  }
+
+# remove local branches that dont have a remote equivalent anymore
+remove_merged() {
+  git fetch -p
+  for br in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
+    git br -D "$br"
+  done
 }
