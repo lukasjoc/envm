@@ -1,6 +1,6 @@
 # envm
 
-> the hacky environment manager
+> my hacky environment manager
 
 ```
 .
