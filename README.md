@@ -7,6 +7,8 @@ Why is it now pluggable?:
 - it's cool
 - it's more powerful too
 - it's fun
+- Enable it with ``$ENVM_ENABLE_PLUGINS=1``
+
 
 What to write in?
 ---
