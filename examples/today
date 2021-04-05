@@ -1,0 +1,103 @@
+#!/bin/bash
+
+todo_name="$(date +'%d.%m.%y').md"
+todo_repository="$HOME/.local/share/todo"
+todo_collection="$(date +'%m')_$(date +'%y')"
+current_todo="$todo_repository/$todo_collection/$todo_name"
+
+# print usage information
+__usage() {
+  cat <<EOF
+Manage todos without overhead and within the workflow.
+Usage:
+ today [flags]
+ today [command]
+Commands:
+  new      create new todo
+  update   update current todo
+  save     save current todo
+  sync     sync with todo repo
+  ls       list all todos
+  help     print the help message
+Flags:
+ -N, --new      create new todo
+ -U, --update   update current todo
+ -S, --save     save current todo
+ -sy, --sync    sync with todo repo
+ -ls, --list    list all todos
+ -n             list specific todo given a day in the past
+ -h, --help     print the help message
+Use "today [help] | [-h|--help]" for more information about this script.
+EOF
+}
+
+create() {
+  if [[ ! -d "$todo_repository/$todo_collection" ]]; then
+    mkdir -p "$todo_repository/$todo_collection"
+  fi
+
+  if [[ -f "$current_todo" ]]; then
+    echo "TODO already exists. Run today to view it."
+    return 1
+  fi
+
+  # $EDITOR ":read $HOME/.vim/skels/todo.md" "$current_todo"
+  $EDITOR "$current_todo"
+  return 0
+}
+
+update() {
+  if [[ ! -d "$todo_repository/$todo_collection" ]]; then
+    mkdir -p "$todo_repository/$todo_collection"
+  fi
+
+  $EDITOR "$current_todo"
+  return 0
+}
+
+save() {
+  cd "$todo_repository" || exit
+  git add "$current_todo" && git commit -m "add current todo $todo_name"
+  git push
+  cd - || exit
+  return 0
+}
+
+sync() {
+  cd "$todo_repository" || exit
+  git checkout main
+  git pull --rebase --stat origin main
+  cd "$OLDPWD" || exit
+  return 0
+}
+
+list() { ls -R "$todo_repository"; return 0; }
+
+gone() {
+  if [[ "$#" == 0 ]]; then __usage; return 1; fi
+
+  local file day
+  day=$( ($(date '+%d') "$1" ) )
+  if [[ "$day" -le 9 ]]; then
+    day="0$day"
+  fi
+  file=$day.$(date +'%m.%y').md
+  cat "$todo_repository/$todo_collection/$file"
+}
+
+# list current todolist for the current day
+if [[ "$#" -eq 0 ]]; then cat "$current_todo"; exit 0; fi
+
+while [[ "$#" -ne 0 ]]; do
+  case "$1" in
+    -N|--new|new|.) create; exit 0;;
+    -U|--update|update) update; exit 0;;
+    -S|--save|save) save; exit 0;;
+    -sy|--sync|sync) sync; exit 0;;
+    -ls|--list|ls) list; exit 0;;
+    -n) gone "$2"; exit 0;;
+    -h|--help|help) __usage; exit 0;;
+    *) __usage; exit 1;;
+  esac
+  shift
+done

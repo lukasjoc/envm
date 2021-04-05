@@ -4,41 +4,48 @@
 # should be in the path ;)
 
 em() {
-	
+  
 # print usage information
 __usage() {
-	cat <<EOF
+  cat <<EOF
 $(figlet -f slant 'envm')
 
 Some utility functions
-	
+  
 Usage:
  em [flags]
  em [command]
-	
+  
 Commands:
  install   install executable to .local/bin
+ install_plugin   install executable to .local/bin
  help      print the help message
-	
+  
 Flags:
  -h, --help   print the help message
-	
+  
 Use "em [help] | [-h|--help]" for more information about this script.
 EOF
-	}
+  }
 
-	install() {
-		local dest="$HOME/.local/bin/$1"
-		ln -sf "$PWD/$1" "$dest"
-		chmod u+x "$dest"
-	}
+  install() {
+    local dest="$HOME/.local/bin/$1"
+    ln -sf "$PWD/$1" "$dest"
+    chmod u+x "$dest"
+  }
 
-	while [[ "$#" -ne 0 ]]; do
-		case "$1" in
-			install) install "$2"; return 0;;
-			-h|--help|help) __usage; return 0;; # print help
-			*) __usage; return 1;; # print usage if command, flag not processable
-		esac
-		shift
-	done
+  plugin_install() {
+    cp "$1" "$HOME/.config/envm/plugs/"
+    chmod u+x "$HOME/.config/envm/plugs/$1"
+  }
+
+  while [[ "$#" -ne 0 ]]; do
+    case "$1" in
+      install) install "$2"; return 0;;
+      install_plugin) plugin_install "$2"; return 0;;
+      -h|--help|help) __usage; return 0;;
+      *) __usage; return 1;;
+    esac
+    shift
+  done
 }

@@ -1,7 +1,21 @@
 #!/bin/bash
 
-# source all scripts when $ENVM_HOME is available
 for script in "$ENVM_HOME"/scripts/*; do source "$script"; done
 
-# greeting screen
 figlet -f slant "Hello, $USER" || echo "Hello, $USER"; neofetch || true; fortune || true;
+
+envm_xdg_dir=$XDG_CONFIG_HOME/envm
+
+if [[ ! -d "$envm_xdg_dir" ]]; then
+  echo "$envm_xdg_dir missing. Creating.."
+  mkdir "$envm_xdg_dir";
+fi
+
+if [[ "$ENVM_ENABLE_PLUGINS" == "1" ]]; then
+  if [[ ! -d "$envm_xdg_dir/plugs" ]]; then
+    echo "$envm_xdg_dir/plugs dir missing. Creating.."
+    mkdir "$envm_xdg_dir/plugs";
+  fi
+  export PATH=$XDG_CONFIG_HOME/envm/plugs:$PATH
+fi
+

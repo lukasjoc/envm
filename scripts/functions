@@ -4,7 +4,7 @@
 
 # sane defaults for vim users on linux or mac
 ignore() {
-	cat << EOM
+  cat << EOM
 *~
 [._]*.sw[a-p]
 .netrwhist
@@ -15,7 +15,7 @@ EOM
 
 # print a current ISC License
 license() {
-	cat << EOM
+  cat << EOM
 Copyright $(date +'%Y') lukasjoc <jochamlu@gmail.com>
 
 Permission to use, copy, modify, and distribute this software for any
@@ -34,7 +34,7 @@ EOM
 
 # print a generic readme
 readme() {
-	cat << EOM
+  cat << EOM
 # $1
 
 > $2
@@ -45,25 +45,25 @@ EOM
 
 # maintaince script for arch systems
 runarchstuff(){
-	# update & upgrade
-	echo "Updating/Upgrading arch/AUR repos..."
-	yes | sudo pacman -Syyu
-	yes | yay -Syuu
+  # update & upgrade
+  echo "Updating/Upgrading arch/AUR repos..."
+  yes | sudo pacman -Syyu
+  yes | yay -Syuu
 
-	# clean and remove/uninstall build deps that are not needed anymore
-	echo "Cleaning the system..."
-	yes | sudo pacman -Rnsc "$(pacman -Qdtq)"
-	yes | yay -Rnsc "$(yay -Qdtq)" 2>/dev/null
+  # clean and remove/uninstall build deps that are not needed anymore
+  echo "Cleaning the system..."
+  yes | sudo pacman -Rnsc "$(pacman -Qdtq)"
+  yes | yay -Rnsc "$(yay -Qdtq)" 2>/dev/null
 
-	if command -v openbox &>/dev/null; then
-	  openbox --reconfigure
-	fi
+  if command -v openbox &>/dev/null; then
+    openbox --reconfigure
+  fi
 }
 
 # music download script using youtube-dl and
 # ffmpeg like reall basic
 get_music() {
-	if ! command -v youtube-dl >/dev/null 2>&1; then
+  if ! command -v youtube-dl >/dev/null 2>&1; then
     echo "youtube-dl is required! but not installed"
     return 1
   fi
@@ -72,3 +72,8 @@ get_music() {
   youtube-dl -x "ytsearch:–audio-format=mp3" "$*"
 }
 
+install() {
+  local dest="$HOME/.local/bin/$1"
+  ln -sf "$PWD/$1" "$dest"
+  chmod u+x "$dest"
+}

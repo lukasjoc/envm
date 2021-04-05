@@ -1,45 +1,28 @@
 # envm
 
-> my hacky environment manager
+> my (now **pluggabe**) hacky environment manager
 
-```
-.
-├── envm
-├── LICENSE.txt
-├── Makefile
-├── README.md
-└── scripts
-    ├── aliases
-    ├── functions
-    ├── install
-    ├── prompt
-    ├── today
-    └── xdgm
+Why is it now pluggable?:
+---
+- it's cool
+- it's more powerful too
+- it's fun
 
-1 directory, 10 files
+What to write in?
+---
+- shell/POSIX
+- python
+- binary
+- any script-ish thing really that has a valid shabang
+  ``eg. #!/usr/bin/node`` or similar would also work
 
-# em cli utility
-                           
-  ___  ____ _   ______ ___ 
- / _ \/ __ \ | / / __ `__ \
-/  __/ / / / |/ / / / / / /
-\___/_/ /_/|___/_/ /_/ /_/ 
-                           
+Guidelines for writing a compatible plugin:
+---
+- put your plugin into this directory `$XDG_CONFIG_HOME/envm/plugins`
+- can be a shell script with functions but these will not be sourced
+  so the script must to the work if neccessary
+- plugin needs a valid shabang line that points to the interpreter
+- can be any ``ELF, Mach-O`` etc. executable
+- make it executable by using ``chmod u+x``
+- See some exampels under ``exampels/``
 
-Some utility functions
-	
-Usage:
- em [flags]
- em [command]
-	
-Commands:
- install   install executable to .local/bin
- help      print the help message
-	
-Flags:
- -h, --help   print the help message
-	
-Use "em [help] | [-h|--help]" for more information about this script.
-```
-
-[lukasjoc](https://lukasjoc.com), 2020

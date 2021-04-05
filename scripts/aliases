@@ -114,3 +114,4 @@ remove_merged() {
     git br -D "$br"
   done
 }
+
