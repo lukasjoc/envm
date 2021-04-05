@@ -1,6 +1,6 @@
 # envm
 
-> the hacky environment manager. I use to learn and improve my bashing skills ;)
+> the hacky environment manager
 
 ```
 .
