@@ -24,5 +24,5 @@ Guidelines for writing a compatible plugin:
 - plugin needs a valid shabang line that points to the interpreter
 - can be any ``ELF, Mach-O`` etc. executable
 - make it executable by using ``chmod u+x``
-- See some exampels under ``exampels/``
+- See some exampels under `./examples``
 
