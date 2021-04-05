@@ -18,7 +18,7 @@ What to write in?
 
 Guidelines for writing a compatible plugin:
 ---
-- put your plugin into this directory `$XDG_CONFIG_HOME/envm/plugins`
+- put your plugin into this directory `$XDG_CONFIG_HOME/envm/plugs`
 - can be a shell script with functions but these will not be sourced
   so the script must to the work if neccessary
 - plugin needs a valid shabang line that points to the interpreter
