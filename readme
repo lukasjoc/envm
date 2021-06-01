@@ -1,4 +1,4 @@
-# envm
+envm
 
 my (now pluggable) hacky environment manager
 
@@ -15,7 +15,7 @@ What to write in?
 - python
 - binary 
 - any script-ish thing really that has a valid shabang
-  ``eg. #!/usr/bin/node`` or similar would also work
+  eg. #!/usr/bin/node`` or similar would also work
 
 Guidelines for writing a compatible plugin:
 ---
