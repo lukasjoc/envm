@@ -17,8 +17,14 @@ export XDG_DATA_BIN=$HOME/.local/bin
 export PATH=$XDG_DATA_BIN:$PATH
 
 # Editor Setup
-export MANPAGER="nvim -c 'set ft=man' -"
-export EDITOR="nvim"
+if command -v nvim >/dev/null 2>&1; then
+  MANPAGER="nvim -c 'set ft=man' -"
+  EDITOR="nvim"
+else
+  EDITOR="vim"
+fi
+export EDITOR
+export MANPAGER
 
 # Append to the history file, don't overwrite it
 shopt -s histappend
@@ -52,7 +58,6 @@ alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
 alias dc="docker-compose"
-alias vi="nvim"
 alias vim="nvim"
 
 # Check for system (MACOS specific stuff)
@@ -61,13 +66,15 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
   # keep system up-to-date
   runbrewstuff() {
-    # TODO: add cool spinner with percenteage
     echo "Update/Upgrade Brew Formulars..."
     brew update
     brew upgrade --greedy
     rm -rf "$(brew --cache)"
     brew cleanup
     brew doctor
+    echo "Locate update..."
+    sudo /usr/libexec/locate.updatedb
+
     echo "Done ;)"
   }
 
@@ -82,36 +89,6 @@ ns() { exec "$SHELL" -l; }
 # ls all global installed npm packages
 npmls() { npm list -g --depth=0; }
 
-# list all available scripts for package.json and composer.json
-sc() {
-  [[ -f "$PWD/package.json" ]]; jq .scripts "$PWD/package.json" || ""
-  [[ -f "$PWD/composer.json" ]]; jq .scripts "$PWD/composer.json" || ""
-}
-
-# golang stuff
-# like finding proper cleaning and creating of go mods and stuff
-gobench() { go test -v --bench . --benchmem -race; }
-goclean() { go clean -x -r -cache -modcache; }
-
 # working dir shortcuts
 fun() { cd "$HOME/fun" || return; }
 builds() { cd "$HOME/builds" || return; }
-
-# Shows the current commits dinstanced from the current base branch
-# Example: so if the branch was branched of from master it shows the diff from the master in commits to the CURRENT HEAD
-mine() {
-  git lg $(git show-branch | sed "s/].*//" \
-    | grep "\*" \
-    | grep -v "$(git rev-parse --abbrev-ref HEAD)" \
-    | head -n1 \
-    | sed "s/^.*\[//")..HEAD
-  }
-
-# remove local branches that dont have a remote equivalent anymore
-remove_merged() {
-  git fetch -p
-  for br in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
-    git br -D "$br"
-  done
-}
-

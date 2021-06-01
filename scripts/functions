@@ -13,36 +13,6 @@ tags
 EOM
 }
 
-# print a current ISC License
-license() {
-  cat << EOM
-Copyright $(date +'%Y') lukasjoc <jochamlu@gmail.com>
-
-Permission to use, copy, modify, and distribute this software for any
-purpose with or without fee is hereby granted, provided that the above
-copyright notice and this permission notice appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-EOM
-}
-
-# print a generic readme
-readme() {
-  cat << EOM
-# $1
-
-> $2
-
-[https://lukasjoc.com](lukasjoc), $(date +'%Y')
-EOM
-}
-
 # maintaince script for arch systems
 runarchstuff(){
   # update & upgrade
@@ -72,8 +42,15 @@ get_music() {
   youtube-dl -x "ytsearch:–audio-format=mp3" "$*"
 }
 
-install() {
-  local dest="$HOME/.local/bin/$1"
-  ln -sf "$PWD/$1" "$dest"
-  chmod u+x "$dest"
+install() { ln -sf "$PWD/$1"; "$HOME/.local/bin/$1"; chmod u+x "$dest"; }
+
+# golang stuff
+# like finding proper cleaning and creating of go mods and stuff
+gobench() { go test -v --bench . --benchmem -race; }
+goclean() { go clean -x -r -cache -modcache; }
+
+# list all available scripts for package.json and composer.json
+sc() {
+  [[ -f "$PWD/package.json" ]]; jq .scripts "$PWD/package.json" || ""
+  [[ -f "$PWD/composer.json" ]]; jq .scripts "$PWD/composer.json" || ""
 }

@@ -15,17 +15,11 @@ parse_git_dirty() {
   bits=''
 
   if [ "${renamed}" == "0" ]; then bits="+-${bits}"; fi
-
   if [ "${ahead}" == "0" ]; then bits="^${bits}"; fi
-
   if [ "${newfile}" == "0" ]; then bits="++${bits}"; fi
-
   if [ "${untracked}" == "0" ]; then bits="*${bits}"; fi
-
   if [ "${deleted}" == "0" ]; then bits="-${bits}"; fi
-
   if [ "${dirty}" == "0" ]; then bits="*${bits}"; fi
-
   if [ ! "${bits}" == "" ]; then echo " ${bits}"; else echo ""; fi
 }
 
@@ -39,6 +33,24 @@ parse_git_branch() {
   else
     echo ""
   fi
+}
+
+# Shows the current commits dinstanced from the current base branch
+# Example: so if the branch was branched of from master it shows the diff from the master in commits to the CURRENT HEAD
+git_mine() {
+  git lg $(git show-branch | sed "s/].*//" \
+    | grep "\*" \
+    | grep -v "$(git rev-parse --abbrev-ref HEAD)" \
+    | head -n1 \
+    | sed "s/^.*\[//")..HEAD
+}
+
+# remove local branches that dont have a remote equivalent anymore
+remove_merged() {
+  git fetch -p
+  for br in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
+    git br -d "$br"
+  done
 }
 
 # If not running interactively, don't do anything
